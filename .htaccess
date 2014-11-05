@@ -1,0 +1,9 @@
+RewriteEngine on
+RewriteBase /
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond $1 !^(index\.php|robots\.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L,QSA]
+
+Order Allow,Deny 
+Allow from all
