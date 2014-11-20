@@ -56,6 +56,14 @@
 				color: red;
 				font-weight: bold;
 			}
+			:not(header) > a[role="button"],div.ui-input-btn,button
+			{
+				background-color: rgba(176, 176, 176, 1) !important;
+			}
+			.ui-loader-default
+			{
+				opacity:0.5;
+			}
         </style>
         <script type="text/javascript">
 	        $(document).on("pageinit", function()
