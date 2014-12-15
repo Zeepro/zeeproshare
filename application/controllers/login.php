@@ -4,6 +4,13 @@ define('HTTP_OK', 202);
 
 class Login extends CI_Controller
 {
+	function __construct()
+	{
+		parent::__construct();
+		if ($this->session->userdata('logged_in') != true)
+			$this->output->set_header("Location: /Login");
+	}
+
 	public function index()
     {
 		$template_data = array();
