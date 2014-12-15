@@ -1,5 +1,8 @@
 <?php
 
+if (!defined('BASEPATH'))
+	exit('No direct script access allowed');x
+
 class Printer extends CI_Controller
 {
 	public function index()

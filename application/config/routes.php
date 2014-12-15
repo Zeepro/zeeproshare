@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "login";
+$route['default_controller'] = "user";
 $route['404_override'] = '';
 
 $route['(\w{2})/(.*)'] = '$2';
