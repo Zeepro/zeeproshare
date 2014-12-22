@@ -2,6 +2,7 @@
 
 $lang['zeepro_account'] = "Your Zeepro Account";
 $lang['remember_box'] = "Remember me";
+$lang['privacy_policy_link'] = "Privacy policy";
 $lang['signin'] = "Log in";
 $lang['signup'] = "Sign up";
 $lang['password'] = "Password";

@@ -35,6 +35,8 @@
     <a href="/login/forgot_pass" data-role="button" data-ajax="false">{forgot_pass}</a>
 	<h2>{create}</h2>
 	<a href="/user/signup" data-role="button" data-ajax="false">{signup}</a>
+	<br />
+	<a href="/login/privacy" data-ajax="false" style="font-weight:normal"><i>{privacy_policy_link}</i></a>
 </div>
 
 <script>

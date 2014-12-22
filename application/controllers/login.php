@@ -1,16 +1,12 @@
 <?php
 
+if (!defined('BASEPATH'))
+	exit('No direct script access allowed');
+
 define('HTTP_OK', 202);
 
 class Login extends CI_Controller
 {
-	function __construct()
-	{
-		parent::__construct();
-		if ($this->session->userdata('logged_in') != true)
-			$this->output->set_header("Location: /Login");
-	}
-
 	public function index()
     {
 		$template_data = array();
@@ -69,6 +65,7 @@ class Login extends CI_Controller
 		$template_data['create'] = t("create");
 		$template_data['signup'] = t("signup");
 		$template_data['forgot_pass'] = t("forgot_pass");
+		$template_data['privacy_policy_link'] = t("privacy_policy_link");
         $this->parser->parse('basetemplate', $template_data);
 	}
 
@@ -112,5 +109,16 @@ class Login extends CI_Controller
 		$this->session->unset_userdata('email');
 		$this->session->unset_userdata('password');
 		redirect("/");
+	}
+	
+	public function privacy()
+	{
+		$this->lang->load('privacy', $this->config->item('language'));
+
+		$template_data = array('body_content'	=> $this->parser->parse("Login/privacy", array(), true),
+								'privacy_policy'=> t('privacy_policy'),
+								'back'			=> t('back')
+								);
+        $this->parser->parse('basetemplate', $template_data);
 	}
 }

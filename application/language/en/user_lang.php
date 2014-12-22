@@ -15,6 +15,7 @@ $lang['back'] = "Back";
 $lang['signup'] = "Sign up";
 $lang['show_password'] = "Show passwords characters";
 $lang['signup_text'] = "An email with a confirmation code will be sent to this address";
+$lang['privacy_policy_link'] = "Privacy policy";
 
 //Confirm signup
 

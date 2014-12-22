@@ -16,6 +16,7 @@ $lang['Password'] = "Mot de passe";
 $lang['signup'] = "S'inscrire";
 $lang['show_password'] = "Afficher les caractères des mots de passe";
 $lang['signup_text'] = "Un email de confirmation vous sera envoy&eacute; &agrave; cette adresse";
+$lang['privacy_policy_link'] = "Politique de confidentialit&eacute";
 
 //Confirm signup
 

@@ -23,6 +23,7 @@
 		<p>{signup_text}</p>
 	</div>
 	<a href="/login/" data-role="button">{back}</a>
+	<a href="/login/privacy" data-ajax="false" style="font-weight:normal;"><i>{privacy_policy_link}</i></a>
 </div>
 
 <script>

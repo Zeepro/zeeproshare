@@ -1,16 +1,23 @@
 <?php
 
+if (!defined('BASEPATH'))
+	exit('No direct script access allowed');
+
 class User extends CI_Controller
 {
 	function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('logged_in') == false)
-			$this->output->set_header("Location: /Login");
+
 	}
 
 	public function index()
 	{
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /Login");
+			return;
+		}
 		$this->lang->load('user', $this->config->item('language'));
 		
 		$tab = array("email" => $this->session->userdata('email'),
@@ -71,6 +78,7 @@ class User extends CI_Controller
 		$template_data = array('body_content'	=> $this->parser->parse("User/signup", array(), true),
 								'signup'		=> t('signup'),
 								'signup_text'	=> t('signup_text'),
+								'privacy_policy_link'	=> t('privacy_policy_link'),
 								'show_password'	=> t('show_password'),
 								'back'			=> t('back'));
         $this->parser->parse('basetemplate', $template_data);
@@ -112,6 +120,11 @@ class User extends CI_Controller
 
 	public function change_password()
 	{
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /Login");
+			return;
+		}
 		$this->lang->load('user', $this->config->item('language'));
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
