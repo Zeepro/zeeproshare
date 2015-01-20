@@ -22,7 +22,7 @@
         <style type="text/css">
             div.logo {
                 width:100%;
-                height:110px;
+                height:80px;
                 background:url("/assets/img/logo-white.png") top center no-repeat;
                 background-size: 212px 59px;
             }
@@ -36,7 +36,7 @@
             .ui-body-c{
                 color:#575749;
                 background:url("/assets/img/back-4.jpg") 0 -100px repeat-x  #f9f7f3;
-                background-size: 79px 245px;
+                background-size: 79px 215px;
             }
             .page-header {
                 background:url("/assets/img/headerBack.png") bottom repeat-x;
