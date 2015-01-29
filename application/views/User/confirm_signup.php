@@ -1,19 +1,20 @@
 <div class="content-wrapper">
-	<center>
-		<h1>Confirmation</h1>
-	</center>
-	<div id="error"></div>
-	<div data-role="fieldcontain">
-		<?php
-			$this->load->helper('form');
-			echo form_open('/user/confirm_signup',
-							array('data-ajax' => 'false'));
-			echo form_label(t('enter_code'), 'confirm_code');
-			echo form_input(array('name' => 'confirm_code', 'required' => 'required'));
-			echo '<br />';
-			echo form_submit('submit', t('send_code'));
-			echo form_close();
-		?>
+	<h2><?php echo t('enter_code') ?></h2>
+	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px;">
+		<div id="error"></div>
+		<div data-role="fieldcontain">
+			<?php
+				$this->load->helper('form');
+				echo form_open('/user/confirm_signup',
+								array('data-ajax' => 'false'));
+			?>
+			<input type="text" name="confirm_code" required="required" placeholder="<?php echo t('code') ?>">
+			<br />
+			<?php
+				echo form_submit('submit', t('send_code'));
+				echo form_close();
+			?>
+		</div>
 	</div>
 </div>
 <script>

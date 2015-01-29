@@ -2,6 +2,7 @@
 $lang['back'] = 'Retour';
 $lang['privacy_policy']
 	= "	<h2>Politique de confidentialité de Zeepro</h2>
+		<div class=\"ui-grid-b ui-corner-all ui-shadow ui-transparent\" style=\"padding: 5px; color: #000 !important;text-shadow: 0 1px 0 #fff !important;\">
 		<p>Dernière mise à jour: 16 Décembre 2014</p>
 		<br />
 		<p>
@@ -97,4 +98,4 @@ $lang['privacy_policy']
 		</p>
 		<br />
 		<p>Si vous avez des questions concernant cette politique de confidentialité, vous pouvez contacter l'équipe de support Zeepro.</p>
-		";
+		</div>";

@@ -7,20 +7,25 @@ $lang['signout'] = "Sign out";
 $lang['old'] = "Old password";
 $lang['new'] = "New password";
 $lang['confirm'] = "Confirm new password";
-$lang['submit_change'] = "Change my password";
+$lang['submit_change'] = "Change password";
 $lang['back'] = "Back";
 
 //Signup
 
-$lang['signup'] = "Sign up";
-$lang['show_password'] = "Show passwords characters";
+$lang['signup'] = "Connect, Print, Share!";
+$lang['email'] = "Email";
+$lang['password'] = "Password";
+$lang['confirmpassword'] = "Confirm password";
+$lang['show_password'] = "Show passwords";
+$lang['signup_btn'] = "Create a new account";
 $lang['signup_text'] = "An email with a confirmation code will be sent to this address";
 $lang['privacy_policy_link'] = "Privacy policy";
 
 //Confirm signup
 
-$lang['enter_code'] = "Enter the confirmation code";
-$lang['send_code'] = "Send code";
+$lang['enter_code'] = "Confirmation code";
+$lang['code'] = "Please enter the code you received by email";
+$lang['send_code'] = "Ok";
 $lang['create_success'] = "Your account has been successfully created";
 
 //printer

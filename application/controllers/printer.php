@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('BASEPATH'))
-	exit('No direct script access allowed');x
+	exit('No direct script access allowed');
 
 class Printer extends CI_Controller
 {

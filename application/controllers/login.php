@@ -48,7 +48,7 @@ class Login extends CI_Controller
 										'logged_in' => true,
 										'password' => $password);
 					$this->session->set_userdata($custom_data);
-					$this->output->set_header("Location: http://home.zeepro.com/user");
+					$this->output->set_header("Location: /user");
 					return ;
 				}
 				else if ($output == 434) //Wrong parameter
@@ -60,8 +60,11 @@ class Login extends CI_Controller
 		$body_content = $this->parser->parse('Login/index', $template_data, TRUE);
         $template_data['body_content'] = $body_content;
 		$template_data['zeepro_account'] = t("zeepro_account");
+		$template_data['email'] = t("email");
+		$template_data['password'] = t("password");
 		$template_data['show_password'] = t("show_password");
 		$template_data['remember_box'] = t("remember_box");
+		$template_data['newsletter_box'] = t("newsletter_box");
 		$template_data['create'] = t("create");
 		$template_data['signup'] = t("signup");
 		$template_data['forgot_pass'] = t("forgot_pass");
@@ -98,7 +101,7 @@ class Login extends CI_Controller
 				}
 			}
 		}
-		$body_content = $this->parser->parse('Login/forgot_pass', array('reset_pass' => t('reset_pass'), 'zeepro_account' => t('zeepro_account')), TRUE);
+		$body_content = $this->parser->parse('Login/forgot_pass', array('reset_pass' => t('reset_pass')), TRUE);
         $template_data['body_content'] = $body_content;
         $this->parser->parse('basetemplate', $template_data);
     }

@@ -21,29 +21,27 @@
         </script>
         <style type="text/css">
             div.logo {
-                width:100%;
+            	margin-top:-9px;
+            	width:100%;
                 height:80px;
-                background:url("/assets/img/logo-white.png") top center no-repeat;
-                background-size: 212px 59px;
+                background:url("/assets/img/logoback.jpg") center no-repeat;
             }
             div#link_logo
 			{
                 margin: 0 auto;
-                width: 97px;
-                height: 100px;
+                width: 270px;
+                height: 55px;
                 cursor: pointer;
             }
             .ui-body-c{
-                color:#575749;
-                background:url("/assets/img/back-4.jpg") 0 -100px repeat-x  #f9f7f3;
-                background-size: 79px 215px;
+                color:#ffffff;
+                background:url("/assets/img/home.jpg") 50% 100px;
             }
             .page-header {
-                background:url("/assets/img/headerBack.png") bottom repeat-x;
+                background:url("/assets/img/headerBack.jpg") bottom center;
                 border:0px;
                 color:#333;
                 height:38px;
-                text-shadow: 0 -1px 1px #fff;
             }
 			.gray-overlay
 			{
@@ -59,15 +57,26 @@
 			.zim-error
 			{
 				color: red;
+				text-shadow: 0 1px 0 #fff !important;
 				font-weight: bold;
 			}
 			:not(header) > a[role="button"],div.ui-input-btn,button
 			{
-				background-color: rgba(176, 176, 176, 1) !important;
+				color: #fff !important;
+				text-shadow: 0 1px 0 #000 !important;
+				background-color: #505050 !important;
 			}
 			.ui-loader-default
 			{
 				opacity:0.5;
+			}
+			h2
+			{
+				text-align: center;
+			}
+			.ui-transparent
+			{
+                background:url("/assets/img/tr150.png") repeat;
 			}
         </style>
         <script type="text/javascript">

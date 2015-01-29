@@ -2,6 +2,7 @@
 $lang['back'] = "Back";
 $lang['privacy_policy']
 	= "	<h2>Zeepro Privacy Policy</h2>
+		<div class=\"ui-grid-b ui-corner-all ui-shadow ui-transparent\" style=\"padding: 5px; color: #000 !important;text-shadow: 0 1px 0 #fff !important;\">
 		<p>Last update: December 16, 2014</p>
 		<br />
 		<p>
@@ -96,4 +97,4 @@ $lang['privacy_policy']
 		</p>
 		<br />
 		<p>If there are any questions regarding this privacy policy you may contact Zeepro support team.</p>
-		";
+		</div>";

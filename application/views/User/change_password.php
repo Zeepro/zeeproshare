@@ -1,29 +1,26 @@
 <div class="content-wrapper">
-    <center>
-		<h1>{submit_change}</h1>
-	</center>
-	<div id="error"></div>
-	<div data-role="fieldcontain">
-		<?php
-			$this->load->helper('form');
-			echo form_open('/index.php/user/change_password', array('data-ajax' => 'false'));
-			echo form_label(t('old'), "old_pass");
-			echo form_password(array("name" => "old_pass", 'required' => 'required'));
-			echo form_label(t('new'), "new_pass");
-			echo form_password(array("name" => "new_pass", 'required' => 'required'));
-			echo form_label(t('confirm'), "confirm_pass");
-			echo form_password(array("name" => "confirm_pass", 'required' => 'required'));
-			echo "<div>";
-			echo '<label><input type="checkbox" name="show_pass" data-mini=true> {show_password} </label>';
-			echo "</div><br />";
-			echo form_submit("submit", t('submit_change'));
-			echo form_close();
-		?>
+	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px;">
+		<div id="error"></div>
+		<div data-role="fieldcontain">
+			<?php
+				$this->load->helper('form');
+				echo form_open('/index.php/user/change_password', array('data-ajax' => 'false'));
+			?>
+			<input type="password" name="old_pass" required="required" placeholder="<?php echo t('old')?>">
+			<input type="password" name="new_pass" required="required" placeholder="<?php echo t('new')?>">
+			<input type="password" name="confirm_pass" required="required" placeholder="<?php echo t('confirm')?>">
+			<input type="checkbox" name="show_pass" id="show_pass" data-mini=true>
+			<label for="show_pass" style="background-color: transparent;border-width:0">{show_password}</label>
+			<?php
+				echo form_submit("submit", t('submit_change'));
+				echo form_close();
+			?>
+		</div>
 	</div>
-	<a href="/index.php/user/" data-role="button">{back}</a>
 </div>
 
 <script>
+	$("header.page-header").html('<a href="javascript:history.back();" data-role="button" data-icon="back" data-ajax="false">{back}</a>')
 	$("form").on("submit", function()
 	{
 		$("#overlay").addClass("gray-overlay");

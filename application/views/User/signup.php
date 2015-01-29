@@ -1,32 +1,30 @@
 <div class="content-wrapper">
-	<center>
-		<h1>{signup}</h1>
-	</center>
-	<div id="error"><?php $this->load->helper('form'); echo validation_errors('<p class="zim-error">', '</p>');?></div>
-	<div data-role="fieldcontain">
-		<?php
-			echo form_open('/user/signup', array('data-ajax' => 'false'));
-			echo form_label('Email', 'email');
-			echo form_input(array('name' => 'email', 'required' => 'required'));
-			echo form_label(t('Password'), 'password');
-			echo form_password(array('name' => 'password', 'required' => 'required'));
-			echo form_label(t('confirm'), 'confirm');
-			echo form_password(array('name' => 'confirm', 'required' => 'required'));
-			echo '<br /><div>';
-			echo '<label><input type="checkbox" name="show_pass" data-mini=true> {show_password} </label>';
-			echo "</div><br />";
-			echo form_submit('submit', t('signup'));
-			echo form_close();
-		?>
+	<h2>{signup}</h2>
+	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px; padding-bottom: 25px;">
+		<div id="error"><?php $this->load->helper('form'); echo validation_errors('<p class="zim-error">', '</p>');?></div>
+		<div data-role="fieldcontain">
+			<?php
+				echo form_open('/user/signup', array('data-ajax' => 'false'));
+			?>
+			<input type="text" name="email" required="required" placeholder="{email}">
+			<input type="password" name="password" required="required" placeholder="{password}">
+			<input type="password" name="confirm" required="required" placeholder="{confirmpassword}">
+			<input type="checkbox" name="show_pass" id="show_pass" data-mini=true>
+			<label for="show_pass" style="background-color: transparent;border-width:0">{show_password}</label>
+			<?php
+				echo form_submit('submit', t('signup_btn'));
+				echo form_close();
+			?>
+		</div>
+		<div>
+			<p style="font-weight: normal;color: #000; text-shadow: 0 1px 0 #fff">{signup_text}</p>
+		</div>
+		<a href="/login/privacy" data-ajax="false" style="font-weight: normal;color: #000; text-shadow: 0 1px 0 #fff">{privacy_policy_link}</a>
 	</div>
-	<div>
-		<p>{signup_text}</p>
-	</div>
-	<a href="/login/" data-role="button">{back}</a>
-	<a href="/login/privacy" data-ajax="false" style="font-weight:normal;"><i>{privacy_policy_link}</i></a>
 </div>
 
 <script>
+	$("header.page-header").html('<a href="javascript:history.back();" data-role="button" data-icon="back" data-ajax="false">{back}</a>')
 	$("form").on("submit", function()
 	{
 		$("#overlay").addClass("gray-overlay");
