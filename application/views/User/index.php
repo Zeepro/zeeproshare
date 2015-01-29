@@ -16,9 +16,9 @@
 					echo '<a class="printer_link" data-localip="' . $printer->localIP . '"data-nb="' . $i . '">' . $printer->printername . '</a></li>';
 					$i++;
 				}
+				echo "</ul>";
 			}
 		?>
-		</ul>
 		<a style="margin-top: 30px;" href="/user/change_password" data-role="button" data-ajax="false">{change_pass}</a>
 		<a style="margin-top: 30px;" href="/login/disconnect" data-role="button" data-ajax="false">{signout}</a>
 	</div>

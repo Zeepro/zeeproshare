@@ -17,13 +17,13 @@
 				echo '<a class="printer_link" data-localip="' . $printer->localIP . '"data-nb="' . $i . '">' . $printer->printername . '</a></li>';
 				$i++;
 			}
+			echo "</ul>";
 		}
 		else
 		{
 			echo "<div style='text-align:center'>". t('no_printer') ."</div>";
 		}
 	?>
-	</ul>
 	<a href="/index.php/user/" data-role="button">{back}</a>
 </div>
 
