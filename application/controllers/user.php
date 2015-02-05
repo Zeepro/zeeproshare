@@ -15,7 +15,7 @@ class User extends CI_Controller
 	{
 		if ($this->session->userdata('logged_in') == false)
 		{
-			$this->output->set_header("Location: /login");
+			$this->output->set_header("Location: /Login");
 			return;
 		}
 		$this->lang->load('user', $this->config->item('language'));
@@ -39,7 +39,7 @@ class User extends CI_Controller
 			$title = t('connected');
 		else
 			$title = t('no_printer');
-		
+				
         $body = $this->load->view('User/index', array("printers" => $printers), true);
 		
 		$template_data = array('body_content'	=> $body,
@@ -82,11 +82,7 @@ class User extends CI_Controller
 		}
 		$template_data = array('body_content'	=> $this->parser->parse("User/signup", array(), true),
 								'signup'		=> t('signup'),
-								'signup_btn'		=> t('signup_btn'),
 								'signup_text'	=> t('signup_text'),
-								'email'	=> t('email'),
-								'password'	=> t('password'),
-								'confirmpassword'	=> t('confirmpassword'),
 								'privacy_policy_link'	=> t('privacy_policy_link'),
 								'show_password'	=> t('show_password'),
 								'back'			=> t('back'));
@@ -123,10 +119,8 @@ class User extends CI_Controller
 				}
 			}
 		}
-
 		$template_data = array('body_content' => $this->parser->parse("User/confirm_signup", array(), true));
-
-$this->parser->parse('basetemplate', $template_data);
+        $this->parser->parse('basetemplate', $template_data);
 	}
 
 	public function change_password()

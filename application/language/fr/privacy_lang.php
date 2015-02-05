@@ -3,99 +3,40 @@ $lang['back'] = 'Retour';
 $lang['privacy_policy']
 	= "	<h2>Politique de confidentialité de Zeepro</h2>
 		<div class=\"ui-grid-b ui-corner-all ui-shadow ui-transparent\" style=\"padding: 5px; color: #000 !important;text-shadow: 0 1px 0 #fff !important;\">
-		<p>Dernière mise à jour: 16 Décembre 2014</p>
-		<br />
-		<p>
-			Cette politique de confidentialité a été rédigée afin d'éclairer le consommateur sur la façon dont ses données personnelles (PII) sont utilisées en ligne.
-			Les PII, comme dicté dans la loi des États-Unis d'Amérique sur la confidentialité et en sécurité d'informations,
-			sont des informations qui peuvent être utilisées seules ou coinjointement à d'autres informations afin d'identifier, contacter ou localiser une personne en particulier, ou encore identifier un individu.
-			Veuillez lire notre politique de confidentialité avec attention afin d'avoir une connaissance claire sur la manière dont nous collectons,
-			utilisons, protégeons, ou manipulons vos données personnelles en accordance avec notre site internet.
-		</p>
-		<br />
-		<p><b>Quelles informations personnelles collectons-nous des gens utilisant Zim ?</b></p>
-		<p>
-			Lorsque vous vous enregistrez sur notre site, votre adresse email et/ou d'autres détails pourront vous être demandés afin d'améliorer votre expérience.
-		</p>
-		<br />
-		<p><b>Quand collectons-nous ces informations ?</b></p>
-		<p>
-			Nous collectons ces informations lorsque vous vous inscrivez et utilisez votre Zim.
-		</p>
-		<br />
-		<p><b>Comment utilisons-nous votre information ?</b></p>
-		<p>
-			Nous pouvons utiliser les informations que nous collectons lorsque vous vous enregistrez ou utilisez certaines fonctionnalités du site des manières suivantes :
-			<ul style='list-style-type:disc;'>
-				<li>Nous permettre de vous fournir un meilleur service lors de vos interactions avec le service consommateurs.</li>
-				<li>Envoyer périodiquement des e-mails concernant d'autres produits et services de Zeepro.</li>
-			</ul>
-		</p>
-		<br />
-		<p><b>Comment protégeons-nous les données de nos visiteurs ?</b></p>
-		<p>
-			Nous ne mettons pas en œuvre les vérifications recommandées par la norme PCI.<br />
-			Vos données personnelles sont stockées derrière des réseaux sécurisées accessibles seulement par un nombre limité de personnes ayant les droits d'accès spéciaux à ces systèmes.
-			Il est requis de ces personnes qu'elles gardent les données recueillies confidentielles. De plus, toutes les informations sensibles que vous fournissez sont encryptées via le protocole SSL (Secure Socket Layer).<br />
-			Nous implémentons une variété de mesures de sécurité pour maintenir la sécurité de vos informations personnelles.
-		</p>
-		<br />
-		<p><b>Utilisons-nous des 'cookies' ?</b></p>
-		<p>
-			Oui. Les cookies sont de minuscules fichiers qu'un site ou son fournisseur de services stocke sur le disque dur de votre ordinateur depuis votre navigateur Web (s'il est configuré pour les accepter).
-			Ils permettent à ce site ou fournisseur de services de reconnaître votre navigateur et stocker certaines informations.
-			Ils sont aussi utilisés afin que nous puissions mieux comprendre vos préférences en se basant sur vos activités actuelles ou passées, pour vous fournir un meilleur service.
-			Nous utilisons également des cookies pour compiler des données sur le trafic du site ainsi que les interactions que vous avez avec celui-ci afin de vous offrir une meilleure expérience et de meilleurs outils dans le futur.<br />			
-			Vous pouvez choisir de configurer votre ordinateur afin qu'il vous avertisse chaque fois qu'un cookie est envoyé, ou de désactiver la gestion des cookies. Ceci est faisable à partir des réglages de votre navigateur web (Internet Explorer par exemple).
-			Chaque navigateur web est différent, donc référez-vous au menu d'Aide de votre navigateur pour plus de détails sur la façon de correctement éditer vos réglages concernant la gestion des cookies.
-		</p>
-		<br />Si les utilisateurs désactivent les cookies dans leur navigateur :</b></p>
-		<p>
-			Si vous désactivez les cookies, certains de nos services pourraient ne pas fonctionner correctement.
-		</p>
-		<p><b>Divulgation aux tiers</b></p>
-		<p>
-			Nous ne vendons, n'échangeons ou ne transférons pas vos données à des parties tierces.
-		</p>
-		<br />
-		<p><b>Liens provenant de tiers</b></p>
-		<p>
-			Nous n'incluons ou ne proposons pas de produits ou de services venant de parties tierces sur l'interface Zim.
-		</p>
-		<br />
-		<p><b>Le California Online Privacy Protection Act (CalOPPA)</b></p>
-		<p>
-			Le CalOPPA est la première loi d'État qui requiert aux sites internet de services en ligne et commerciaux à poster une politique de confidentialité.
-			La portée de cette loi s'étend au-delà de la Californie et force toute personne ou entreprise dans le monde qui opèrerait un ou des sites internet collectant des données personnelles de consommateurs Californiens
-			à présenter de manière claire et visible une politique de confidentialité détaillant quelles informations exactement sont collectées, les individus avec qui elles pourraient être partagées, et de respecter cette politique.<br />
-			- Pour plus d'informations : <a href='http://consumercal.org/california-online-privacy-protection-act-caloppa/'>http://consumercal.org/</a>
-		</p>
-		<br />
-		<p><b>Conformément au CalOPPA nous aggréons aux points suivants :</b></p>
-		<p>
-			Les utilisateurs peuvent visiter notre site de façon anonyme.<br />
-			Le lien menant à la description de cette politique de confidentialité restera toujours disponible sur la page d'inscription de ce site.<br />
-			Notre politique de confidentialité inclut le mot 'Confidentialité' et peut facilement être trouvée sur la page d'inscription de ce site.<br />
-			Nos utilisateurs seront notifiés de tout changement concernant notre politique de confidentialité.<br />
-			Il sera possible pour nos utilisateurs de changer leurs informations personnelles en contactant l'équipe support de Zeepro.
-		</p>
-		<br />
-		<p><b>Comment notre site gère-t-il les signaux Do-Not-Track (DNT)?</b></p>
-		<p>
-			Nous respectons les signaux Do-Not-Track et ne traçons, ne posons pas de cookies, ou ne mettons pas de publicité lorsqu'un mécanisme Do-Not-Track (DNT) est en place sur le navigateur.
-		</p>
-		<br />
-		<p><b>Notre site autorise-t-il le ciblage comportemental de la part de parties tierces ?</b></p>
-		<p>
-			Il est important de noter que nous n'autorisons pas de ciblage comportemental de la part de parties tierces.
-		</p>
-		<br />
-		<p><b>COPPA (Children Online Privacy Protection Act)</b></p>
-		<p>
-			Le COPPA (Children's Online Privacy Protection Act) impose que la collecte de données personnelles de mineurs en-dessous de 13 ans implique l'accord des parents. La Commission Fédérale des Échanges,
-			l'agence nationale de protection des consommateurs, applique la loi COPPA, qui dicte aux opérateurs de sites internets et de services en ligne ce qu'ils doivent mettre en œuvre afin de protéger la confidentialité et la sécurité des mineurs en ligne.<br />
-			Nous ne promouvons pas spécifiquement nos produits aux mineurs âgés de moins de 13 ans.
-		</p>
-		<br />
-		<p>Si vous avez des questions concernant cette politique de confidentialité, vous pouvez contacter l'équipe de support Zeepro.</p>
+		<p>À compter du 21 Janvier, 2015</p>
+		<p>Zeepro, Inc., et ses sociétés affiliées (collectivement «Zeepro», «nous», «notre» ou «nos»), sont engagés à maintenir tous les renseignements personnels recueillis auprès des personnes qui visitent notre site internet et qui utilisent nos produits, logiciels et services (collectivement, les «Services») confidentiels, sécurisés et privés.</p>
+		<p>En accédant et en utilisant notre site internet et Services, vous reconnaissez et convenez que vous acceptez les politiques énoncées dans la présente Politique de confidentialité comme condition de d’utilisation de nos Services. Si vous utiliser nos Services pour le compte d'une organisation ou d’une personne morale, vous consentez à accepter les politiques énoncées dans la présente politique de confidentialité au nom de cette organisation ou entité et affirmez que vous êtes autorisés à le faire.</p>
+		<p><b>Informations collectées</b></p>
+		<p>Nous recueillons et utilisons les informations suivantes pour fournir, améliorer et protéger nos services:</p>
+		<p>Nous pouvons collecter certaines informations que vous fournissez spécifiquement et intentionnellement pour nous. Par exemple, lorsque vous créez un compte utilisateur, nous pouvons recueillir des renseignements personnels vous concernant, telles que votre nom, adresse email, numéro de téléphone, âge, sexe et adresse physique. En outre, dans le cadre de nos services, vous aurez la possibilité de télécharger, stocker et partager certains fichiers avec nous, ainsi que les données et les informations qui leur sont liées. Nous pouvons également recueillir des renseignements financiers que vous choisissez de partager avec nous, comme votre carte de crédit ou de débit, adresse de facturation, et d'autres informations de facturation. D’autres informations uniques que nous pouvons recueillir incluent les préférences  produits et services, préférences de contact, formation et expérience professionnelle, et les centres d’intérêts professionnels - dans certains cas, vos coordonnées professionnelles peuvent être fournis à Zeepro par une  entité désignée dans votre entreprise (tels qu’un membre des départements des Achats, de l’IT ou Services Supports à l’entreprise).</p>
+		<p>Nous pouvons également recueillir des renseignements que  vous ne nous fournissez pas spécifiquement et intentionnellement.  Cela inclurait votre adresse de protocole Internet, le type de navigateur et la langue, l'appareil que vous utilisez pour accéder aux Services, votre fournisseur d'accès Internet, les pages de renvoi, et le système d'exploitation. En outre, nous contrôlons et recueillons des informations sur votre imprimante lorsque vous utilisez les services, y compris les informations sur les cartouches, la couleur et autres.</p>
+		<p>Nous n’autorisons et ne permettrons pas sciemment à une personne de moins de 13 ans de nous fournir toute information d'identification personnelle. Les utilisateurs des services seront considérés avoir le plein contrôle sur leurs produits et leurs comptes d'utilisateurs, et doivent s’assurer qu'aucun enfant de moins de 13 ans n’utilise nos services d'une façon qui nous fournirait des informations le concernant. Si nous apprenons que nous avons recueilli des renseignements personnels concernant un enfant de moins de 13 ans, nous supprimerons ces informations le plus rapidement possible. Si vous croyez que nous pourrions avoir des information personnelle concernant un enfant de moins de 13 ans, merci de nous contacter en utilisant les coordonnées ci-dessous.</p>
+		<p><b>Méthodes de collecte</b></p>
+		<p>Nous utilisons diverses technologies pour recueillir les informations décrites ci-dessus, et fournir, améliorer et protéger nos services, qui peuvent inclure l'utilisation de cookies et de pixels invisibles. Les cookies sont de petits fichiers de données stockés sur votre ordinateur ou un appareil qui permettent à notre site de reconnaître votre navigateur et de mémoriser certaines informations. Si nous utilisons des cookies, nous le ferons afin de comprendre et d'enregistrer vos préférences pour de futures visites, compiler des données globales sur le trafic du site internet et l'interaction afin d’offrir  une meilleure expérience utilisateur et de meilleurs outils. Vous pouvez configurer votre navigateur pour ne pas accepter les cookies, mais cela peut limiter votre expérience avec et la capacité à utiliser nos Services.</p>
+		<p><b>Accès et de contrôle des renseignements personnels</b></p>
+		<p>Vous pouvez accéder, examiner et/ou mettre à jour votre profil utilisateur et  vos paramètres sur zeeposhare.com, ce qui vous permettra de modifier, mettre à jour ou de restreindre l'accès à certaines informations.</p>
+		<p><b>Utilisation de l'information</b></p>
+		<p>Nous utilisons les informations que nous recueillons dans le but de fournir, exploiter, entretenir et améliorer nos services. Vos informations ne seront pas vendues, échangées, transférées ou données à toute autre personne ou entité pour quelque motif que ce soit, sans votre consentement, sauf les exceptions suivantes :
+		<ul style='list-style-type:disc;'>
+		<li>Nous pouvons fournir vos informations à des tiers de confiance pour nous aider à fournir, exploiter, maintenir et améliorer nos services.</li>
+		<li>Nous pouvons utiliser vos informations pour aider à personnaliser votre expérience  utilisateur lors de l’utilisation de nos Services.</li>
+		<li>Nous pouvons utiliser vos informations pour traiter les transactions et vous aider à remplir une transaction ou une commande.</li>
+		<li>Nous pouvons utiliser vos informations pour vous tenir au courant des dernières annonces produits de Zeepro, mises à jour logicielles, et des événements à venir - cependant, vous pouvez refuser de recevoir ces messages à tout moment en mettant à jour votre profil.</li>
+		<li>Nous pouvons utiliser vos informations pour administrer les concours, promotions, enquêtes ou d'autres caractéristiques de nos services.</li>
+		<li>Avec certaines caractéristiques de nos Services, vous pouvez téléverser des fichiers sur nos serveurs qui sont destinés à être mis à disposition d’autres utilisateurs de nos Services, dans ce cas certaines informations non liées à l’identification (par exemple, votre nom d'utilisateur) peuvent être montrées à des tiers - Toutefois, dans ce cas, nous ne partagerons aucune information personnelle ou financière.</li>
+		<li>Nous pouvons également divulguer certaines informations à nos avocats, nos comptables et nos conseillers professionnels afin d'aider à nous conformer aux lois en vigueur, et à des tierces parties lorsque nous le jugeons nécessaire pour appliquer nos politiques de site, ou protéger nos droits, notre propriété ou notre sécurité, et / ou les droits, la propriété ou la sécurité d'autrui.</li>
+		<li>Si Zeepro est impliqué dans une fusion, acquisition, réorganisation ou vente de la totalité ou quasi-totalité de nos actifs, vos informations peuvent être transférées dans le cadre de cette opération. Dans ce cas, nous vous informerons d'une telle opération, et vous expliquerons, le cas échéant, les choix qui vous sont offerts.</li>
+		<li>Pour vous offrir nos Services, nous pouvons stocker, traiter et transmettre des informations dans le monde entier - y compris ceux en dehors de votre pays. Certaines informations peuvent également être stockées localement sur les appareils que vous utilisez pour accéder à nos Services.</li>
+		</ul></p>
+		<p><b>Sites Internet de tiers</b></p>
+		<p>Zeepro peut créer un lien vers des sites tiers, applications, produits et services, et peut vous permettre de publier du contenu sur ou via des sites tiers. Nous ne sommes pas responsables des pratiques employées par les sites Web de tiers liés à ou fournis via nos Services, ni de l’information ou du contenu qui y figurent. Merci de ne pas oublier que lorsque vous utilisez un lien vers un autre site, notre politique de confidentialité n’est plus en vigueur. La navigation et l'interaction sur tout autre site Web, y compris ceux auxquels nous relions, est soumise à ses propres règles et politiques que le troisième site de partie. Merci de vous assurer de faire relire ces règles et politiques avant de procéder. En outre, vous êtes seul responsable de tout contenu que vous choisissez de publier sur ou par l'intermédiaire des sites Internet tiers et Zeepro n’est pas responsable pour le maintien de la vie privée de tout ce qui y est contenu.</p>
+		<p><b>Sécurité</b></p>
+		<p>Zeepro utilise des contrôles de sécurité raisonnables pour protéger vos données et d'informations contre la perte, l'accès non autorisé, la divulgation, l'altération et la destruction. Les renseignements personnels que vous nous fournissez sont stockés sur des systèmes informatiques situés dans des installations contrôlées, qui ont un accès limité, et seulement le personnel sélectionné avec attention et autorisé, a accès aux informations de l'utilisateur en clair. Lors de la collecte ou du transfert des informations sensibles telles que les informations de carte de crédit, nous utilisons une variété de technologies et procédures de sécurité supplémentaires pour aider à protéger vos renseignements personnels contre l'accès non autorisé, l'utilisation ou la divulgation. Lorsque nous transmettons des informations sensibles sur Internet, nous les protégeons en utilisant des techniques de cryptage avancées, telles que le protocole Secure Socket Layer (SSL) et des pare-feux. En outre, dans le cadre du traitement des paiements en temps réel, Zeepro peut souscrire à des services de gestion de la fraude. Ces services fourniraient à Zeepro un niveau supplémentaire de sécurité pour se prémunir contre la fraude de carte de crédit et de protéger vos données financières. Malgré ces précautions,  aucun dispositif de protection ne garantit la sécurité à 100% tout le temps, et aucune garantie n’est faite dans ce sens.</p>
+		<p><b>L'exécution et le règlement des différends</b></p>
+		<p>Si vous avez des questions, des plaintes ou différends relatifs à la manière dont nous utilisons ou protégeons vos informations, merci de nous contacter en utilisant les coordonnées ci-dessous. Nous enquêterons et tenterons de résoudre les plaintes et les différends dans un délai raisonnable et d'une manière qui respecte les principes décrits dans la présente politique.</p>
+		<p>En ce qui concerne les plaintes liées à cette politique de confidentialité qui ne  peuvent être résolues grâce à notre processus interne, les lois de l'État de la Californie régissent cette politique de confidentialité, ainsi que toute réclamation qui pourrait surgir entre vous et nous en relation avec cette politique de confidentialité, sans égard aux conflits de lois. Vous acceptez que la compétence pour toute action judiciaire sera un tribunal du lieu de la juridiction compétente à San Francisco, en Californie. Vous acceptez également de soumettre à la juridiction personnelle des tribunaux situés dans le comté de San Francisco, en Californie, pour une telle action en justice.</p>
+		<p><b>Changements à cette politique</b></p>
+		<p>Cette politique de confidentialité est effective à compter de la date d'effet prévue ci-dessus. Nous nous réservons le droit de modifier et de réviser notre politique de confidentialité à tout moment, avec ou sans préavis. Ainsi, nous pouvons modifier ou réviser notre politique de confidentialité pour se conformer à la réglementation locale, d'état, ou des lois fédérales ou pour tenir compte de changements technologiques, ou pour répondre aux besoins de nos utilisateurs. Cette politique de confidentialité peut donc être modifiée de temps à autre, en conformité avec les lois et les principes visant la confidnetialité et la protection des données. Si nous apportons des changements importants à cette politique de confidentialité, nous afficherons un avis sur notre site Web pendant 30 jours à compter de la date de ces changements.</p>
+		<p><b>Pour nous contacter</b></p>
+		<p>Toute question ou plainte concernant la présente politique de confidentialité doivent être adressées à support@zeepro.com.</p>
 		</div>";

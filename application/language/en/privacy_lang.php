@@ -3,98 +3,40 @@ $lang['back'] = "Back";
 $lang['privacy_policy']
 	= "	<h2>Zeepro Privacy Policy</h2>
 		<div class=\"ui-grid-b ui-corner-all ui-shadow ui-transparent\" style=\"padding: 5px; color: #000 !important;text-shadow: 0 1px 0 #fff !important;\">
-		<p>Last update: December 16, 2014</p>
-		<br />
-		<p>
-			This privacy policy has been compiled to better serve those who are concerned with how their 'Personally identifiable information' (PII) is being used online.
-			PII, as used in US privacy law and information security, is information that can be used on its own or with other information to identify, contact, or locate a single person, or to identify an individual in context.
-			Please read our privacy policy carefully to get a clear understanding of how we collect, use, protect or otherwise handle your Personally Identifiable Information in accordance with our website.
-		</p>
-		<br />
-		<p><b>What personal information do we collect from the people using Zim ?</b></p>
-		<p>
-			When registering you may be asked to enter your email address or other details to help you with your experience.
-		</p>
-		<br />
-		<p><b>When do we collect information ?</b></p>
-		<p>
-			We collect information from you when you register and use your Zim.
-		</p>
-		<br />
-		<p><b>How do we use your information?</b></p>
-		<p>
-			We may use the information we collect from you when you register, or use certain other site features in the following ways:
-			<ul style='list-style-type:disc;'>
-				<li>To allow us to better service you in responding to your customer service requests.</li>
-				<li>To send periodic emails regarding other products and services.</li>
-			</ul>
-		</p>
-		<br />
-		<p><b>How do we protect visitor information?</b></p>
-		<p>
-			We do not use vulnerability scanning and/or scanning to PCI standards.<br />
-			Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems,
-			and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.<br />
-			We implement a variety of security measures to maintain the safety of your personal information.
-		</p>
-		<br />
-		<p><b>Do we use 'cookies' ?</b></p>
-		<p>
-			Yes. Cookies are small files that a site or its service provider transfers to your computer's hard drive through your Web browser (if you allow) that enables the site's or service provider's systems to recognize your browser and capture and remember certain information.
-			They are also used to help us understand your preferences based on previous or current activity, which enables us to provide you with improved services.
-			We also use cookies to help us compile aggregate data about site traffic and site interaction so that we can offer better site experiences and tools in the future.<br />
-			You can choose to have your computer warn you each time a cookie is being sent, or you can choose to turn off all cookies. You can do this through your browser (like Internet Explorer) settings.
-			Each browser is a little different, so look at your browser's Help menu to learn the correct way to modify your cookies.
-		</p>
-		<br />
-		<p><b>If users disable cookies in their browser:</b></p>
-		<p>
-			If you disable cookies, some features will be disabled. It will turn off some of the features that make your site experience more efficient and some of our services will not function properly.
-		</p>
-		<p><b>Third Party Disclosure</b></p>
-		<p>
-			We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties.
-		</p>
-		<br />
-		<p><b>Third party links</b></p>
-		<p>
-			We do not include or offer third party products or services on Zim interface.
-		</p>
-		<br />
-		<p><b>California Online Privacy Protection Act</b></p>
-		<p>
-			CalOPPA is the first state law in the nation to require commercial websites and online services to post a privacy policy.
-			The law's reach stretches well beyond California to require a person or company in the United States (and conceivably the world)
-			that operates websites collecting personally identifiable information from California consumers to post a conspicuous privacy policy on its website stating exactly the information being collected
-			and those individuals with whom it is being shared, and to comply with this policy.<br />
-			- See more at: <a href='http://consumercal.org/california-online-privacy-protection-act-caloppa/'>http://consumercal.org/</a>
-		</p>
-		<br />
-		<p><b>According to CalOPPA we agree to the following:</b></p>
-		<p>
-			Users can visit our site anonymously.<br />
-			The Privacy Policy link will always remain available on the registration page.<br />
-			Our Privacy Policy link includes the word 'Privacy', and can be easily found on the page specified above.<br />
-			Users will be notified of any privacy policy changes on our Privacy Policy Page.<br />
-			Users are able to change their personal information by contacting Zeepro support team.
-		</p>
-		<br />
-		<p><b>How does our site handle do not track signals ?</b></p>
-		<p>
-			We honor do not track signals and do not track, plant cookies, or use advertising when a Do Not Track (DNT) browser mechanism is in place.
-		</p>
-		<br />
-		<p><b>Does our site allow third party behavioral tracking?</b></p>
-		<p>
-			It's also important to note that we do not allow third party behavioral tracking
-		</p>
-		<br />
-		<p><b>COPPA (Children Online Privacy Protection Act)</b></p>
-		<p>
-			When it comes to the collection of personal information from children under 13, the Children's Online Privacy Protection Act (COPPA) puts parents in control. The Federal Trade Commission, the nation's
-			consumer protection agency, enforces the COPPA Rule, which spells out what operators of websites and online services must do to protect children's privacy and safety online.<br />
-			We do not specifically market to children under 13.
-		</p>
-		<br />
-		<p>If there are any questions regarding this privacy policy you may contact Zeepro support team.</p>
+		<p>Effective as of January 21, 2015</p>
+		<p>Zeepro, Inc., and its parents and affiliates (collectively “Zeepro”, “we”, “us”, or “our”), are committed to keeping any and all personal information collected from individuals that visit our website and who use our products, software and services (collectively, “Services”) confidential, secure and private.</p>
+		<p>By accessing and using our website and Services, you (“you” or “your”) acknowledge and agree that you accept the policies set forth in this Privacy Policy as a condition of your use of our Services.  If your use of the Services is through or on behalf of an organization or corporate entity, you are agreeing to accept the policies set forth in this Privacy Policy on behalf of such organization or entity, and are representing to us that you are authorized to do so.</p>
+		<p><b>Information We Collect</b></p>
+		<p>We collect and use the following information to provide, improve and protect our Services:</p>
+		<p>We may collect certain information that you specifically and intentionally provide to us.  For example, when you create a user account with us, we may collect personal information about you such as your name, email address, phone number, age, sex, and physical address.  Additionally, as part of our Services, you will have the ability to upload, store and share certain files with us, along with data and information related to them.  We may also collect financial information that you choose to share with us, such as your credit or debit card number, billing address, and other billing information.  Other unique information that we may collect includes product and service preferences, contact preferences, educational and employment background, and job interest data - in some cases, your business contact data may be provided to Zeepro by a designated entity within your company (such as a member of your Purchasing/IT/Facility Management department).</p>
+		<p>We also may collect information that you do not specifically and intentionally provide to us.  This would include your Internet Protocol address, browser type and language, the device you are using to access the Services, your Internet Service Provider, referring pages, and operating system.  Additionally, we monitor and collect information about your printer as you use the Services, including information about cartridges, color, and the like.</p>
+		<p>We do not and will not knowingly allow anyone under 13 years of age to provide us any personal identifying information. Users of the Services will be deemed to have full control over their products and user accounts, and must ensure that no children under the age of 13 use our Services in any manner which would provide us or any third party with any personal information of a child. If we learn that we have collected personal information from a child under age 13, we will delete that information as quickly as possible. If you believe that we might have any personal information about a child under age 13, please contact us using the contact information provided below.</p>
+		<p><b>How We Collect Information</b></p>
+		<p>We use various technologies to collect the information described above, and to provide, improve and protect our Services, which may include the use of cookies and pixel tags.  For example, cookies are small data files stored on your computer or device that enable our website to recognize your browser and capture and remember certain information.  If we use cookies, we will do so in order to understand and save your preferences for future visits, compile aggregate data about website traffic and interaction so that we can offer a better user experience and tools in the future.  You can set your browser to not accept cookies, but this may limit your experience with, and ability to use, the Services.</p>
+		<p><b>Access to and Control of Personal Information</b></p>
+		<p>You can access, review and/or update your user profile and settings at zeeproshare.com, which will allow you to modify, update, or restrict access to certain information.</p>
+		<p><b>Use of Information</b></p>
+		<p>We use the information that we collect for the express purpose of providing, operating, maintaining and improving the Services.  Your information will not be sold, exchanged, transferred, or given to any other person or entity for any other reason whatsoever, without your consent, except as follows:
+		<ul style='list-style-type:disc;'>
+		<li>We may provide your information to trusted third parties to help us provide, operate, maintain and improve the Services.</li>
+		<li>We may use your information to help personalize your experience using the Services.</li>
+		<li>We may use your information to process transactions and assist you in completing a transaction or order.</li>
+		<li>We may use your information to keep you apprised of Zeepro’s latest product announcements, software updates, and upcoming events – however, you can opt out of receiving these messages at any time by updating your profile.</li>
+		<li>We may use your information to administer contests, promotions, surveys, or other features of our Services.</li>
+		<li>With certain features of our Services, you may upload files to our system which are intended to be available to other users of the Services, and in such case some non-identifying information (e.g., your user name) may be shown to third parties - however, in such case, we will not share any other personal or financial information.</li>
+		<li>We may also release certain information to our attorneys, accountants and professional advisors in order to help us comply with applicable laws, and to third parties as we deem necessary to enforce our website policies, or protect our rights, property, or safety, and/or the rights, property or safety of others.</li>
+		<li>If Zeepro is involved in a merger, acquisition, reorganization, or sale of all or substantially all of our assets, your information may be transferred as part of such transaction.  In such event, we will notify you of any such transaction, and explain your options in such event.</li>
+		<li>To provide you with the Services, we may store, process and transmit information in locations around the world - including those outside your country. Information may also be stored locally on the devices you use to access the Services.</li>
+		</ul></p>
+		<p><b>Third Party Websites</b></p>
+		<p>Zeepro may link to third party websites, applications, products and services, and may allow you to publish content on or through third party websites.  We are not responsible for the practices employed by third party websites linked to or provided through the Services, nor the information or content contained therein. Please remember that when you use a link to another website, our Privacy Policy is no longer in effect. Your browsing and interaction on any other website, including those to which we link, is subject to that third party website's own rules and policies. Please make sure to read over those rules and policies before proceeding.  Additionally, you are solely responsible for any content which you elect to publish on or through any third party websites, and Zeepro is not responsible for maintaining the privacy of anything contained therein.</p>
+		<p><b>Security</b></p>
+		<p>Zeepro uses reasonable security controls to protect your data and information from loss, misuse, unauthorized access, disclosure, alteration and destruction.  The personal information you provide us is stored on computer systems located in controlled facilities which have limited access, and only carefully selected, authorized personnel have access to unencrypted user information.  When collecting or transferring sensitive information such as credit card information, we use a variety of additional security technologies and procedures to help protect your personal information from unauthorized access, use, or disclosure. When we transmit sensitive information over the internet, we protect it through the use of advanced encryption techniques, such as the Secure Socket Layer (SSL) protocol, and firewall.  Additionally, as part of real-time payment processing, Zeepro may subscribe to fraud management services. These services would provide Zeepro with an extra level of security to guard against credit card fraud and to protect your financial data.  Despite these precautions, no security safeguards guarantee 100% security all of the time, and no guarantees are made with respect to same.</p>
+		<p><b>Enforcement and Dispute Resolution</b></p>
+		<p>If you have any questions, complaints or disputes regarding the manner in which we use or protect your information, please contact us using the contact information provided below. We will investigate and attempt to resolve any complaints and disputes in a reasonable time and in a manner that complies with the principles described in this Policy.</p>
+		<p>With respect to any complaints related to this Privacy Policy that cannot be resolved through our internal process, the laws of the State of California will govern this Privacy Policy, as well as any claim that might arise between you and us in connection with this Privacy Policy, without regard to conflict of law provisions. You agree that jurisdiction for any legal action will be a court of competent jurisdiction location in San Francisco, California. You further agree to submit to the personal jurisdiction of the courts located in San Francisco County, California for any such legal action.</p>
+		<p><b>Changes to this Policy</b></p>
+		<p>This Privacy Policy is effective as of the effective date provided above. We reserve the right to amend and revise our Privacy Policy at any time, with or without notice. For example, we may amend or revise our Privacy Policy to comply with local, state, or Federal laws or to accommodate changes in technology, or to accommodate the needs of our users.  This Privacy Policy may therefore be amended from time to time, consistent with applicable data protection and privacy laws and principles.  If we make any material changes to this Privacy Policy, we will post a notice on our website for 30 days from the date of any such material changes.</p>
+		<p><b>Contacting Us</b></p>
+		<p>Any questions or complaints about this Privacy Policy should be addressed to support@zeepro.com.</p>
 		</div>";

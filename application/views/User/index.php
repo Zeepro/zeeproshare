@@ -10,7 +10,7 @@
 				foreach ($printers as $printer)
 				{
 					echo "<li>";
-					echo "<form action='http://" . $printer->URL . "/set_cookie' method='POST' id='printer" . $i ."'>";
+					echo "<form action='https://" . $printer->URL . "/set_cookie' method='POST' id='printer" . $i ."'>";
 					echo form_hidden('token', $printer->token);
 					echo form_close();
 					echo '<a class="printer_link" data-localip="' . $printer->localIP . '"data-nb="' . $i . '">' . $printer->printername . '</a></li>';
@@ -36,9 +36,11 @@
 			var selector = "#printer" + nb;
 			setTimeout(function(selector, localip)
 			{
-				if (img.height > 0)
-					$(selector).attr('action', 'http://' + localip + '/set_cookie');
-				$(selector).submit();
+				if (img.height > 0) {
+					window.location.href = 'http://' + localip;
+				} else {
+					$(selector).submit();
+				}
 			}, 4000, selector, localip);
 		});
 	</script>
