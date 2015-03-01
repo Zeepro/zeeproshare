@@ -8,7 +8,7 @@
 		<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 		<meta http-equiv="pragma" content="no-cache" />
 		<title>Home - Zim</title>
-        <link rel="stylesheet" href="/assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css" />
+        <link rel="stylesheet" href="/assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.css" />
         <link rel="stylesheet" href="/assets/css/home.css" />
 		
         <script src="/assets/jquery-2.1.1.min.js"></script>
@@ -59,12 +59,6 @@
 				color: red;
 				text-shadow: 0 1px 0 #fff !important;
 				font-weight: bold;
-			}
-			:not(header) > a[role="button"],div.ui-input-btn,button
-			{
-				color: #fff !important;
-				text-shadow: 0 1px 0 #000 !important;
-				background-color: #505050 !important;
 			}
 			.ui-loader-default
 			{
