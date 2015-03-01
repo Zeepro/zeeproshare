@@ -17,21 +17,21 @@ class Login extends CI_Controller
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 			$this->form_validation->set_rules('password', 'Password', 'required');
-			if ($this->form_validation->run())
-			{
+			if ($this->form_validation->run()) {
 				extract($_POST);
-				if($remember)
-				{
+				if($remember) {
 					$three_months = time() + 7776000;
 					setcookie('remember_me_home_zeepro', $email . ':' . $password, $three_months, '/');
-				}
-				else if (!$remember && isset($_COOKIE['remember_me_home_zeepro']))
-				{
+				} else if (!$remember && isset($_COOKIE['remember_me_home_zeepro'])) {
 					unset($_COOKIE['remember_me_home_zeepro']);
 					$past = time() - 100;
 					setcookie('remember_me_home_zeepro', null, $past, '/');
 				}
-				$tab = array("email" => $email, "password" => $password);
+				if ($optin)
+					$optin = "on";
+				else
+					$optin = "off";
+				$tab = array("email" => $email, "password" => $password, "optin" => $optin);
 				$curl = curl_init();
 				curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/login.ashx");
 				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
@@ -57,6 +57,32 @@ class Login extends CI_Controller
 				}
 			}
 		}
+		
+		
+		$template_data['optin'] = 'checked';
+		if (isset ( $_COOKIE ['remember_me_home_zeepro'] )) {
+			$cred = explode ( ':', $_COOKIE ['remember_me_home_zeepro'] );
+			if (count($cred) >= 2) {
+				$tab = array("email" => $cred[0], "password" => $cred[1]);
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/optin.ashx");
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+				curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
+				curl_setopt($curl, CURLOPT_POST, 2);
+				curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+				$result = curl_exec($curl);
+				$output = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+				curl_close($curl);
+				if ($output == 200) {
+					$result_array = json_decode($result, TRUE);
+					if ($result_array["optin"] == "off")
+						$template_data['optin'] = "";
+				}
+			}
+		}
+				
 		$body_content = $this->parser->parse('Login/index', $template_data, TRUE);
         $template_data['body_content'] = $body_content;
 		$template_data['zeepro_account'] = t("zeepro_account");
@@ -69,7 +95,9 @@ class Login extends CI_Controller
 		$template_data['signup'] = t("signup");
 		$template_data['forgot_pass'] = t("forgot_pass");
 		$template_data['privacy_policy_link'] = t("privacy_policy_link");
-        $this->parser->parse('basetemplate', $template_data);
+		$template_data['apply_text'] = t("apply_text");
+		$template_data['apply'] = t("apply");
+		$this->parser->parse('basetemplate', $template_data);
 	}
 
     public function forgot_pass()

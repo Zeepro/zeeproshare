@@ -81,6 +81,9 @@ class User extends CI_Controller
 			}
 		}
 		$template_data = array('body_content'	=> $this->parser->parse("User/signup", array(), true),
+								'email'		=> t('email'),
+								'password'		=> t('password'),
+								'confirmpassword'		=> t('confirmpassword'),
 								'signup'		=> t('signup'),
 								'signup_text'	=> t('signup_text'),
 								'privacy_policy_link'	=> t('privacy_policy_link'),
