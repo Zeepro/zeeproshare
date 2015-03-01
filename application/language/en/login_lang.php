@@ -14,3 +14,5 @@ $lang['show_password'] = "show password";
 $lang['custom_error'] = "<p class='zim-error'>The email or password you entered is incorrect.</p>";
 $lang['email'] = "Email";
 $lang['back'] = 'Back';
+$lang['apply_text'] = 'Apply below to have a chance to watch your very own object print on the Zim - a connected 3D printer. Zeepro will then mail your 3D-print object for you to keep!';
+$lang['apply'] = 'Apply';
