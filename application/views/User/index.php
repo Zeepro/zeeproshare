@@ -19,8 +19,8 @@
 				echo "</ul>";
 			}
 		?>
-		<a style="margin-top: 30px;" href="/user/change_password" data-role="button" data-ajax="false">{change_pass}</a>
-		<a style="margin-top: 30px;" href="/login/disconnect" data-role="button" data-ajax="false">{signout}</a>
+		<a style="margin-top: 30px;" href="/user/change_password" data-role="button" data-theme="b" data-ajax="false">{change_pass}</a>
+		<a style="margin-top: 30px;" href="/login/disconnect" data-role="button" data-theme="b" data-ajax="false">{signout}</a>
 	</div>
 
 	<script>

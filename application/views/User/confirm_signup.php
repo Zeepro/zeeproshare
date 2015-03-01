@@ -3,17 +3,11 @@
 	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px;">
 		<div id="error"></div>
 		<div data-role="fieldcontain">
-			<?php
-				$this->load->helper('form');
-				echo form_open('/user/confirm_signup',
-								array('data-ajax' => 'false'));
-			?>
-			<input type="text" name="confirm_code" required="required" placeholder="<?php echo t('code') ?>">
-			<br />
-			<?php
-				echo form_submit('submit', t('send_code'));
-				echo form_close();
-			?>
+			<form action="/user/confirm_signup" method="post" accept-charset="utf-8" data-ajax="false">
+				<input type="text" name="confirm_code" required="required" placeholder="<?php echo t('code') ?>">
+				<br />
+				<input type="submit" name="submit" value="<?php echo t('send_code') ?>" data-theme="b" />
+			</form>
 		</div>
 	</div>
 </div>
