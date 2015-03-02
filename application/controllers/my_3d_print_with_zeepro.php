@@ -12,51 +12,29 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
+			extract($_POST);
+
+			$json = json_encode(array('email' => date("$email"),
+				'first_name' => date("$first_name"),
+				'last_name' => date("$last_name"),
+				'address1' => date("$address1"),
+				'address2' => date("$address2"),
+				'city' => date("$city"),
+				'state' => date("$state"),
+				'zip' => date("$zip"),
+				'country' => date("$country"),
+				'cell_phone' => date("$cell_phone")
+			));
+			$url = 'https://stat.service.zeepro.com/log.ashx';
+			$data = array('printersn' => '000000000000', 'version' => '1', 'category' => 'My3DPrintWithZeepro', 'action' => 'collect', 'label' => $json);
+			$options = array('http' => array('header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method'  => 'POST',
+					'content' => http_build_query($data)));
+			$context  = stream_context_create($options);
+			@file_get_contents($url, false, $context);
+							
 			$this->output->set_header("Location: /my_3d_print_with_zeepro/confirmation");
 			return ;
-					
-			$this->load->library('form_validation');
-			$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-			$this->form_validation->set_rules('password', 'Password', 'required');
-			if ($this->form_validation->run()) {
-				extract($_POST);
-				if($remember) {
-					$three_months = time() + 7776000;
-					setcookie('remember_me_home_zeepro', $email . ':' . $password, $three_months, '/');
-				} else if (!$remember && isset($_COOKIE['remember_me_home_zeepro'])) {
-					unset($_COOKIE['remember_me_home_zeepro']);
-					$past = time() - 100;
-					setcookie('remember_me_home_zeepro', null, $past, '/');
-				}
-				if ($optin)
-					$optin = "on";
-				else
-					$optin = "off";
-				$tab = array("email" => $email, "password" => $password, "optin" => $optin);
-				$curl = curl_init();
-				curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/login.ashx");
-				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-				curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-				curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
-				curl_setopt($curl, CURLOPT_POST, 2);
-				curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
-				curl_exec($curl);
-				$output = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-				curl_close($curl);
-				if ($output == HTTP_OK)
-				{
-					$custom_data = array('email' => $email,
-										'logged_in' => true,
-										'password' => $password);
-					$this->session->set_userdata($custom_data);
-					$this->output->set_header("Location: /user");
-					return ;
-				}
-				else if ($output == 434) //Wrong parameter
-				{
-					$template_data['custom_error'] = t("custom_error");
-				}
-			}
 		}
 		
 				
@@ -64,12 +42,12 @@ class my_3d_print_with_zeepro extends CI_Controller
         $template_data['body_content'] = $body_content;
 		$template_data['back'] = t("back");
 		$template_data['title'] = t("title");
-		$template_data['terms_of_service'] = t("terms_of_service");
-		$template_data['I_agree'] = t("I_agree");
+		$template_data['terms_of_service_agreement'] = t("terms_of_service_agreement");
 		$template_data['email'] = t("email");
 		$template_data['first_name'] = t("first_name");
 		$template_data['last_name'] = t("last_name");
 		$template_data['address'] = t("address");
+		$template_data['why_address'] = t("why_address");		
 		$template_data['city'] = t("city");
 		$template_data['state'] = t("state");
 		$template_data['zip'] = t("zip");
