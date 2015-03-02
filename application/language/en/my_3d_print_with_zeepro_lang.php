@@ -1,16 +1,16 @@
 <?php
 
 $lang['title'] = "My first 3D print with Zeepro";
-$lang['terms_of_service'] = "Terms of service";
+$lang['terms_of_service_agreement'] = "I agree with the terms of service";
 $lang['back'] = 'Back';
 $lang['apply'] = 'Apply';
-$lang['I_agree'] = 'I agree with the';
 $lang['terms_of_service_text'] = 'Terms of service text';
 $lang['confirmation_text'] = 'Confirmation text';
 $lang['email'] = "Email";
 $lang['first_name'] = "First name";
 $lang['last_name'] = "Last name";
 $lang['address'] = "Address";
+$lang['why_address'] = "Text explaining why...";
 $lang['city'] = "City";
 $lang['state'] = "State";
 $lang['zip'] = "Zip code";
