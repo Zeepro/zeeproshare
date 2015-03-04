@@ -34,14 +34,14 @@
 					placeholder="{last_name}">
 				<br />
 				<div class="ui-grid-a">
-					<div class="ui-block-b" style="float:right; width:10%">
+					<div class="ui-block-b" style="float:right; width:15%">
 						<a href="#address_why_popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow" data-transition="pop" style="height:14px; padding-top:9px; padding-left:14px">?</a>
 						<div id="address_why_popup" data-role="popup" class="ui-content">
 							<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left"></a>
 							{why_address}
 						</div>
 					</div>
-					<div class="ui-block-a" style="width:90%">
+					<div class="ui-block-a" style="width:85%">
 						<input type="text" id="address1" name="address1" value="" placeholder="{address1}">
 					</div>
 				</div>
@@ -326,26 +326,7 @@
 					<option value="{country268}">{country268}</option>
 					<option value="{country269}">{country269}</option>
 				</select>
-
-				
-				
-				
-				
 				<br />
-				<div class="ui-grid-a">
-					<div class="ui-block-b" style="float:right; width:10%">
-						<a href="#phone_why_popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow" data-transition="pop" style="height:14px; padding-top:9px; padding-left:14px">?</a>
-						<div id="phone_why_popup" data-role="popup" class="ui-content">
-							<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left"></a>
-							{why_phone}
-						</div>
-					</div>
-					<div class="ui-block-a" style="width:90%">
-						<input type="text" id="cell_phone"
-							name="cell_phone" value="" placeholder="{cell_phone}"
-							data-type="phone">
-					</div>
-				</div>
 				<fieldset id="3D_printer_owner" data-role="controlgroup"
 					data-type="horizontal">
 					<legend>{3D_printer_owner}</legend>
@@ -357,11 +338,14 @@
 				<div id="ThreeDprinterDiv">
 					<select name="ThreeDprinter" id="ThreeDprinter"
 						data-native-menu="false">
-						<option value="{ThreeDprinter01}">{ThreeDprinter01}</option>
 						<option value="{ThreeDprinter02}">{ThreeDprinter02}</option>
 						<option value="{ThreeDprinter03}">{ThreeDprinter03}</option>
 						<option value="{ThreeDprinter04}">{ThreeDprinter04}</option>
 					</select>
+					<div id="printer_makeDiv">
+						<input type="text" id="printer_make" name="printer_make" value=""
+							placeholder="{printer_make}">
+					</div>	
 				</div>
 				<fieldset id="ever_use_3D_printer" data-role="controlgroup"
 					data-type="horizontal">
@@ -382,12 +366,7 @@
 					<input type="text" id="websiteURL" name="websiteURL" value=""
 						placeholder="{websiteURL}">
 				</div>
-				<select name="criteriaB" id="criteriaB" data-native-menu="false">
-					<option value="choose-one" data-placeholder="true">{criteriaB}</option>
-					<option value="{criteriaB01}">{criteriaB01}</option>
-					<option value="{criteriaB02}">{criteriaB02}</option>
-					<option value="{criteriaB03}">{criteriaB03}</option>
-				</select> <select name="social_media" id="social_media"
+				<select name="social_media" id="social_media"
 					data-native-menu="false">
 					<option value="choose-one" data-placeholder="true">{social_media}</option>
 					<option value="{social_media01}">{social_media01}</option>
@@ -413,8 +392,7 @@
 							target="_blank">{terms_of_service_agreement}</a>
 					</div>
 				</div>
-				<input type="submit" name="submit" value="<?php echo t('apply') ?>"
-					data-theme="b" />
+				<input type="submit" name="submit" value="<?php echo t('apply') ?>" data-theme="b" />
 			</form>
 		</div>
 	</div>
@@ -423,6 +401,7 @@
 <script type="text/javascript">
 	$("header.page-header").html('<a href="javascript:history.back();" data-role="button" data-theme="b" data-icon="back" data-ajax="false">{back}</a>')
 	$("#ThreeDprinterDiv").hide();
+	$("#printer_makeDiv").hide();
 	$("#websiteURLDiv").hide();
 	$("#social_media_customDiv").hide();
 	$("#3D_printer_owner_yes").bind("click", function(event, ui) {
@@ -430,6 +409,13 @@
 	});
 	$("#3D_printer_owner_no").bind("click", function(event, ui) {
 		$("#ThreeDprinterDiv").hide("slow");
+	});
+	$("#ThreeDprinter").change(function () {
+		if($(this).val() == "{ThreeDprinter04}")
+			$("#printer_makeDiv").show("slow");
+		else {
+			$("#printer_makeDiv").hide("slow");
+		}
 	});
 	$("#criteriaA").change(function () {
 		if($(this).val() != "{criteriaA04}")
@@ -489,18 +475,17 @@
 	$("#country").change(function() {
 		$("#country-button").css('border-color', '#ddd')
 	});	
-	$("#cell_phone").focusout(function() {
-		var phoneReg = /^[ 0-9]+$/;
-		if($(this).val() == '' || !phoneReg.test($(this).val()))
-			$(this).parent().closest('div').css('border-color', '#f00')
-		else
-			$(this).parent().closest('div').css('border-color', '#ddd');
-	});
 	$("#3D_printer_owner_yes").click(function() {
 		$("#3D_printer_owner").css('color', '#000');
 	});
 	$("#3D_printer_owner_no").click(function() {
 		$("#3D_printer_owner").css('color', '#000');
+	});
+	$("#printer_make").focusout(function() {
+		if($(this).val() == '')
+			$(this).parent().closest('div').css('border-color', '#f00')
+		else
+			$(this).parent().closest('div').css('border-color', '#ddd');
 	});
 	$("#ever_use_3D_printer_yes").click(function() {
 		$("#ever_use_3D_printer").css('color', '#000');
@@ -511,22 +496,14 @@
 	$("#criteriaA").change(function() {
 		$("#criteriaA-button").css('border-color', '#ddd')
 	});	
-	$("#websiteURL").focusout(function() {
-		if($(this).val() == '')
-			$(this).parent().closest('div').css('border-color', '#f00')
-		else
-			$(this).parent().closest('div').css('border-color', '#ddd');
-	});
-	$("#criteriaB").change(function() {
-		$("#criteriaB-button").css('border-color', '#ddd')
-	});	
 	$("#social_media").change(function() {
 		$("#social_media-button").css('border-color', '#ddd')
+		
 	});	
 	$("#tos").click(function() {
 		$("#agree").css('color', '#000')
 	});	
-	$("form").on("submit", function() {
+		$("form").on("submit", function() {
 		var hasError = false;
 		if ($("#email").val() == '') {
 			$("#email").parent().closest('div').css('border-color', '#f00');
@@ -560,30 +537,19 @@
 			$("#country-button").css('border-color', '#f00');
 			hasError = true;
 		}
-		var phoneReg = /^[ 0-9]+$/;
-		if ($("#cell_phone").val() == '' || !phoneReg.test($("#cell_phone").val())) {
-			$("#cell_phone").parent().closest('div').css('border-color', '#f00');
-			hasError = true;
-		}
 		if ($("input[type='radio'][name='3D_printer_owner']:checked").length == 0) {
 			$("#3D_printer_owner").css('color', '#f00');
 			hasError = true;
-		} else {
-//			alert($("input[type='radio'][name='3D_printer_owner']:checked").val());				
-		}			
+		} else if ($("input[type='radio'][name='3D_printer_owner']:checked").val() == "yes" && $("#ThreeDprinter").val() == '{{ThreeDprinter04}}' && $("#printer_make").val() == '') {
+				$("#printer_make").parent().closest('div').css('border-color', '#f00');
+				hasError = true;
+		}
 		if ($("input[type='radio'][name='ever_use_3D_printer']:checked").length == 0) {
 			$("#ever_use_3D_printer").css('color', '#f00');
 			hasError = true;
 		}			
 		if ($("#criteriaA").val() == 'choose-one') {
 			$("#criteriaA-button").css('border-color', '#f00');
-			hasError = true;
-		} else if ($("#criteriaA").val() != '{criteriaA04}' && $("#websiteURL").val() == ''){
-			$("#websiteURL").parent().closest('div').css('border-color', '#f00');
-			hasError = true;
-}
-		if ($("#criteriaB").val() == 'choose-one') {
-			$("#criteriaB-button").css('border-color', '#f00');
 			hasError = true;
 		}
 		if ($("#social_media").val() == 'choose-one') {

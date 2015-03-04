@@ -12,6 +12,22 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
+			if ($_POST['3D_printer_owner'] == "no") {
+				$ThreeDprinter = "";
+				$printer_make = "";
+			} else if ($_POST['ThreeDprinter'] != t("ThreeDprinter04")) {
+				$ThreeDprinter = $_POST['ThreeDprinter'];
+				$printer_make = "";
+			} else {
+				$ThreeDprinter = $_POST['ThreeDprinter'];
+				$printer_make = $_POST['printer_make'];
+			}
+			
+			if ($_POST['social_media'] != t("social_media06"))
+				$social_media_custom = "";
+			else
+				$social_media_custom = $_POST['social_media_custom'];
+				
 			$json = json_encode(array('email' => $_POST['email'],
 				'first_name' => $_POST['first_name'],
 				'last_name' => $_POST['last_name'],
@@ -21,25 +37,42 @@ class my_3d_print_with_zeepro extends CI_Controller
 				'state' => $_POST['state'],
 				'zip' => $_POST['zip'],
 				'country' => $_POST['country'],
-				'cell_phone' => $_POST['cell_phone'],
 				'3D_printer_owner' => $_POST['3D_printer_owner'],
-				'ThreeDprinter' => $_POST['ThreeDprinter'],
+				'ThreeDprinter' => $ThreeDprinter,
+				'Printer_make' => $printer_make,
 				'ever_use_3D_printer' => $_POST['ever_use_3D_printer'],
 				'occupation' => $_POST['criteriaA'],
 				'websiteURL' => $_POST['websiteURL'],
-				'job' => $_POST['criteriaB'],
 				'social_media' => $_POST['social_media'],
-				'other_social_media' => $_POST['social_media_custom'],
+				'other_social_media' => $social_media_custom,
 				'handle' => $_POST['handle']
 			));
-			$url = 'https://stat.service.zeepro.com/log.ashx';
-			$data = array('printersn' => '000000000000', 'version' => '1', 'category' => 'My3DPrintWithZeepro', 'action' => 'collect', 'label' => $json);
-			$options = array('http' => array('header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-					'method'  => 'POST',
-					'content' => http_build_query($data)));
-			$context  = stream_context_create($options);
-			@file_get_contents($url, false, $context);
 
+			// Via Log
+// 			$url = 'https://stat.service.zeepro.com/log.ashx';
+// 			$data = array('printersn' => '000000000000', 'version' => '1', 'category' => 'My3DPrintWithZeepro', 'action' => 'collect', 'label' => $json);
+// 			$options = array('http' => array('header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+// 					'method'  => 'POST',
+// 					'content' => http_build_query($data)));
+// 			$context  = stream_context_create($options);
+// 			@file_get_contents($url, false, $context);
+
+			// Direct
+			$server = "tcp:p8jt5i2tn6.database.windows.net,1433";
+			$user = "zssologin@p8jt5i2tn6";
+			$pwd = "V8lu7hb1";
+			$db = "zsso";
+
+			try{
+				$conn = new PDO("sqlsrv:Server= $server ; Database = $db ", $user, $pwd);
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$sql = "INSERT INTO My3DPrintWithZeepro (data) VALUES (:data)";
+				$q = $conn->prepare($sql);
+				$q->execute(array(':data' => $json));
+			} catch(Exception $e){
+				die($e);
+			}
+				
 			include_once "/application/third_party/swiftmailer-master/lib/swift_required.php";
 			
 			$subject = t("confirmation_email_subject");
@@ -54,8 +87,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 			$message = new Swift_Message($subject);
 			$message->setFrom($from);
 			$message->setTo($to);
-			$message->setBody(t("confirmation_email_text"), 'text/plain');
-			$message->addPart(t("confirmation_email_html"), 'text/html');
+			$message->setBody(str_replace("{first_name}", $_POST['first_name'], t("confirmation_email_html")), 'text/html');
 			
 			$recipients = $swift->send($message, $failures);
 			
@@ -78,8 +110,6 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['city'] = t("city");
 		$template_data['state'] = t("state");
 		$template_data['zip'] = t("zip");
-		$template_data['cell_phone'] = t("cell_phone");
-		$template_data['why_phone'] = t("why_phone");		
 		$template_data['country'] = t("country");
 		$template_data['country001'] = t("country001");
 		$template_data['country002'] = t("country002");
@@ -353,10 +383,10 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['3D_printer_owner'] = t("3D_printer_owner");
 		$template_data['yes'] = t("yes");
 		$template_data['no'] = t("no");
-		$template_data['ThreeDprinter01'] = t("ThreeDprinter01");
 		$template_data['ThreeDprinter02'] = t("ThreeDprinter02");
 		$template_data['ThreeDprinter03'] = t("ThreeDprinter03");
 		$template_data['ThreeDprinter04'] = t("ThreeDprinter04");
+		$template_data['printer_make'] = t("printer_make");
 		$template_data['ever_use'] = t("ever_use");
 		$template_data['criteriaA'] = t("criteriaA");
 		$template_data['criteriaA01'] = t("criteriaA01");
@@ -364,10 +394,6 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['criteriaA03'] = t("criteriaA03");
 		$template_data['criteriaA04'] = t("criteriaA04");
 		$template_data['websiteURL'] = t("websiteURL");
-		$template_data['criteriaB'] = t("criteriaB");
-		$template_data['criteriaB01'] = t("criteriaB01");
-		$template_data['criteriaB02'] = t("criteriaB02");
-		$template_data['criteriaB03'] = t("criteriaB03");
 		$template_data['social_media'] = t("social_media");
 		$template_data['social_media01'] = t("social_media01");
 		$template_data['social_media02'] = t("social_media02");
@@ -381,15 +407,56 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$this->parser->parse('basetemplate', $template_data);
 	}
 
-	public function terms_of_service()
+	public function extract94110()
 	{
-		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
+		$this->load->helper('download');
+		
+		$server = "tcp:p8jt5i2tn6.database.windows.net,1433";
+		$user = "zssologin@p8jt5i2tn6";
+		$pwd = "V8lu7hb1";
+		$db = "zsso";
 
-		$template_data = array('body_content'	=> $this->parser->parse("my_3d_print_with_zeepro/terms_of_service", array(), true),
-								'terms_of_service_text'=> t('terms_of_service_text'),
-								'back'			=> t('back')
-								);
-        $this->parser->parse('basetemplate', $template_data);
+		$csv = "#;Date;Email;First name;Last name;Address1;Address2;City;State;Zip;Country;3D printer owner;3D printer;Other 3D printer;Ever use 3D printer;Description;Website;Social media;Other social media;Handle\r\n";
+		
+		try{
+			$conn = new PDO("sqlsrv:Server= $server ; Database = $db ", $user, $pwd);
+			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = "SELECT id, date, data FROM My3DPrintWithZeepro";
+
+			foreach ($conn->query($sql) as $row) {
+				try {
+					$result_array = json_decode($row['data'], TRUE);
+
+					$line = $row['id'] . ';' .
+						$row['date'] . ';' .
+						'"' . str_replace('"', '""', $result_array["email"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["first_name"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["last_name"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["address1"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["address2"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["city"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["state"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["zip"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["country"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["3D_printer_owner"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["ThreeDprinter"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["Printer_make"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["ever_use_3D_printer"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["occupation"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["websiteURL"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["social_media"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["other_social_media"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["handle"]) . "\"\r\n";
+					$csv = $csv . $line;
+				} catch(Exception $e) {
+				}				
+			}			
+		} catch(Exception $e){
+			die($e);
+		}
+	
+		force_download("My3DPrintWithZeepro.csv", $csv);
+		return;
 	}
 
 	public function confirmation()
@@ -398,6 +465,17 @@ class my_3d_print_with_zeepro extends CI_Controller
 
 		$template_data = array('body_content'	=> $this->parser->parse("my_3d_print_with_zeepro/confirmation", array(), true),
 								'confirmation_text'=> t('confirmation_text'),
+								'back'			=> t('back')
+								);
+        $this->parser->parse('basetemplate', $template_data);
+	}
+
+	public function terms_of_service()
+	{
+		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
+
+		$template_data = array('body_content'	=> $this->parser->parse("my_3d_print_with_zeepro/terms_of_service", array(), true),
+								'confirmation_text'=> t('terms_of_service_text'),
 								'back'			=> t('back')
 								);
         $this->parser->parse('basetemplate', $template_data);
