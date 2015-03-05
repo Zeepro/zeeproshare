@@ -12,17 +12,21 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
-			if ($_POST['3D_printer_owner'] == "no") {
-				$ThreeDprinter = "";
-				$printer_make = "";
-			} else if ($_POST['ThreeDprinter'] != t("ThreeDprinter04")) {
-				$ThreeDprinter = $_POST['ThreeDprinter'];
-				$printer_make = "";
-			} else {
-				$ThreeDprinter = $_POST['ThreeDprinter'];
+			if ($_POST['journalist_or_blogger'] == "on")
+				$journalist_or_blogger = "yes";
+			else
+				$journalist_or_blogger = "no";
+			if ($_POST['3D_printer_owner'] == "on") {
+				$ThreeD_printer_owner = "yes";
 				$printer_make = $_POST['printer_make'];
+			} else {
+				$ThreeD_printer_owner = "no";
+				$printer_make = "";
 			}
-			
+			if ($_POST['ever_use'] == "on")
+				$ever_use = "yes";
+			else
+				$ever_use = "no";
 			if ($_POST['social_media'] != t("social_media06"))
 				$social_media_custom = "";
 			else
@@ -31,18 +35,16 @@ class my_3d_print_with_zeepro extends CI_Controller
 			$json = json_encode(array('email' => $_POST['email'],
 				'first_name' => $_POST['first_name'],
 				'last_name' => $_POST['last_name'],
+				'journalist_or_blogger' => $journalist_or_blogger,
 				'address1' => $_POST['address1'],
 				'address2' => $_POST['address2'],
 				'city' => $_POST['city'],
 				'state' => $_POST['state'],
 				'zip' => $_POST['zip'],
 				'country' => $_POST['country'],
-				'3D_printer_owner' => $_POST['3D_printer_owner'],
-				'ThreeDprinter' => $ThreeDprinter,
+				'3D_printer_owner' => $ThreeD_printer_owner,
 				'Printer_make' => $printer_make,
-				'ever_use_3D_printer' => $_POST['ever_use_3D_printer'],
-				'occupation' => $_POST['criteriaA'],
-				'websiteURL' => $_POST['websiteURL'],
+				'ever_use_3D_printer' => $ever_use,
 				'social_media' => $_POST['social_media'],
 				'other_social_media' => $social_media_custom,
 				'handle' => $_POST['handle']
@@ -104,6 +106,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['email'] = t("email");
 		$template_data['first_name'] = t("first_name");
 		$template_data['last_name'] = t("last_name");
+		$template_data['journalist_or_blogger'] = t("journalist_or_blogger");
 		$template_data['address1'] = t("address1");
 		$template_data['address2'] = t("address2");
 		$template_data['why_address'] = t("why_address");		
@@ -380,6 +383,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['country267'] = t("country267");
 		$template_data['country268'] = t("country268");
 		$template_data['country269'] = t("country269");
+		$template_data['check_the_following'] = t("check_the_following");
 		$template_data['3D_printer_owner'] = t("3D_printer_owner");
 		$template_data['yes'] = t("yes");
 		$template_data['no'] = t("no");
@@ -416,7 +420,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$pwd = "V8lu7hb1";
 		$db = "zsso";
 
-		$csv = "#;Date;Email;First name;Last name;Address1;Address2;City;State;Zip;Country;3D printer owner;3D printer;Other 3D printer;Ever use 3D printer;Description;Website;Social media;Other social media;Handle\r\n";
+		$csv = "#;Date;Email;First name;Last name;Jrnlst or blogger;Address1;Address2;City;State;Zip;Country;3D printer owner;Printer brand;Ever use 3D printer;Social media;Other social media;Handle\r\n";
 		
 		try{
 			$conn = new PDO("sqlsrv:Server= $server ; Database = $db ", $user, $pwd);
@@ -432,6 +436,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 						'"' . str_replace('"', '""', $result_array["email"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["first_name"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["last_name"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["journalist_or_blogger"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["address1"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["address2"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["city"]) . '";' .
@@ -439,11 +444,8 @@ class my_3d_print_with_zeepro extends CI_Controller
 						'"' . str_replace('"', '""', $result_array["zip"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["country"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["3D_printer_owner"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["ThreeDprinter"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["Printer_make"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["ever_use_3D_printer"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["occupation"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["websiteURL"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["social_media"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["other_social_media"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["handle"]) . "\"\r\n";

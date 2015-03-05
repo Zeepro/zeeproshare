@@ -17,6 +17,13 @@
 	.ui-selectmenu.ui-dialog .ui-header {
 	    border-bottom-width: 1px;
 	}
+	label.ui-btn {
+		font-weight: normal;
+	}
+
+	.ui-page-theme-a a, html .ui-bar-a a, html .ui-body-a a, html body .ui-group-theme-a a {
+		font-weight: normal;
+	}	
 </style>
 <div class="content-wrapper">
 	<h2>{title}</h2>
@@ -33,7 +40,10 @@
 				<input type="text" id="last_name" name="last_name" value=""
 					placeholder="{last_name}">
 				<br />
-				<div class="ui-grid-a">
+			    <label for="journalist_or_blogger">{journalist_or_blogger}</label>
+			    <input name="journalist_or_blogger" id="journalist_or_blogger" type="checkbox">
+				<br />
+			    <div class="ui-grid-a">
 					<div class="ui-block-b" style="float:right; width:15%">
 						<a href="#address_why_popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow" data-transition="pop" style="height:14px; padding-top:9px; padding-left:14px">?</a>
 						<div id="address_why_popup" data-role="popup" class="ui-content">
@@ -327,46 +337,19 @@
 					<option value="{country269}">{country269}</option>
 				</select>
 				<br />
-				<fieldset id="3D_printer_owner" data-role="controlgroup"
-					data-type="horizontal">
-					<legend>{3D_printer_owner}</legend>
-					<input name="3D_printer_owner" id="3D_printer_owner_yes"
-						value="yes" type="radio"> <label for="3D_printer_owner_yes">{yes}</label>
-					<input name="3D_printer_owner" id="3D_printer_owner_no" value="no"
-						type="radio"> <label for="3D_printer_owner_no">{no}</label>
-				</fieldset>
-				<div id="ThreeDprinterDiv">
-					<select name="ThreeDprinter" id="ThreeDprinter"
-						data-native-menu="false">
-						<option value="{ThreeDprinter02}">{ThreeDprinter02}</option>
-						<option value="{ThreeDprinter03}">{ThreeDprinter03}</option>
-						<option value="{ThreeDprinter04}">{ThreeDprinter04}</option>
-					</select>
+			    <fieldset data-role="controlgroup">
+			        <legend>{check_the_following}</legend>
+			    	<input name="ever_use" id="ever_use" type="checkbox">
+			        <label for="ever_use">{ever_use}</label>
+			        <input name="3D_printer_owner" id="3D_printer_owner" type="checkbox">
+			        <label for="3D_printer_owner">{3D_printer_owner}</label>
 					<div id="printer_makeDiv">
 						<input type="text" id="printer_make" name="printer_make" value=""
 							placeholder="{printer_make}">
 					</div>	
-				</div>
-				<fieldset id="ever_use_3D_printer" data-role="controlgroup"
-					data-type="horizontal">
-					<legend>{ever_use}</legend>
-					<input name="ever_use_3D_printer" id="ever_use_3D_printer_yes"
-						value="yes" type="radio"> <label for="ever_use_3D_printer_yes">{yes}</label>
-					<input name="ever_use_3D_printer" id="ever_use_3D_printer_no"
-						value="no" type="radio"> <label for="ever_use_3D_printer_no">{no}</label>
-				</fieldset>
-				<select name="criteriaA" id="criteriaA" data-native-menu="false">
-					<option value="choose-one" data-placeholder="true">{criteriaA}</option>
-					<option value="{criteriaA01}">{criteriaA01}</option>
-					<option value="{criteriaA02}">{criteriaA02}</option>
-					<option value="{criteriaA03}">{criteriaA03}</option>
-					<option value="{criteriaA04}">{criteriaA04}</option>
-				</select>
-				<div id="websiteURLDiv">
-					<input type="text" id="websiteURL" name="websiteURL" value=""
-						placeholder="{websiteURL}">
-				</div>
-				<select name="social_media" id="social_media"
+			    </fieldset>
+				<br />
+			    <select name="social_media" id="social_media"
 					data-native-menu="false">
 					<option value="choose-one" data-placeholder="true">{social_media}</option>
 					<option value="{social_media01}">{social_media01}</option>
@@ -381,6 +364,7 @@
 						placeholder="{social_media_custom}">
 				</div>
 				<input type="text" name="handle" value="" placeholder="{handle}">
+				<br />
 				<div class="ui-grid-a">
 					<div class="ui-block-a" style="width: 50px;">
 						<input type="checkbox" name="tos" id="tos" data-mini="true">
@@ -392,6 +376,7 @@
 							target="_blank">{terms_of_service_agreement}</a>
 					</div>
 				</div>
+				<br />
 				<input type="submit" name="submit" value="<?php echo t('apply') ?>" data-theme="b" />
 			</form>
 		</div>
@@ -400,29 +385,14 @@
 
 <script type="text/javascript">
 	$("header.page-header").html('<a href="javascript:history.back();" data-role="button" data-theme="b" data-icon="back" data-ajax="false">{back}</a>')
-	$("#ThreeDprinterDiv").hide();
 	$("#printer_makeDiv").hide();
-	$("#websiteURLDiv").hide();
 	$("#social_media_customDiv").hide();
-	$("#3D_printer_owner_yes").bind("click", function(event, ui) {
-		$("#ThreeDprinterDiv").show("slow");
-	});
-	$("#3D_printer_owner_no").bind("click", function(event, ui) {
-		$("#ThreeDprinterDiv").hide("slow");
-	});
-	$("#ThreeDprinter").change(function () {
-		if($(this).val() == "{ThreeDprinter04}")
-			$("#printer_makeDiv").show("slow");
-		else {
-			$("#printer_makeDiv").hide("slow");
-		}
-	});
-	$("#criteriaA").change(function () {
-		if($(this).val() != "{criteriaA04}")
-			$("#websiteURLDiv").show("slow");
-		else
-			$("#websiteURLDiv").hide("slow");
-	});
+    $("#3D_printer_owner").change(function () {
+        if ($(this).is(':checked'))
+        	$("#printer_makeDiv").show("slow");
+        else
+        	$("#printer_makeDiv").hide("slow");
+    });
 	$("#social_media").change(function () {
 		if($(this).val() == "{social_media06}")
 			$("#social_media_customDiv").show("slow");
@@ -475,27 +445,12 @@
 	$("#country").change(function() {
 		$("#country-button").css('border-color', '#ddd')
 	});	
-	$("#3D_printer_owner_yes").click(function() {
-		$("#3D_printer_owner").css('color', '#000');
-	});
-	$("#3D_printer_owner_no").click(function() {
-		$("#3D_printer_owner").css('color', '#000');
-	});
 	$("#printer_make").focusout(function() {
 		if($(this).val() == '')
 			$(this).parent().closest('div').css('border-color', '#f00')
 		else
 			$(this).parent().closest('div').css('border-color', '#ddd');
 	});
-	$("#ever_use_3D_printer_yes").click(function() {
-		$("#ever_use_3D_printer").css('color', '#000');
-	});
-	$("#ever_use_3D_printer_no").click(function() {
-		$("#ever_use_3D_printer").css('color', '#000');
-	});
-	$("#criteriaA").change(function() {
-		$("#criteriaA-button").css('border-color', '#ddd')
-	});	
 	$("#social_media").change(function() {
 		$("#social_media-button").css('border-color', '#ddd')
 		
@@ -503,7 +458,7 @@
 	$("#tos").click(function() {
 		$("#agree").css('color', '#000')
 	});	
-		$("form").on("submit", function() {
+	$("form").on("submit", function() {
 		var hasError = false;
 		if ($("#email").val() == '') {
 			$("#email").parent().closest('div').css('border-color', '#f00');
@@ -537,20 +492,9 @@
 			$("#country-button").css('border-color', '#f00');
 			hasError = true;
 		}
-		if ($("input[type='radio'][name='3D_printer_owner']:checked").length == 0) {
-			$("#3D_printer_owner").css('color', '#f00');
-			hasError = true;
-		} else if ($("input[type='radio'][name='3D_printer_owner']:checked").val() == "yes" && $("#ThreeDprinter").val() == '{{ThreeDprinter04}}' && $("#printer_make").val() == '') {
+		if ($("#3D_printer_owner").is(':checked') && $("#printer_make").val() == '') {
 				$("#printer_make").parent().closest('div').css('border-color', '#f00');
 				hasError = true;
-		}
-		if ($("input[type='radio'][name='ever_use_3D_printer']:checked").length == 0) {
-			$("#ever_use_3D_printer").css('color', '#f00');
-			hasError = true;
-		}			
-		if ($("#criteriaA").val() == 'choose-one') {
-			$("#criteriaA-button").css('border-color', '#f00');
-			hasError = true;
 		}
 		if ($("#social_media").val() == 'choose-one') {
 			$("#social_media-button").css('border-color', '#f00');
