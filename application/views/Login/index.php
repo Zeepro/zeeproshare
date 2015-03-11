@@ -1,6 +1,15 @@
 <div class="content-wrapper">
 	<h2>{zeepro_account}</h2>
-	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px; padding-bottom: 25px;">
+	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px; padding-top: 25px; padding-bottom: 25px; color: #000;  text-shadow: 0 1px 0 #fff">
+		{apply_text}
+		<br/>
+		<br/>
+		<a href="/my_3d_print_with_zeepro" data-role="button" data-theme="b" data-ajax="false">{apply}</a>
+	</div>		
+	<br />
+	
+	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px; padding-top: 25px; padding-bottom: 25px; color: #000;  text-shadow: 0 1px 0 #fff">
+		{zim_owner}
 		<div id="error"><?php $this->load->helper('form'); echo validation_errors('<p class="zim-error">', '</p>'); ?>{custom_error}</div>
 		<div data-role="fieldcontain">
 			<?php
@@ -29,13 +38,6 @@
 			</form>
 		</div>
 		<a href="/user/signup" data-role="button" data-theme="b" data-ajax="false">{signup}</a>
-		<br />
-		<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px; padding-top: 25px; padding-bottom: 25px; color: #000;  text-shadow: 0 1px 0 #fff">
-		{apply_text}
-		<br/>
-		<br/>
-		<a href="/my_3d_print_with_zeepro" data-role="button" data-theme="b" data-ajax="false">{apply}</a>
-		</div>		
 		<br />
 		<a href="/login/forgot_pass" data-ajax="false" style="font-weight: normal;color: #000; text-shadow: 0 1px 0 #fff">{forgot_pass}</a>
 		<br />

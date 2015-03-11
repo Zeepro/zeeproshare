@@ -39,7 +39,8 @@
 */
 
 $route['default_controller'] = "user";
-$route['404_override'] = '';
+/*$route['404_override'] = '';*/
+$route['404_override'] = 'user';
 
 $route['(\w{2})/(.*)'] = '$2';
 $route['(\w{2})'] = $route['default_controller'];

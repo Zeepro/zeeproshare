@@ -15,4 +15,5 @@ $lang['custom_error'] = "<p class='zim-error'>L'adresse email ou le mot de passe
 $lang['email'] = "Adresse de messagerie";
 $lang['back'] = 'Retour';
 $lang['apply_text'] = "Inscrivez-vous pour avoir une chance de voir votre modèle s'impirmer sur la Zim, l'imprimante 3D connectée. Zeepro vous ferra parvenir votre impression 3D par courrier!";
+$lang['zim_owner'] = 'Possesseur de Zim';
 $lang['apply'] = "S'inscrire";

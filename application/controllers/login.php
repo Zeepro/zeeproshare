@@ -96,6 +96,7 @@ class Login extends CI_Controller
 		$template_data['forgot_pass'] = t("forgot_pass");
 		$template_data['privacy_policy_link'] = t("privacy_policy_link");
 		$template_data['apply_text'] = t("apply_text");
+		$template_data['zim_owner'] = t("zim_owner");
 		$template_data['apply'] = t("apply");
 		$this->parser->parse('basetemplate', $template_data);
 	}

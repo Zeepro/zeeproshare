@@ -349,22 +349,6 @@
 					</div>	
 			    </fieldset>
 				<br />
-			    <select name="social_media" id="social_media"
-					data-native-menu="false">
-					<option value="choose-one" data-placeholder="true">{social_media}</option>
-					<option value="{social_media01}">{social_media01}</option>
-					<option value="{social_media02}">{social_media02}</option>
-					<option value="{social_media03}">{social_media03}</option>
-					<option value="{social_media04}">{social_media04}</option>
-					<option value="{social_media05}">{social_media05}</option>
-					<option value="{social_media06}">{social_media06}</option>
-				</select>
-				<div id="social_media_customDiv">
-					<input type="text" name="social_media_custom" value=""
-						placeholder="{social_media_custom}">
-				</div>
-				<input type="text" name="handle" value="" placeholder="{handle}">
-				<br />
 				<div class="ui-grid-a">
 					<div class="ui-block-a" style="width: 50px;">
 						<input type="checkbox" name="tos" id="tos" data-mini="true">
@@ -393,12 +377,6 @@
         else
         	$("#printer_makeDiv").hide("slow");
     });
-	$("#social_media").change(function () {
-		if($(this).val() == "{social_media06}")
-			$("#social_media_customDiv").show("slow");
-		else
-			$("#social_media_customDiv").hide("slow");
-	});
 	$("#email").focusout(function() {
 		var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
 		if($(this).val() == '' || !emailReg.test($(this).val()))
@@ -451,10 +429,6 @@
 		else
 			$(this).parent().closest('div').css('border-color', '#ddd');
 	});
-	$("#social_media").change(function() {
-		$("#social_media-button").css('border-color', '#ddd')
-		
-	});	
 	$("#tos").click(function() {
 		$("#agree").css('color', '#000')
 	});	
@@ -495,10 +469,6 @@
 		if ($("#3D_printer_owner").is(':checked') && $("#printer_make").val() == '') {
 				$("#printer_make").parent().closest('div').css('border-color', '#f00');
 				hasError = true;
-		}
-		if ($("#social_media").val() == 'choose-one') {
-			$("#social_media-button").css('border-color', '#f00');
-			hasError = true;
 		}
 		if (!$("#tos").is(':checked')) {
 			$("#agree").css('color', '#f00');

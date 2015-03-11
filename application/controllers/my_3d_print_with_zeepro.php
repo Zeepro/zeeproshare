@@ -7,7 +7,12 @@ class my_3d_print_with_zeepro extends CI_Controller
 {
 	public function index()
     {
-		$template_data = array();
+    	
+//		To be commented at the end of the operation      	
+//    	$this->output->set_header("Location: /");
+//    	return ;
+    	
+    	$template_data = array();
 		$template_data['custom_error'] = "";
 		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -27,10 +32,6 @@ class my_3d_print_with_zeepro extends CI_Controller
 				$ever_use = "yes";
 			else
 				$ever_use = "no";
-			if ($_POST['social_media'] != t("social_media06"))
-				$social_media_custom = "";
-			else
-				$social_media_custom = $_POST['social_media_custom'];
 				
 			$json = json_encode(array('email' => $_POST['email'],
 				'first_name' => $_POST['first_name'],
@@ -44,10 +45,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 				'country' => $_POST['country'],
 				'3D_printer_owner' => $ThreeD_printer_owner,
 				'Printer_make' => $printer_make,
-				'ever_use_3D_printer' => $ever_use,
-				'social_media' => $_POST['social_media'],
-				'other_social_media' => $social_media_custom,
-				'handle' => $_POST['handle']
+				'ever_use_3D_printer' => $ever_use
 			));
 
 			// Via Log
@@ -387,26 +385,8 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['3D_printer_owner'] = t("3D_printer_owner");
 		$template_data['yes'] = t("yes");
 		$template_data['no'] = t("no");
-		$template_data['ThreeDprinter02'] = t("ThreeDprinter02");
-		$template_data['ThreeDprinter03'] = t("ThreeDprinter03");
-		$template_data['ThreeDprinter04'] = t("ThreeDprinter04");
 		$template_data['printer_make'] = t("printer_make");
 		$template_data['ever_use'] = t("ever_use");
-		$template_data['criteriaA'] = t("criteriaA");
-		$template_data['criteriaA01'] = t("criteriaA01");
-		$template_data['criteriaA02'] = t("criteriaA02");
-		$template_data['criteriaA03'] = t("criteriaA03");
-		$template_data['criteriaA04'] = t("criteriaA04");
-		$template_data['websiteURL'] = t("websiteURL");
-		$template_data['social_media'] = t("social_media");
-		$template_data['social_media01'] = t("social_media01");
-		$template_data['social_media02'] = t("social_media02");
-		$template_data['social_media03'] = t("social_media03");
-		$template_data['social_media04'] = t("social_media04");
-		$template_data['social_media05'] = t("social_media05");
-		$template_data['social_media06'] = t("social_media06");
-		$template_data['social_media_custom'] = t("social_media_custom");
-		$template_data['handle'] = t("handle");
 		
 		$this->parser->parse('basetemplate', $template_data);
 	}
@@ -420,7 +400,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$pwd = "V8lu7hb1";
 		$db = "zsso";
 
-		$csv = "#;Date;Email;First name;Last name;Jrnlst or blogger;Address1;Address2;City;State;Zip;Country;3D printer owner;Printer brand;Ever use 3D printer;Social media;Other social media;Handle\r\n";
+		$csv = "#;Date;Email;First name;Last name;Jrnlst or blogger;Address1;Address2;City;State;Zip;Country;Ever use 3D printer;3D printer owner;Printer brand\r\n";
 		
 		try{
 			$conn = new PDO("sqlsrv:Server= $server ; Database = $db ", $user, $pwd);
@@ -431,24 +411,24 @@ class my_3d_print_with_zeepro extends CI_Controller
 				try {
 					$result_array = json_decode($row['data'], TRUE);
 
+					$date = new DateTime($row['date'], new DateTimeZone("UTC"));
+					$date->setTimezone(new DateTimeZone('America/New_York'));
+						
 					$line = $row['id'] . ';' .
-						$row['date'] . ';' .
-						'"' . str_replace('"', '""', $result_array["email"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["first_name"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["last_name"]) . '";' .
+						$date->format(DateTime::ISO8601) . ';' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["email"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["first_name"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["last_name"])) . '";' .
 						'"' . str_replace('"', '""', $result_array["journalist_or_blogger"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["address1"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["address2"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["city"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["state"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["zip"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["country"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["3D_printer_owner"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["Printer_make"]) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["address1"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["address2"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["city"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["state"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["zip"])) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["country"])) . '";' .
 						'"' . str_replace('"', '""', $result_array["ever_use_3D_printer"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["social_media"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["other_social_media"]) . '";' .
-						'"' . str_replace('"', '""', $result_array["handle"]) . "\"\r\n";
+						'"' . str_replace('"', '""', $result_array["3D_printer_owner"]) . '";' .
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["Printer_make"])) . "\"\r\n";
 					$csv = $csv . $line;
 				} catch(Exception $e) {
 				}				
@@ -477,9 +457,21 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$this->lang->load('my_3d_print_with_zeepro', $this->config->item('language'));
 
 		$template_data = array('body_content'	=> $this->parser->parse("my_3d_print_with_zeepro/terms_of_service", array(), true),
-								'confirmation_text'=> t('terms_of_service_text'),
+								'terms_of_service_text'=> t('terms_of_service_text'),
 								'back'			=> t('back')
 								);
         $this->parser->parse('basetemplate', $template_data);
+	}
+	
+	public function Zeepro_Zim_official_March_2015() {
+		$this->load->helper('download');
+		force_download("Zeepro_Zim_official_March_2015.jpg", file_get_contents($_SERVER['DOCUMENT_ROOT'].'\assets\img\Zeepro_Zim_official_March_2015.jpg'));
+		return;
+	}
+	
+	public function ZeeproShare_official_March_2015() {
+		$this->load->helper('download');
+		force_download("ZeeproShare_official_March_2015.jpg", file_get_contents($_SERVER['DOCUMENT_ROOT'].'\assets\img\ZeeproShare_official_March_2015.jpg'));
+		return;
 	}
 }
