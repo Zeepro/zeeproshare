@@ -347,7 +347,13 @@
 						<input type="text" id="printer_make" name="printer_make" value=""
 							placeholder="{printer_make}">
 					</div>	
-			    </fieldset>
+			    	<input name="personal_use" id="personal_use" type="checkbox">
+			        <label for="personal_use">{personal_use}</label>
+					<input name="professional_use" id="professional_use" type="checkbox">
+			        <label for="professional_use">{professional_use}</label>
+					<input name="educational_use" id="educational_use" type="checkbox">
+			        <label for="educational_use">{educational_use}</label>
+				</fieldset>
 				<br />
 				<div class="ui-grid-a">
 					<div class="ui-block-a" style="width: 50px;">

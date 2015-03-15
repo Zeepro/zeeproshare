@@ -32,6 +32,18 @@ class my_3d_print_with_zeepro extends CI_Controller
 				$ever_use = "yes";
 			else
 				$ever_use = "no";
+			if ($_POST['personal_use'] == "on")
+				$personal_use = "yes";
+			else
+				$personal_use = "no";
+			if ($_POST['professional_use'] == "on")
+				$professional_use = "yes";
+			else
+				$professional_use = "no";
+			if ($_POST['educational_use'] == "on")
+				$educational_use = "yes";
+			else
+				$educational_use = "no";
 				
 			$json = json_encode(array('email' => $_POST['email'],
 				'first_name' => $_POST['first_name'],
@@ -45,7 +57,10 @@ class my_3d_print_with_zeepro extends CI_Controller
 				'country' => $_POST['country'],
 				'3D_printer_owner' => $ThreeD_printer_owner,
 				'Printer_make' => $printer_make,
-				'ever_use_3D_printer' => $ever_use
+				'ever_use_3D_printer' => $ever_use,
+				'personal_use' => $personal_use,
+				'professional_use' => $professional_use,
+				'educational_use' => $educational_use
 			));
 
 			// Via Log
@@ -387,6 +402,9 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$template_data['no'] = t("no");
 		$template_data['printer_make'] = t("printer_make");
 		$template_data['ever_use'] = t("ever_use");
+		$template_data['personal_use'] = t("personal_use");
+		$template_data['professional_use'] = t("professional_use");
+		$template_data['educational_use'] = t("educational_use");
 		
 		$this->parser->parse('basetemplate', $template_data);
 	}
@@ -400,7 +418,7 @@ class my_3d_print_with_zeepro extends CI_Controller
 		$pwd = "V8lu7hb1";
 		$db = "zsso";
 
-		$csv = "#;Date;Email;First name;Last name;Jrnlst or blogger;Address1;Address2;City;State;Zip;Country;Ever use 3D printer;3D printer owner;Printer brand\r\n";
+		$csv = "#;Date;Email;First name;Last name;Jrnlst or blogger;Address1;Address2;City;State;Zip;Country;Ever use 3D printer;3D printer owner;Printer brand;Personal use;Professional use;Educational use\r\n";
 		
 		try{
 			$conn = new PDO("sqlsrv:Server= $server ; Database = $db ", $user, $pwd);
@@ -411,6 +429,13 @@ class my_3d_print_with_zeepro extends CI_Controller
 				try {
 					$result_array = json_decode($row['data'], TRUE);
 
+					if (!array_key_exists('personal_use', $result_array))
+						$result_array["personal_use"] = "";
+					if (!array_key_exists('professional_use', $result_array))
+						$result_array["professional_use"] = "";
+					if (!array_key_exists('educational_use', $result_array))
+						$result_array["educational_use"] = "";
+						
 					$date = new DateTime($row['date'], new DateTimeZone("UTC"));
 					$date->setTimezone(new DateTimeZone('America/New_York'));
 						
@@ -428,7 +453,10 @@ class my_3d_print_with_zeepro extends CI_Controller
 						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["country"])) . '";' .
 						'"' . str_replace('"', '""', $result_array["ever_use_3D_printer"]) . '";' .
 						'"' . str_replace('"', '""', $result_array["3D_printer_owner"]) . '";' .
-						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["Printer_make"])) . "\"\r\n";
+						'"' . str_replace('"', '""', iconv("UTF-8", "Windows-1252", $result_array["Printer_make"])) . '";' . 
+						'"' . str_replace('"', '""', $result_array["personal_use"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["professional_use"]) . '";' .
+						'"' . str_replace('"', '""', $result_array["educational_use"]) . "\"\r\n";
 					$csv = $csv . $line;
 				} catch(Exception $e) {
 				}				
