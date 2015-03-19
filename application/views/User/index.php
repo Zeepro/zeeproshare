@@ -32,7 +32,7 @@
 
 			$("#overlay").addClass('gray-overlay');
 			$(".ui-loader").css("display", "block");
-			img.src = "http://" + localip + '/assets/images/logo-1.png?_=' + Date.now();
+			img.src = "http://" + localip + '/images/pixel.png?_=' + Date.now();
 			var selector = "#printer" + nb;
 			setTimeout(function(selector, localip)
 			{
