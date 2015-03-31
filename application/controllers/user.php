@@ -173,4 +173,47 @@ class User extends CI_Controller
 								'back'			=> t('back'));
         $this->parser->parse('basetemplate', $template_data);
 	}
+
+	public function change_password_guest()
+	{
+		$this->lang->load('user', $this->config->item('language'));
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('email', 'Email', 'required');
+			$this->form_validation->set_rules('old_pass', 'Old password', 'required');
+			$this->form_validation->set_rules('new_pass', 'New password',
+										'required|matches[confirm_pass]');
+			$this->form_validation->set_rules('confirm_pass', 'Password confirmation', 'required');
+			if ($this->form_validation->run())
+			{
+				extract($_POST);
+				$tab = array("email" => $email,
+							"old_password" => $old_pass,
+							"new_password" => $new_pass);
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/changepassword.ashx");
+				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+				curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+				curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
+				curl_setopt($curl, CURLOPT_POST, 3);
+				curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
+				curl_exec($curl);
+				$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+				curl_close($curl);
+				if ($code == 200)
+				{
+					$this->session->set_userdata('password', $new_pass);
+					echo "<script type='text/javascript'>
+							alert('" . t('pass_change_success') . "');
+							setTimeout(\"window.location.href = '/user';\", 500);
+						</script>";
+				}
+			}
+		}
+		$template_data = array('body_content'	=> $this->parser->parse("User/change_password_guest", array(), true),
+								'submit_change'	=> t('submit_change'),
+								'show_password'	=> t('show_password'));
+        $this->parser->parse('basetemplate', $template_data);
+	}
 }
