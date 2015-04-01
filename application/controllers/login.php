@@ -39,14 +39,17 @@ class Login extends CI_Controller
 				curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
 				curl_setopt($curl, CURLOPT_POST, 2);
 				curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
-				curl_exec($curl);
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+				$result = curl_exec($curl);
 				$output = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 				curl_close($curl);
 				if ($output == HTTP_OK)
 				{
+					$result_array = json_decode($result, TRUE);
 					$custom_data = array('email' => $email,
 										'logged_in' => true,
-										'password' => $password);
+										'password' => $password,
+										'user_token' => $result_array["token_id"]);
 					$this->session->set_userdata($custom_data);
 					$this->output->set_header("Location: /user");
 					return ;
@@ -71,7 +74,7 @@ class Login extends CI_Controller
 				curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
 				curl_setopt($curl, CURLOPT_POST, 2);
 				curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 				$result = curl_exec($curl);
 				$output = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 				curl_close($curl);

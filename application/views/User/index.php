@@ -12,6 +12,7 @@
 					echo "<li>";
 					echo "<form action='https://" . $printer->URL . "/set_cookie' method='POST' id='printer" . $i ."'>";
 					echo form_hidden('token', $printer->token);
+					echo form_hidden('user', $user_token);
 					echo form_close();
 					echo '<a class="printer_link" data-localip="' . $printer->localIP . '"data-nb="' . $i . '">' . $printer->printername . '</a></li>';
 					$i++;
@@ -37,7 +38,25 @@
 			setTimeout(function(selector, localip)
 			{
 				if (img.height > 0) {
-					window.location.href = 'http://' + localip;
+					$.ajax({
+						url: "http://" + localip + "/set_cookie/user",
+						cache: false,
+						async: true,
+						xhrFields: {
+							withCredentials: true,
+						},
+						success: function() {
+							console.log('CORS and verification ok, pass directly without token');
+							window.location.href = 'http://' + localip;
+						},
+						error: function() {
+							console.log('CORS or verification failed, use POST URL (not be secured in local network)');
+							$(selector).attr('action', 'http://' + localip + '/set_cookie/user');
+							$(selector + ' input[name=token]').prop('disabled', true);
+							$(selector).submit();
+						}
+					});
+// 					window.location.href = 'http://' + localip;
 				} else {
 					$(selector).submit();
 				}

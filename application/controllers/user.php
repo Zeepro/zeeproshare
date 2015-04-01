@@ -40,7 +40,7 @@ class User extends CI_Controller
 		else
 			$title = t('no_printer');
 				
-        $body = $this->load->view('User/index', array("printers" => $printers), true);
+        $body = $this->load->view('User/index', array( "printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
 		
 		$template_data = array('body_content'	=> $body,
 								'signout'		=> t('signout'),
