@@ -33,3 +33,7 @@ $lang['create_success'] = "Votre compte a bien été crée";
 $lang['connected'] = "Imprimantes connectées";
 $lang['back'] = "Retour";
 $lang['no_printer'] = "Aucune imprimante connectée";
+
+// 3dslash
+
+$lang['select'] = "Sélectionner une imprimante";

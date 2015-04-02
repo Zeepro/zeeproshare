@@ -51,7 +51,11 @@ class Login extends CI_Controller
 										'password' => $password,
 										'user_token' => $result_array["token_id"]);
 					$this->session->set_userdata($custom_data);
-					$this->output->set_header("Location: /user");
+					if (isset($_GET['url'])) {
+						$this->output->set_header("Location: https://zeeproshare.com" . $_GET['url']);
+					}else {
+						$this->output->set_header("Location: /user");
+					}
 					return ;
 				}
 				else if ($output == 434) //Wrong parameter

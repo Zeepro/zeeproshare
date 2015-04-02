@@ -14,7 +14,7 @@
 				);
 				$checked = "";
 			}?>
-			<form action="/login/index" method="post" accept-charset="utf-8" data-ajax="false">
+			<form method="post" accept-charset="utf-8" data-ajax="false">
 				<input type="text" name="email" value="<?php echo $cred[0]?>" required="required" placeholder="{email}">
 				<input type="password" name="password" value="<?php echo $cred[1]?>" required="required" placeholder="{password}">
 			    <fieldset data-role="controlgroup">

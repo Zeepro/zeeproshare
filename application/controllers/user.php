@@ -15,7 +15,7 @@ class User extends CI_Controller
 	{
 		if ($this->session->userdata('logged_in') == false)
 		{
-			$this->output->set_header("Location: /Login");
+			$this->output->set_header("Location: /login");
 			return;
 		}
 		$this->lang->load('user', $this->config->item('language'));
