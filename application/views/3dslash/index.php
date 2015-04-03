@@ -46,7 +46,7 @@
 						token: token,
 						redirect: {
 							url: "/3dslash",
-							prm: {
+							cookie: {
 								name:	$(selector + ' input[name=name]').val(),
 								token:	$(selector + ' input[name=token]').val(),
 							},
