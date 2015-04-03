@@ -32,7 +32,7 @@
 			var	localip = $(this).data('localip');
 			var	url = $(this).data('url');
 			var	token = $(this).data('token');
-									
+			
 			$("#overlay").addClass('gray-overlay');
 			$(".ui-loader").css("display", "block");
 			img.src = "http://" + localip + '/images/pixel.png?_=' + Date.now();
@@ -41,25 +41,42 @@
 					$(selector).attr("action", "http://" + localip + "/3dslash");
 					$(selector).submit();
 				} else {
-					$.ajax({
-						url: "https://" + url + "/set_cookie",
-						cache: false,
-						method: 'post',
-						async: true,
-						xhrFields: {
-							withCredentials: true,
+					// new token system
+					var var_token_json = JSON.stringify({
+						token: token,
+						redirect: {
+							url: "/3dslash",
+							prm: {
+								name:	$(selector + ' input[name=name]').val(),
+								token:	$(selector + ' input[name=token]').val(),
+							},
 						},
-						data: {token: token},
-						success: function() {
-							console.log('remote set cookie success');
-							$(selector).attr("action", "https://" + url + "/3dslash");
-							$(selector).submit();
-						},
-						error: function() {
-							console.log('remote set cookie failed');
-							location.reload();
-						}
 					});
+					$(selector + ' input[name=name]').prop('disabled', true);
+					$(selector + ' input[name=token]').val(var_token_json);
+					$(selector).attr("action", "https://" + url + "/set_cookie");
+					$(selector).submit();
+					
+// 					// old token system (doesn't work well with IE, iOS)
+// 					$.ajax({
+// 						url: "https://" + url + "/set_cookie",
+// 						cache: false,
+// 						method: 'post',
+// 						async: true,
+// 						xhrFields: {
+// 							withCredentials: true,
+// 						},
+// 						data: {token: token},
+// 						success: function() {
+// 							console.log('remote set cookie success');
+// 							$(selector).attr("action", "https://" + url + "/3dslash");
+// 							$(selector).submit();
+// 						},
+// 						error: function() {
+// 							console.log('remote set cookie failed');
+// 							location.reload();
+// 						}
+// 					});
 				}
 			}, 4000, selector, localip, url, token);
 		});
