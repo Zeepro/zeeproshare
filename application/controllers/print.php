@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-class Threedslash extends CI_Controller
+class Print extends CI_Controller
 {
 	function __construct()
 	{
