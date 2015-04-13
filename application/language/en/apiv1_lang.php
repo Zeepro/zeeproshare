@@ -2,20 +2,31 @@
 
 // Print STL
 
-$lang['titre'] = "Imprimer sur une Zim en un click depuis votre service ou votre application";
-$lang['service'] = "Depuis un service<br/><br/>1 - envoyer une requête en POST à l'URL :<br/><br/>https://zeeproshare.com/apiv1/printstl<br/><br/>avec les champs \"stl\", \"id_partner\" et \"return_type\" depuis votre serveur.<br/><br/>2 - envoyer au client une redirection vers l'URL retournée";
-$lang['application'] = "Depuis une application<br/><br/>1 - envoyer une requête en POST à l'URL :<br/><br/>https://zeeproshare.com/apiv1/printstl<br/><br/>avec les champs \"stl\", \"id_partner\" et \"return_type\" depuis votre application.<br/><br/>2 - ouvrir un explorateur avec l'URL retournée";
-$lang['descrition'] = "Ce formulaire simule la requête à réaliser :";
-$lang['stl'] = "Fichier STL";
-$lang['stl_error_required'] = "saisie obligatoire";
-$lang['stl_error_too_big'] = "la taille du fichier ne doit pas excéder 100 Mo";
-$lang['id_partner'] = "Identifiant partenaire";
-$lang['id_partner_info'] = "(si vous ne disposez pas d'un identifiant partenaire, ou si vous souhaitez tester votre intégration, laisser ce champ vide : le modèle STL sera affiché dans une page simulant une Zim)";
-$lang['id_partner_error'] = "identifiant inconnu";
-$lang['return_type'] = "Format de retour";
-$lang['plain_text'] = "plain text (par défaut)";
+$lang['titre'] = "Zim \"1-click-to-print\" API";
+$lang['titre2'] = "Print on a Zim in one click from your site or from your app";
+$lang['service'] = "SITE";
+$lang['service_description'] = "1 - send a POST request to:<br/><br/>https://zeeproshare.com/apiv1/printstl<br/><br/>with the fields \"stl\", \"id_partner\" and \"return_type\" (see below) from the server.<br/><br/>2 - redirect the client to the returned URL";
+$lang['application'] = "APP";
+$lang['application_description'] = "1 - send a POST request to:<br/><br/>https://zeeproshare.com/apiv1/printstl<br/><br/>with the fields \"stl\", \"id_partner\" and \"return_type\" (see below) from the app.<br/><br/>2 - display the returned URL in a browser";
+$lang['descrition'] = "REST web-service simulator";
+$lang['stl'] = "STL file";
+$lang['stl_error_required'] = "required";
+$lang['stl_error_too_big'] = "the file must stay below 100Mb";
+$lang['id_partner'] = "Partner id";
+$lang['id_partner_info'] = "(if you don't have a partner id yet, or if you just want to test the API, leave this field empty: the model will then be displayed on a preview page)";
+$lang['id_partner_error'] = "unknow id";
+$lang['return_type'] = "Return format";
+$lang['plain_text'] = "plain text (by default)";
 $lang['json'] = "json";
 $lang['xml'] = "XML";
 $lang['html'] = "html / javascript";
-$lang['submit'] = "Imprimer";
-$lang['note'] = "Pour tester cette API, remplisser les champs, puis accèder à l'URL retournée (si vous avez choisi l'option \"html / javascript\" vous serez automatiquement redirigé vers l'imprimante).";
+$lang['submit'] = "Print";
+$lang['note'] = "To test the API, simply fill the following form (it creates exactly the request you'll have to send to the web-service); then open the returned URL in a browser (if you have chosen \"html / javascript\" option, you'll be automatically redirected).";
+$lang['error_blog'] = "The API is temporarily unavilaible, please try later";
+
+// Rendering
+$lang['rendering_pagetitle'] = "Preview";
+$lang['reset_model_button'] = "Reset";
+$lang['congratulation'] = "<br/>Congratulation: you're almost done!<br/><br/>To get a partner id to let users print directly on their Zim, please send an email to: <a href=\"mailto:contact@zeepro.com\">api@zeepro.com</a><br/><br/>Thank you!<br/><br/><br/>The Zeepro Team";
+$lang['msg_webgl_failed'] = "WebGL not supported";
+$lang['msg_fetch_failed'] = "The API is temporarily unavilaible, please try later";

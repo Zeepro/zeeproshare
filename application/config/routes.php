@@ -46,6 +46,7 @@ $route['(\w{2})/(.*)'] = '$2';
 $route['(\w{2})'] = $route['default_controller'];
 
 $route['3dslash'] = 'threedslash';
+$route['api/print'] = 'apiv1/printstl';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

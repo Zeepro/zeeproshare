@@ -9,10 +9,10 @@
 <script type="text/javascript" src="/assets/rendering/stl.js"></script>
 <script type="text/javascript" src="/assets/rendering/zpviewer.js"></script>
 <style> .zeeprocanvas { background-color: rgba(0,0,0,1.0); border: 0px; } </style>
+
 <div class="content-wrapper">
 	<h2>{rendering_pagetitle}</h2>
-	<div data-role="collapsible" data-collapsed="false">
-		<h3>{preview_title}</h3>
+		<div class="ui-grid-b ui-corner-all ui-shadow ui-opaque" style="padding: 5px; padding-top: 25px; padding-bottom: 25px; color: #000;  text-shadow: 0 1px 0 #fff">
 		<div id="preview_zone" style="clear: both; text-align: center;">
 			<div id="preview_image_zone"><canvas id="ivwindow3d" width="500px" height="500px" class="zeeprocanvas"></canvas></div>
 		</div>
@@ -56,7 +56,7 @@
 				</div>
 			</div>
 		</div>
-		<a href="#" id="request_button" class="ui-disabled" data-role="button">{request_button}</a>
+		{congratulation}
 	</div>
 </div>
 
@@ -66,8 +66,6 @@ var var_wait_preview = false;
 var var_webgl_support = true;
 var var_webgl_initialized = false;
 var var_mini_control_slider_type = 's'; // scale as default
-// back button
-$("header.page-header").html('<a href="javascript:history.back();" data-role="button" data-theme="b" data-icon="back" data-ajax="false">{back}</a>');
 
 // main body
 $(document).ready(function() {

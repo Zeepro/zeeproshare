@@ -72,7 +72,11 @@
 			{
                 background:url("/assets/img/tr150.png") repeat;
 			}
-        </style>
+			.ui-opaque
+			{
+                background:url("/assets/img/tr255.png") repeat;
+			}
+			</style>
         <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', "UA-60678926-1"]);
