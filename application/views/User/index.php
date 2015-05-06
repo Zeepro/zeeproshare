@@ -30,7 +30,7 @@
 			var img = new Image();
 			var nb = $(this).data('nb');
 			var	localip = $(this).data('localip');
-
+			
 			$("#overlay").addClass('gray-overlay');
 			$(".ui-loader").css("display", "block");
 			img.src = "http://" + localip + '/images/pixel.png?_=' + Date.now();
@@ -58,6 +58,12 @@
 					});
 // 					window.location.href = 'http://' + localip;
 				} else {
+					var var_token_json = JSON.stringify({
+						token: $(selector + ' input[name=token]').val(),
+						user: $(selector + ' input[name=user]').val(),
+					});
+					$(selector + ' input[name=user]').prop('disabled', true);
+					$(selector + ' input[name=token]').val(var_token_json);
 					$(selector).submit();
 				}
 			}, 4000, selector, localip);

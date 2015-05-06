@@ -13,6 +13,7 @@
 					<form method="POST" id="printer<?php echo $i ?>">
 						<input type="hidden" name="name" value="<?php echo $this->session->userdata('3dslash_name') ?>">
 						<input type="hidden" name="token" value="<?php echo $this->session->userdata('3dslash_token') ?>">
+						<input type="hidden" name="user" value="<?php echo $user_token; ?>">
 					</form>
 					<a class="printer_link" data-localip="<?php echo $printer->localIP ?>" data-url="<?php echo $printer->URL ?>" data-token="<?php echo $printer->token ?>" data-nb="<?php echo $i ?>"><?php echo $printer->printername ?></a>
 					</li>
@@ -38,12 +39,43 @@
 			img.src = "http://" + localip + '/images/pixel.png?_=' + Date.now();
 			setTimeout(function(selector, localip, url) {
 				if (img.height > 0) {
-					$(selector).attr("action", "http://" + localip + "/3dslash");
-					$(selector).submit();
+					//CORS check
+					$.ajax({
+						url: "http://" + localip + "/set_cookie/user",
+						cache: false,
+						async: true,
+						xhrFields: {
+							withCredentials: true,
+						},
+						success: function() {
+							console.log('CORS and verification ok, pass directly without token');
+							$(selector).attr("action", "http://" + localip + "/3dslash");
+							$(selector + ' input[name=user]').prop('disabled', true);
+							$(selector).submit();
+						},
+						error: function() {
+							var var_redirect_json = JSON.stringify({
+								url: "/3dslash",
+								cookie: {
+									name:	$(selector + ' input[name=name]').val(),
+									token:	$(selector + ' input[name=token]').val(),
+								},
+							});
+							
+							console.log('CORS or verification failed, use POST URL (not be secured in local network)');
+							$(selector).attr('action', 'http://' + localip + '/set_cookie/user');
+							$(selector + ' input[name=token]').prop('disabled', true);
+							// change name to redirect
+							$(selector + ' input[name=name]').val(var_redirect_json);
+							$(selector + ' input[name=name]').prop('name', 'redirect');
+							$(selector).submit();
+						}
+					});
 				} else {
 					// new token system
 					var var_token_json = JSON.stringify({
 						token: token,
+						user: $(selector + ' input[name=user]').val(),
 						redirect: {
 							url: "/3dslash",
 							cookie: {
@@ -52,9 +84,10 @@
 							},
 						},
 					});
-					$(selector + ' input[name=name]').prop('disabled', true);
-					$(selector + ' input[name=token]').val(var_token_json);
 					$(selector).attr("action", "https://" + url + "/set_cookie");
+					$(selector + ' input[name=name]').prop('disabled', true);
+					$(selector + ' input[name=user]').prop('disabled', true);
+					$(selector + ' input[name=token]').val(var_token_json);
 					$(selector).submit();
 					
 // 					// old token system (doesn't work well with IE, iOS)

@@ -35,14 +35,14 @@ class Threedslash extends CI_Controller
 				$this->session->userdata('3dslash_depth') &&
 				$this->session->userdata('3dslash_token') &&
 				$this->session->userdata('3dslash_userid'))) {
-				$this->output->set_header("Location: /login");
-// 				echo "<!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=Content-Type content=\"text/html; charset=utf-8\" /><title></title></head>" .
-// 						"<body><form  method=\"post\" action=\"/3dslash\" accept-charset=utf-8\">" .
-// 						"name <input id=\"name\" name=\"name\" type=\"text\" /><br />" .
-// 						"depth <input id=\"depth\" name=\"depth\" type=\"text\" /><br />" .
-// 						"token <input id=\"token\" name=\"token\" type=\"text\" /><br />" .
-// 						"userid <input id=\"userid\" name=\"userid\" type=\"text\" /><br />" .
-// 						"<input id=\"Submit1\" type=\"submit\" value=\"Ok\" /></form></body></html>";
+// 				$this->output->set_header("Location: /login");
+				echo "<!DOCTYPE html><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><meta http-equiv=Content-Type content=\"text/html; charset=utf-8\" /><title></title></head>" .
+						"<body><form  method=\"post\" action=\"/3dslash\" accept-charset=utf-8\">" .
+						"name <input id=\"name\" name=\"name\" type=\"text\" /><br />" .
+						"depth <input id=\"depth\" name=\"depth\" type=\"text\" /><br />" .
+						"token <input id=\"token\" name=\"token\" type=\"text\" /><br />" .
+						"userid <input id=\"userid\" name=\"userid\" type=\"text\" /><br />" .
+						"<input id=\"Submit1\" type=\"submit\" value=\"Ok\" /></form></body></html>";
 				return;
 			}
 		}			
@@ -71,10 +71,12 @@ class Threedslash extends CI_Controller
 		} else
 			$title = t('no_printer');
 				
-		if (count($printer) == 1)
-			$body = $this->load->view('3dslash/index', array("printers" => $printers), true);
-		else
-			$body = $this->load->view('3dslash/index', array("printers" => $printers), true);
+        $body = $this->load->view('3dslash/index', array("printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
+		
+// 		if (count($printer) == 1)
+// 			$body = $this->load->view('3dslash/index', array("printers" => $printers), true);
+// 		else
+// 			$body = $this->load->view('3dslash/index', array("printers" => $printers), true);
 
 		$template_data = array('body_content'	=> $body,
 				'signout'		=> t('signout'),
