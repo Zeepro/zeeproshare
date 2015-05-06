@@ -9,8 +9,8 @@ class my_3d_print_with_zeepro extends CI_Controller
     {
     	
 //		To be commented at the end of the operation      	
-    	$this->output->set_header("Location: /");
-    	return ;
+//    	$this->output->set_header("Location: /");
+//    	return ;
     	
     	$template_data = array();
 		$template_data['custom_error'] = "";

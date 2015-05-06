@@ -10,7 +10,7 @@
 		<title>Home - Zim</title>
         <link rel="stylesheet" href="/assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.css" />
         <link rel="stylesheet" href="/assets/css/home.css" />
-		
+		<link rel="shortcut icon" href="/favicon.ico?v=2" />
         <script src="/assets/jquery-2.1.1.min.js"></script>
         <script src="/assets/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densitydpi=medium-dpi, user-scalable=0" />
@@ -76,7 +76,7 @@
 			{
                 background:url("/assets/img/tr255.png") repeat;
 			}
-			</style>
+		</style>
         <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', "UA-60678926-1"]);

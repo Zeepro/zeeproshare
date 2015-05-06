@@ -37,3 +37,25 @@ $lang['no_printer'] = "Aucune imprimante connectée";
 // 3dslash
 
 $lang['select'] = "Sélectionner une imprimante";
+
+// V2
+
+$lang['areyousure'] = "Souhaitez-vous vraiment vous déconnecter ?";
+$lang['yes'] = "Oui";
+$lang['no'] = "Non";
+$lang['news'] = "Nouveautés";
+$lang['inspiration'] = "Trouvez l'inspiration !";
+$lang['myzeeproshare'] = "My ZeeproShare";
+$lang['channels'] = "Chaines ZeeproShare";
+$lang['share'] = "Partager vos idées !";
+$lang['follow'] = "Suivez-nous";
+$lang['store'] = "Magasin Zim";
+$lang['support'] = "Support";
+
+// Share
+
+$lang['tellus'] = "Dîtes-nous quels objects vous aimeriez que nous ajoutions aux modèles Zeepro !";
+$lang['description'] = "Description courte";
+$lang['description_placeholder'] = "(200 caractères max.)";
+$lang['attach'] = "Ajouter un fichier ou une image";
+$lang['submit'] = "Envoyer";

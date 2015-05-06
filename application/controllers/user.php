@@ -49,6 +49,54 @@ class User extends CI_Controller
 		$this->parser->parse('basetemplate', $template_data);
 	}
 	
+	public function v2()
+	{
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /login");
+			return;
+		}
+		$this->lang->load('user', $this->config->item('language'));
+		
+		$tab = array("email" => $this->session->userdata('email'),
+					"password" => $this->session->userdata('password'));
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/listprinter.ashx");
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
+		curl_setopt($curl, CURLOPT_POST, 2);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+		$output = curl_exec($curl);
+		curl_close($curl);
+		
+		$printers = json_decode($output);
+
+		if ($printers != NULL)
+			$title = t('connected');
+		else
+			$title = t('no_printer');
+				
+        $body = $this->load->view('User/v2', array( "printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
+		
+		$template_data = array('body_content'	=> $body,
+				'connected'		=> $title,
+				'change_pass'	=> t('change_pass'),
+				'areyousure'	=> t('areyousure'),
+				'yes'			=> t('yes'),
+				'no'			=> t('no'),
+				'news'			=> t('news'),
+				'inspiration'	=> t('inspiration'),
+				'myzeeproshare'	=> t('myzeeproshare'),
+				'channels'		=> t('channels'),
+				'share'			=> t('share'),
+				'follow'		=> t('follow'),
+				'store'			=> t('store'),
+				'support'		=> t('support'));
+		$this->parser->parse('basetemplate', $template_data);
+	}
+	
 	public function signup()
 	{
 		$this->lang->load('user', $this->config->item('language'));
@@ -214,6 +262,31 @@ class User extends CI_Controller
 		$template_data = array('body_content'	=> $this->parser->parse("User/change_password_guest", array(), true),
 								'submit_change'	=> t('submit_change'),
 								'show_password'	=> t('show_password'));
+        $this->parser->parse('basetemplate', $template_data);
+	}
+
+	public function share()
+	{
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /login");
+			return;
+		}
+		$this->lang->load('user', $this->config->item('language'));
+		
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			redirect("/user/v2");
+		}
+		$template_data = array('body_content' => $this->parser->parse("user/share", array(), true),
+				'areyousure' => t('areyousure'),
+				'yes' => t('yes'),
+				'no' => t('no'),
+				'tellus' => t('tellus'),
+				'description' => t('description'),
+				'description_placeholder' => t('description_placeholder'),
+				'attach' => t('attach'),
+				'submit' => t('submit'));
         $this->parser->parse('basetemplate', $template_data);
 	}
 }

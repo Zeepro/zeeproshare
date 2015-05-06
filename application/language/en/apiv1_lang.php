@@ -2,7 +2,7 @@
 
 // Print STL
 
-$lang['titre'] = "Zim \"1-click-to-print\" API";
+$lang['titre'] = "Zeepro Streaming API";
 $lang['titre2'] = "Print on a Zim in one click from your site or from your app";
 $lang['service'] = "SITE";
 $lang['service_description'] = "1 - send a POST request to:<br/><br/>https://zeeproshare.com/apiv1/printstl<br/><br/>with the fields \"stl\", \"id_partner\" and \"return_type\" (see below) from the server.<br/><br/>2 - redirect the client to the returned URL";
