@@ -59,3 +59,17 @@ $lang['description'] = "Description courte";
 $lang['description_placeholder'] = "(200 caractères max.)";
 $lang['attach'] = "Ajouter un fichier ou une image";
 $lang['submit'] = "Envoyer";
+$lang['shareideas_email_subject'] = "Suggestion utilisateur (Share ideas)";
+$lang['shareideas_email_address'] = "shareideas@zeepro.com";
+$lang['shareideas_email_alias'] = "Suggestion utilisateur";
+$lang['shareideas_email_html'] = "Bonjour,<br><br>L'utilisteur {email} a envoyé la suggestion suivante :<br><br>---<br><br>{suggestion}<br><br>---";
+
+// Follow us
+
+$lang['follow_us'] = "Suivez-nous sur votre réseau social favori !";
+$lang['facebook'] = "Facebook";
+$lang['youtube'] = "Youtube";
+$lang['pinterest'] = "Pinterest";
+$lang['twitter'] = "Twitter";
+$lang['googleplus'] = "Google+";
+$lang['fancy'] = "Fancy";

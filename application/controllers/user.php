@@ -276,6 +276,29 @@ class User extends CI_Controller
 		
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
+			include_once "/application/third_party/swiftmailer-master/lib/swift_required.php";
+			
+			$subject = t("shareideas_email_subject");
+			$from = array('zim@zeepro.com' => t("shareideas_email_alias"));
+			$to = array(t("shareideas_email_address"));
+			
+			$transport = Swift_SmtpTransport::newInstance('smtp.mandrillapp.com', 587);
+			$transport->setUsername('service-informatique@zee3dcompany.com');
+			$transport->setPassword('uBXf9JhuFAg7FfeJVAVvkA');
+			$swift = Swift_Mailer::newInstance($transport);
+			
+			$message = new Swift_Message($subject);
+			$message->setFrom($from);
+			$message->setTo($to);
+			$message->setBody(str_replace("{email}", $this->session->userdata('email'), str_replace("{suggestion}", $_POST['description'], t("shareideas_email_html"))), 'text/html');
+			
+			if (isset($_FILES['file']['error']) && !is_array($_FILES['file']['error']) && $_FILES['file']['size'] > 0)
+			{
+				$message->attach(Swift_Attachment::fromPath($_FILES['file']['tmp_name'])->setFilename($_FILES['file']['name']));
+			}
+			
+			$recipients = $swift->send($message, $failures);
+			
 			redirect("/user/v2");
 		}
 		$template_data = array('body_content' => $this->parser->parse("user/share", array(), true),
@@ -287,6 +310,44 @@ class User extends CI_Controller
 				'description_placeholder' => t('description_placeholder'),
 				'attach' => t('attach'),
 				'submit' => t('submit'));
+        $this->parser->parse('basetemplate', $template_data);
+	}
+
+	public function follow()
+	{
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /login");
+			return;
+		}
+		$this->lang->load('user', $this->config->item('language'));
+		
+		$template_data = array('body_content' => $this->parser->parse("user/follow", array(), true),
+				'areyousure' => t('areyousure'),
+				'yes' => t('yes'),
+				'no' => t('no'),
+				'follow_us' => t('follow_us'),
+				'facebook' => t('facebook'),
+				'youtube' => t('youtube'),
+				'pinterest' => t('pinterest'),
+				'twitter' => t('twitter'),
+				'googleplus' => t('googleplus'),
+				'fancy' => t('fancy'));
+        $this->parser->parse('basetemplate', $template_data);
+	}
+	public function support()
+	{
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /login");
+			return;
+		}
+		$this->lang->load('user', $this->config->item('language'));
+		
+		$template_data = array('body_content' => $this->parser->parse("user/support", array(), true),
+				'areyousure' => t('areyousure'),
+				'yes' => t('yes'),
+				'no' => t('no'));
         $this->parser->parse('basetemplate', $template_data);
 	}
 }
