@@ -51,6 +51,15 @@ $lang['share'] = "Partager vos idées !";
 $lang['follow'] = "Suivez-nous";
 $lang['store'] = "Magasin Zim";
 $lang['support'] = "Support";
+$lang['msg_load_wait'] = "Charger en cours...";
+$lang['link_print'] = 'Imprimer';
+$lang['link_config'] = 'Configuration d\'imprimante';
+$lang['link_account'] = 'Mon compte';
+$lang['msg_upgrade'] = 'Nouvelle mise à jour disponible, CLIQUEZ ICI !';
+$lang['link_news_more'] = '+plus';
+$lang['link_tutorial'] = 'Tutorials';
+$lang['link_faq'] = 'FAQ';
+$lang['link_support'] = 'Support';
 
 // Share
 
@@ -73,3 +82,47 @@ $lang['pinterest'] = "Pinterest";
 $lang['twitter'] = "Twitter";
 $lang['googleplus'] = "Google+";
 $lang['fancy'] = "Fancy";
+
+// account
+
+$lang['title_change_pwd'] = $lang['change_pass'];
+$lang['link_user_info']	= 'Mon profil';
+$lang['title_account_optin'] = 'Newsletters & avertissement';
+$lang['title_account_delete'] = 'Supprimer compte';
+$lang['hint_account_optin'] = 'Choisissez les sujets de ZeeproShare que vous voulez recevoir par mail';
+$lang['title_optin_news'] = 'Nouvelles & promos';
+$lang['title_optin_update'] = 'Mise à jour de logiciel';
+$lang['function_off'] = 'Non';
+$lang['function_on'] = 'Oui';
+$lang['hint_account_delete'] = 'Entrez votre mot de passe ici';
+$lang['button_account_delete'] = 'Valider à supprimer';
+$lang['msg_password_error'] = 'Mot de passe incorrect';
+$lang['title_old_password'] = $lang['old'];
+$lang['title_new_password'] = $lang['new'];
+$lang['title_confirm_pwd'] = $lang['confirm'];
+$lang['option_show_pwd'] = $lang['show_password'];
+$lang['button_pwd_change'] = $lang['submit_change'];
+
+// user info
+
+$lang['title_location'] = 'Où habitez-vous ?';
+$lang['title_birth'] = 'Date de naissance';
+$lang['label_why'] = 'Pourquoi vous imprimiez en 3D ?';
+$lang['title_why'] = 'Raison d\'impression 3D';
+$lang['label_what'] = 'Quel modèle voulez-vous imprimer ?';
+$lang['title_what'] = 'modèle préféré à imprimer';
+$lang['msg_head_hint'] = 'Parlez-nous plus de vous, et nous ferons nos efforts à répondre vos désirs !';
+$lang['button_confirm'] = 'Valider';
+$lang['hint_country'] = 'Choisissez pays';
+$lang['hint_city'] = 'Choisissez ville';
+$lang['hint_not_found'] = '-Non listé';
+$lang['hint_why'] = '200 charactères Max.';
+$lang['hint_what'] = '200 charactères Max.';
+$lang['error_parameter'] = 'Erreur de parametère';
+$lang['error_authorize'] = 'Erreur d\'authentification';
+$lang['error_unknown'] = 'Error inconnu';
+
+// header button
+
+$lang['home'] = 'accueil';
+$lang['back'] = 'retour';

@@ -51,6 +51,15 @@ $lang['share'] = "Share ideas!";
 $lang['follow'] = "Follow us";
 $lang['store'] = "Zim Store";
 $lang['support'] = "Support";
+$lang['msg_load_wait'] = "Loading...";
+$lang['link_print'] = 'Print';
+$lang['link_config'] = 'Printer settings';
+$lang['link_account'] = 'My account';
+$lang['msg_upgrade'] = 'New update available, CLICK HERE!';
+$lang['link_news_more'] = '+more';
+$lang['link_tutorial'] = 'Tutorials';
+$lang['link_faq'] = 'FAQ';
+$lang['link_support'] = 'Support';
 
 // Share
 
@@ -73,3 +82,47 @@ $lang['pinterest'] = "Pinterest";
 $lang['twitter'] = "Twitter";
 $lang['googleplus'] = "Google+";
 $lang['fancy'] = "Fancy";
+
+// account
+
+$lang['title_change_pwd'] = $lang['change_pass'];
+$lang['link_user_info']	= 'My profile';
+$lang['title_account_optin'] = 'Newsletter & alerts';
+$lang['title_account_delete'] = 'Delete account';
+$lang['hint_account_optin'] = 'Select items for which you will be receiving emails from ZeeproShare';
+$lang['title_optin_news'] = 'News & promos';
+$lang['title_optin_update'] = 'Sotfware update';
+$lang['function_off'] = 'Off';
+$lang['function_on'] = 'On';
+$lang['hint_account_delete'] = 'Input your password here';
+$lang['button_account_delete'] = 'Confirm to delete';
+$lang['msg_password_error'] = 'Wrong password';
+$lang['title_old_password'] = $lang['old'];
+$lang['title_new_password'] = $lang['new'];
+$lang['title_confirm_pwd'] = $lang['confirm'];
+$lang['option_show_pwd'] = $lang['show_password'];
+$lang['button_pwd_change'] = $lang['submit_change'];
+
+// user info
+
+$lang['title_location'] = 'Where do you live?';
+$lang['title_birth'] = 'Date of birth';
+$lang['label_why'] = 'Why do you 3D print?';
+$lang['title_why'] = 'Why 3D print';
+$lang['label_what'] = 'What do you love printing?';
+$lang['title_what'] = 'Favorite print';
+$lang['msg_head_hint'] = 'Tell us more about you, we will then work hard on better addressing your needs!';
+$lang['button_confirm'] = 'Submit';
+$lang['hint_country'] = 'Select country';
+$lang['hint_city'] = 'Select city';
+$lang['hint_not_found'] = '-Not in list';
+$lang['hint_why'] = 'Max. 200 characters';
+$lang['hint_what'] = 'Max. 200 characters';
+$lang['error_parameter'] = 'Parameter error';
+$lang['error_authorize'] = 'Authentification failed';
+$lang['error_unknown'] = 'Unknown error';
+
+// header button
+
+$lang['home'] = 'home';
+$lang['back'] = 'back';
