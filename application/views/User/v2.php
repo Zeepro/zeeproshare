@@ -27,9 +27,9 @@
 				<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"></a>
 				<ul data-role="listview" class="shadowBox" data-inset="true">
 				{upgrades_display}
-					<li><a href="#" id="user_multiUpgrade_item_{id}" data-rel="back"
+					<li><a href="#" id="user_multiUpgrade_item_{id}" data-rel="back" data-v1system="{v1system}"
 							data-token="{token}" data-rdvurl="{rdv_url}" data-locip="{loc_ip}"
-							onclick="javascript: do_assign(this.id); do_submit('printerstate/upgradenote', {reboot:''});">
+							onclick="javascript: if(do_assign(this.id)) do_submit('printerstate/upgradenote', {reboot:''});">
 						<h2>{name}</h2>
 					</a></li>
 				{/upgrades_display}
@@ -59,7 +59,8 @@
 		<div class="widget_user_multiPrinter" style="display: none;">
 			<ul data-role="listview" class="shadowBox" data-inset="true">
 				{multi_printers}
-				<li><a href="#printer_menu_popup" id="user_multiPrinter_item_{id}" data-rel="popup" onclick="javascript: do_assign(this.id);"
+				<li><a href="#" id="user_multiPrinter_item_{id}" data-rel="popup" data-v1system="{v1system}"
+						onclick="javascript: do_assign(this.id, 'printer_menu_popup');"
 						data-token="{token}" data-rdvurl="{rdv_url}" data-locip="{loc_ip}">
 				<h2>{name}</h2>
 				</a></li>
@@ -104,6 +105,7 @@ var var_user_token = '{user_token}';
 var var_submit_token = '{mono_printer_token}';
 var var_submit_rdvURL = '{mono_printer_rdv_url}';
 var var_submit_locIP = '{mono_printer_loc_ip}';
+var var_submit_v1System = {mono_printer_v1system};
 var var_show_upgrade = {show_upgrade};
 
 function disconnect() {
@@ -112,19 +114,31 @@ function disconnect() {
 	window.location = "/login/disconnect";
 };
 
-function do_assign(var_a_id) {
+function do_assign(var_a_id, var_popup_id) {
 	if (typeof(var_a_id) == "undefined"
 			|| typeof($("a#" + var_a_id).data("locip")) == "undefined") {
 		console.log("assign source not found");
 		
-		return;
+		return false;
 	}
 	
 	var_submit_token = $("a#" + var_a_id).data("token");
 	var_submit_rdvURL = $("a#" + var_a_id).data("rdvurl");
 	var_submit_locIP = $("a#" + var_a_id).data("locip");
+	var_submit_v1System = $("a#" + var_a_id).data("v1system");
 	
-	return;
+	if ($("a#" + var_a_id).data("v1system") == true) {
+		do_submit(); // do submit action directly for v1 system
+		
+		return false;
+	}
+	else if (typeof(var_popup_id) != "undefined"
+			&& $("a#" + var_a_id).data("v1system") === false
+			&& "popup" == $("div#" + var_popup_id).data("role")) {
+		$("div#" + var_popup_id).popup("open");
+	}
+	
+	return true;
 }
 
 function do_upgrade() {
@@ -159,64 +173,81 @@ function do_submit(var_redirectURL, var_redirectPrm) {
 		var var_form_selector = "form#user_hiddenform2submit";
 		
 		if (var_testImg.height > 0) { // local case
-			// CORS check
-			$.ajax({
-				url: "http://" + var_submit_locIP + "/set_cookie/user",
-				cache: false,
-				async: true,
-				xhrFields: {
-					withCredentials: true,
-				},
-				success: function() {
-					var var_get_prm = "?from=redirect";
-					
-					console.log("CORS and verification ok, pass directly without token");
-					if (typeof(var_redirectPrm) == "object") {
-						$.each(var_redirectPrm, function(key, value) {
-							var_get_prm = var_get_prm + "&" + key + "=" + value;
-						});
-					}
-					window.location.href = "http://" + var_submit_locIP + "/" + var_redirectURL + var_get_prm;
-				},
-				error: function() {
-					if (var_redirectURL.length) {
-						var var_redirect_json = {
-							url: "/" + var_redirectURL,
-						};
-						
-						if (typeof(var_redirectPrm) == "object") {
-							var_redirect_json.prm = var_redirectPrm;
-						}
-						$(var_form_selector + " input[name=redirect]").val(JSON.stringify(var_redirect_json));
-					}
-					else {
-						$(var_form_selector + " input[name=redirect]").prop("disabled", true);
-					}
-					$(var_form_selector).attr("action", "http://" + var_submit_locIP + "/set_cookie/user");
-					$(var_form_selector + " input[name=token]").prop("disabled", true);
-					
-					$(var_form_selector).submit();
+			if (var_submit_v1System) {
+				var var_get_prm = "?from=redirect";
+				
+				if (typeof(var_redirectPrm) == "object") {
+					$.each(var_redirectPrm, function(key, value) {
+						var_get_prm = var_get_prm + "&" + key + "=" + value;
+					});
 				}
-			});
+				window.location.href = "http://" + var_submit_locIP + "/" + var_redirectURL + var_get_prm;
+			}
+			else {
+// 				// CORS check
+// 				$.ajax({
+// 					url: "http://" + var_submit_locIP + "/set_cookie/user",
+// 					cache: false,
+// 					async: true,
+// 					xhrFields: {
+// 						withCredentials: true,
+// 					},
+// 					success: function() {
+// 						var var_get_prm = "?from=redirect";
+						
+// 						console.log("CORS and verification ok, pass directly without token");
+// 						if (typeof(var_redirectPrm) == "object") {
+// 							$.each(var_redirectPrm, function(key, value) {
+// 								var_get_prm = var_get_prm + "&" + key + "=" + value;
+// 							});
+// 						}
+// 						window.location.href = "http://" + var_submit_locIP + "/" + var_redirectURL + var_get_prm;
+// 					},
+// 					error: function() {
+						if (var_redirectURL.length) {
+							var var_redirect_json = {
+								url: "/" + var_redirectURL,
+							};
+							
+							if (typeof(var_redirectPrm) == "object") {
+								var_redirect_json.prm = var_redirectPrm;
+							}
+							$(var_form_selector + " input[name=redirect]").val(JSON.stringify(var_redirect_json));
+						}
+						else {
+							$(var_form_selector + " input[name=redirect]").prop("disabled", true);
+						}
+						$(var_form_selector).attr("action", "http://" + var_submit_locIP + "/set_cookie/user");
+						$(var_form_selector + " input[name=token]").prop("disabled", true);
+						
+						$(var_form_selector).submit();
+// 					}
+// 				});
+			}
 		}
 		else { // remote case
-			var var_token_json = {
-				token: var_submit_token,
-				user: var_user_token,
-				redirect: {
-					url: "/" + var_redirectURL,
-				},
-			};
-			
-			if (var_redirectURL.length) {
-				var_token_json.redirect = {
-						url: "/" + var_redirectURL,
-				};
-				if (typeof(var_redirectPrm) == "object") {
-					var_token_json.prm = var_redirectPrm;
-				}
+			if (var_submit_v1System) {
+				$(var_form_selector + " input[name=token]").val(var_submit_token);
 			}
-			$(var_form_selector + " input[name=token]").val(JSON.stringify(var_token_json));
+			else {
+				var var_token_json = {
+					token: var_submit_token,
+					user: var_user_token,
+					redirect: {
+						url: "/" + var_redirectURL,
+					},
+				};
+				
+				if (var_redirectURL.length) {
+					var_token_json.redirect = {
+							url: "/" + var_redirectURL,
+					};
+					if (typeof(var_redirectPrm) == "object") {
+						var_token_json.prm = var_redirectPrm;
+					}
+				}
+				$(var_form_selector + " input[name=token]").val(JSON.stringify(var_token_json));
+			}
 			
 			$(var_form_selector).attr("action", "https://" + var_submit_rdvURL + "/set_cookie");
 			$(var_form_selector + " input[name=user]").prop('disabled', true);
@@ -229,6 +260,8 @@ function do_submit(var_redirectURL, var_redirectPrm) {
 		$("#overlay").addClass('gray-overlay');
 		$(".ui-loader").css("display", "block");
 	}, 3000);
+	
+	return;
 }
 
 function initializeSlider() {

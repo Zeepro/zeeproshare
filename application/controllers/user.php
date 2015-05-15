@@ -11,40 +11,45 @@ class User extends CI_Controller {
 
 	public function index()
 	{
-		if ($this->session->userdata('logged_in') == false)
-		{
-			$this->output->set_header("Location: /login");
-			return;
-		}
-		$this->lang->load('user', $this->config->item('language'));
+		$this->load->helper('url');
+		redirect('/user/v2');
 		
-		$tab = array("email" => $this->session->userdata('email'),
-					"password" => $this->session->userdata('password'));
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/listprinter.ashx");
-		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-		curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
-		curl_setopt($curl, CURLOPT_POST, 2);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-		$output = curl_exec($curl);
-		curl_close($curl);
+		return;
 		
-		$printers = json_decode($output);
+// 		if ($this->session->userdata('logged_in') == false)
+// 		{
+// 			$this->output->set_header("Location: /login");
+// 			return;
+// 		}
+// 		$this->lang->load('user', $this->config->item('language'));
+		
+// 		$tab = array("email" => $this->session->userdata('email'),
+// 					"password" => $this->session->userdata('password'));
+// 		$curl = curl_init();
+// 		curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/listprinter.ashx");
+// 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+// 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+// 		curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
+// 		curl_setopt($curl, CURLOPT_POST, 2);
+// 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
+// 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+// 		$output = curl_exec($curl);
+// 		curl_close($curl);
+		
+// 		$printers = json_decode($output);
 
-		if ($printers != NULL)
-			$title = t('connected');
-		else
-			$title = t('no_printer');
+// 		if ($printers != NULL)
+// 			$title = t('connected');
+// 		else
+// 			$title = t('no_printer');
 				
-        $body = $this->load->view('User/index', array( "printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
+//         $body = $this->load->view('User/index', array( "printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
 		
-		$template_data = array('body_content'	=> $body,
-								'signout'		=> t('signout'),
-								'connected'		=> $title,
-								'change_pass'	=> t('change_pass'));
-		$this->parser->parse('basetemplate', $template_data);
+// 		$template_data = array('body_content'	=> $body,
+// 								'signout'		=> t('signout'),
+// 								'connected'		=> $title,
+// 								'change_pass'	=> t('change_pass'));
+// 		$this->parser->parse('basetemplate', $template_data);
 	}
 	
 	public function v2() {
@@ -80,7 +85,9 @@ class User extends CI_Controller {
 		
 		$id_printer = 1;
 		foreach ($printers as $printer) {
-			$printer_info = array(); // empty array
+			$printer_info = array(
+					'v1system'		=> 'true',
+			); // empty array
 			foreach (array(
 					'token'			=> 'token',
 					'URL'			=> 'rdv_url',
@@ -91,9 +98,13 @@ class User extends CI_Controller {
 			}
 			$printer_info['id'] = $id_printer . '_' . rand();
 			
-			if (isset($printer['currentversion']) && isset($printer['nextversion'])
-					&& $printer['currentversion'] != $printer['nextversion']) {
-				$upgrades_display[] = $printer_info;
+			if (isset($printer['current_software'])) {
+				$printer_info['v1system'] = 'false';
+				
+				if (isset($printer['next_software'])
+						&& $printer['current_software'] != $printer['next_software']) {
+					$upgrades_display[] = $printer_info;
+				}
 			}
 			$printers_display[] = $printer_info;
 			
@@ -108,6 +119,7 @@ class User extends CI_Controller {
 				'mono_printer_rdv_url'	=> $printer_info['rdv_url'],
 				'mono_printer_name'		=> $printer_info['name'],
 				'mono_printer_loc_ip'	=> $printer_info['loc_ip'],
+				'mono_printer_v1system'	=> $printer_info['v1system'],
 				'multi_printers'		=> $printers_display,
 				'show_upgrade'			=> (count($upgrades_display) > 0) ? 'true' : 'false',
 				'upgrades_display'		=> $upgrades_display,
@@ -403,13 +415,72 @@ class User extends CI_Controller {
 		$option_selected = 'selected';
 		$error = NULL;
 		$template_data = NULL; //array()
+		$user_info = array();
+		$assign_func = NULL; //function()
+		$user_birth = NULL;
 		$delete_account = $this->input->post('delete');
 		$change_password = $this->input->post('change');
+		$change_info = $this->input->post('info');
 		
 		$this->load->helper('ssouser');
 		$this->lang->load('user', $this->config->item('language'));
-		
-		if ($change_password) {
+		if ($change_info) {
+			$this->load->library('form_validation');
+			
+// 			$this->form_validation->set_rules('user_country', 'lang:title_country', 'required');
+// 			$this->form_validation->set_rules('user_city', 'lang:title_city', 'required');
+// 			$this->form_validation->set_rules('user_birth', 'lang:title_birth', 'required');
+			$this->form_validation->set_rules('user_why', 'lang:title_why', 'max_length[200]');
+			$this->form_validation->set_rules('user_what', 'lang:title_what', 'max_length[200]');
+			
+			if ($this->form_validation->run() == FALSE) {
+				$error = validation_errors();
+			}
+			else {
+				$array_info = array();
+				
+				foreach (array(
+						SSOUSER_TITLE_COUNTRY	=> 'user_country',
+// 						SSOUSER_TITLE_CITY		=> 'user_city',
+						SSOUSER_TITLE_BIRTHDAY	=> 'user_birth',
+						SSOUSER_TITLE_WHY		=> 'user_why',
+						SSOUSER_TITLE_WHAT		=> 'user_what',
+				) as $key => $value) {
+					$array_info[$key] = ($this->input->post($value) !== FALSE) ? $this->input->post($value) : "";
+				}
+				$array_info[SSOUSER_TITLE_CITY] = "";
+				foreach (array('user_city_input', 'user_city') as $value) {
+					if ($this->input->post($value) !== FALSE && strlen($this->input->post($value)) > 0) {
+						$array_info[SSOUSER_TITLE_CITY] = $this->input->post($value);
+						break;
+					}
+				}
+				
+				$ret_val = SSOUser_setUserInfo($array_info);
+				
+				switch ($ret_val) {
+					case ERROR_OK:
+						$this->output->set_header('Location: /user/account');
+						
+						return;
+						break; // never reach here
+						
+					case ERROR_MISS_PRM:
+					case ERROR_WRONG_PRM:
+						$error = t('error_parameter');
+						break;
+						
+					case ERROR_AUTHOR_USER:
+						$error = t('error_authorize');
+						break;
+						
+					default:
+						$error = t('error_unknown');
+						break;
+				}
+			}
+		}
+		else if ($change_password) {
 			$this->load->library('form_validation');
 			
 			$this->form_validation->set_rules('old_pwd', 'lang:title_old_password', 'required');
@@ -451,6 +522,20 @@ class User extends CI_Controller {
 		}
 		SSOUser_requestOptin($optin_news); // we ignore as optin off
 		
+		$ret_val = SSOUser_getUserInfo($user_info);
+		if ($ret_val == ERROR_AUTHOR_USER) {
+			$error = t('error_authorize');
+		}
+		
+		$assign_func = function ($key_array) use (&$user_info) {
+			return (isset($user_info[$key_array]) ? htmlspecialchars($user_info[$key_array]) : NULL);
+		};
+		$user_birth = $assign_func(SSOUSER_TITLE_BIRTHDAY);
+		if ($user_birth) {
+			$obj_date = DateTime::createFromFormat('n/j/Y', $user_birth);
+			$user_birth = $obj_date->format('Y-m-d');
+		}
+		
 		$template_data = array(
 				'home'					=> t('home'),
 				'back'					=> t('back'),
@@ -473,6 +558,22 @@ class User extends CI_Controller {
 				'hint_account_delete'	=> t('hint_account_delete'),
 				'button_account_delete'	=> t('button_account_delete'),
 				'error'					=> $error,
+				'title_location'		=> t('title_location'),
+				'title_birth'			=> t('title_birth'),
+				'label_why'				=> t('label_why'),
+				'label_what'			=> t('label_what'),
+				'msg_head_hint'			=> t('msg_head_hint'),
+				'button_confirm'		=> t('button_confirm'),
+				'hint_country'			=> t('hint_country'),
+				'hint_city'				=> t('hint_city'),
+				'hint_not_found'		=> t('hint_not_found'),
+				'hint_why'				=> t('hint_why'),
+				'hint_what'				=> t('hint_what'),
+				'value_country'			=> $assign_func(SSOUSER_TITLE_COUNTRY),
+				'value_city'			=> $assign_func(SSOUSER_TITLE_CITY),
+				'value_birth'			=> $user_birth,
+				'value_why'				=> $assign_func(SSOUSER_TITLE_WHY),
+				'value_what'			=> $assign_func(SSOUSER_TITLE_WHAT),
 		);
 		
 		$this->parser->parse('basetemplate', array(
