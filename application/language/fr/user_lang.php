@@ -40,7 +40,7 @@ $lang['select'] = "Sélectionner une imprimante";
 
 // V2
 
-$lang['areyousure'] = "Souhaitez-vous vraiment vous déconnecter ?";
+$lang['areyousure'] = "Se connecté comme %s<br/>Souhaitez-vous vraiment vous déconnecter ?";
 $lang['yes'] = "Oui";
 $lang['no'] = "Non";
 $lang['news'] = "Nouveautés";
@@ -57,9 +57,18 @@ $lang['link_config'] = 'Configuration d\'imprimante';
 $lang['link_account'] = 'Mon compte';
 $lang['msg_upgrade'] = 'Nouvelle mise à jour disponible, CLIQUEZ ICI !';
 $lang['link_news_more'] = '+plus';
+$lang['msg_no_printer'] = 'Aucune imprimante trouvable';
+$lang['link_printers'] = 'Mes imprimantes';
+$lang['upgrade_title'] = 'Mises à jour';
+
+// Support
+
 $lang['link_tutorial'] = 'Tutorials';
 $lang['link_faq'] = 'FAQ';
 $lang['link_support'] = 'Support';
+$lang['how_load_cartridge'] = 'Comment charge votre cartouche de Zim';
+$lang['how_zeeproshare'] = 'ZeeproShare';
+$lang['how_init_setup'] = 'Configuration initiale de Zim';
 
 // Share
 
@@ -82,19 +91,21 @@ $lang['pinterest'] = "Pinterest";
 $lang['twitter'] = "Twitter";
 $lang['googleplus'] = "Google+";
 $lang['fancy'] = "Fancy";
+$lang['instagram'] = 'Instagram';
+$lang['linkedin'] = 'Linkedin';
 
 // account
 
 $lang['title_change_pwd'] = $lang['change_pass'];
 $lang['link_user_info']	= 'Mon profil';
-$lang['title_account_optin'] = 'Newsletters & avertissement';
+$lang['title_account_optin'] = 'Newsletters'; //'Newsletters & avertissement';
 $lang['title_account_delete'] = 'Supprimer compte';
-$lang['hint_account_optin'] = 'Choisissez les sujets de ZeeproShare que vous voulez recevoir par mail';
+$lang['hint_account_optin'] = 'Voici les nouvelles que vous recevrez depuis Zeepro !'; //'Choisissez les sujets de ZeeproShare que vous voulez recevoir par mail';
 $lang['title_optin_news'] = 'Nouvelles & promos';
 $lang['title_optin_update'] = 'Mise à jour de logiciel';
-$lang['function_off'] = 'Non';
-$lang['function_on'] = 'Oui';
-$lang['hint_account_delete'] = 'Entrez votre mot de passe ici';
+// $lang['function_off'] = 'Non';
+// $lang['function_on'] = 'Oui';
+$lang['hint_account_delete'] = 'Mot de passe'; //'Entrez votre mot de passe ici';
 $lang['button_account_delete'] = 'Valider à supprimer';
 $lang['msg_password_error'] = 'Mot de passe incorrect';
 $lang['title_old_password'] = $lang['old'];
@@ -102,6 +113,10 @@ $lang['title_new_password'] = $lang['new'];
 $lang['title_confirm_pwd'] = $lang['confirm'];
 $lang['option_show_pwd'] = $lang['show_password'];
 $lang['button_pwd_change'] = $lang['submit_change'];
+$lang['msg_download'] = 'Téléchargement...';
+$lang['msg_delete_user'] = 'Warning: Tous les modèles dans votre compte vont être supprimés en permanence !<br/>Êtes-vous sûrs de vouloir supprimer votre compte ?';
+$lang['button_delete_no'] = 'Non';
+$lang['button_delete_ok'] = 'Oui';
 
 // user info
 
@@ -121,6 +136,7 @@ $lang['hint_what'] = '200 charactères Max.';
 $lang['error_parameter'] = 'Erreur de parametère';
 $lang['error_authorize'] = 'Erreur d\'authentification';
 $lang['error_unknown'] = 'Error inconnu';
+$lang['msg_max_birthday'] = 'Vous devez avoir 13+ ans à s\'enregistrer';
 
 // header button
 

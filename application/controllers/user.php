@@ -113,13 +113,16 @@ class User extends CI_Controller {
 		
 		$this->lang->load('user', $this->config->item('language'));
 		$template_data = array(
+				'back'					=> t('back'),
 				'user_token'			=> $this->session->userdata('user_token'),
-				'user_multi_printer'	=> ($nb_printer > 1) ? 'true' : 'false',
+// 				'user_multi_printer'	=> ($nb_printer > 1) ? 'true' : 'false',
+				'user_nb_printer'		=> count($printers_display),
+				'msg_no_printer'		=> t('msg_no_printer'),
 				'mono_printer_token'	=> $printer_info['token'],
 				'mono_printer_rdv_url'	=> $printer_info['rdv_url'],
 				'mono_printer_name'		=> $printer_info['name'],
 				'mono_printer_loc_ip'	=> $printer_info['loc_ip'],
-				'mono_printer_v1system'	=> $printer_info['v1system'],
+				'mono_printer_v1system'	=> isset($printer_info['v1system']) ? $printer_info['v1system'] : 'true',
 				'multi_printers'		=> $printers_display,
 				'show_upgrade'			=> (count($upgrades_display) > 0) ? 'true' : 'false',
 				'upgrades_display'		=> $upgrades_display,
@@ -128,13 +131,15 @@ class User extends CI_Controller {
 				'link_config'			=> t('link_config'),
 				'link_account'			=> t('link_account'),
 				'msg_upgrade'			=> t('msg_upgrade'),
+				'upgrade_title'			=> t('upgrade_title'),
 				'link_news_more'		=> t('link_news_more'),
-				'link_tutorial'			=> t('link_tutorial'),
-				'link_faq'				=> t('link_faq'),
-				'link_support'			=> t('link_support'),
+// 				'link_tutorial'			=> t('link_tutorial'),
+// 				'link_faq'				=> t('link_faq'),
+// 				'link_support'			=> t('link_support'),
+				'link_printers'			=> t('link_printers'),
 // 				'connected'				=> ($nb_printer ? t('connected') : t('no_printer')),
 // 				'change_pass'			=> t('change_pass'),
-				'areyousure'			=> t('areyousure'),
+				'areyousure'			=> t('areyousure', $this->session->userdata('email')),
 				'yes'					=> t('yes'),
 				'no'					=> t('no'),
 				'news'					=> t('news'),
@@ -360,14 +365,17 @@ class User extends CI_Controller {
 			redirect("/user/v2");
 		}
 		$template_data = array('body_content' => $this->parser->parse("user/share", array(), true),
-				'areyousure' => t('areyousure'),
-				'yes' => t('yes'),
-				'no' => t('no'),
+// 				'areyousure' => t('areyousure'),
+// 				'yes' => t('yes'),
+// 				'no' => t('no'),
 				'tellus' => t('tellus'),
 				'description' => t('description'),
 				'description_placeholder' => t('description_placeholder'),
 				'attach' => t('attach'),
-				'submit' => t('submit'));
+				'submit' => t('submit'),
+				'home'	=> t('home'),
+				'back'	=> t('back'),
+		);
         $this->parser->parse('basetemplate', $template_data);
 	}
 
@@ -381,16 +389,21 @@ class User extends CI_Controller {
 		$this->lang->load('user', $this->config->item('language'));
 		
 		$template_data = array('body_content' => $this->parser->parse("user/follow", array(), true),
-				'areyousure' => t('areyousure'),
-				'yes' => t('yes'),
-				'no' => t('no'),
+// 				'areyousure' => t('areyousure'),
+// 				'yes' => t('yes'),
+// 				'no' => t('no'),
 				'follow_us' => t('follow_us'),
 				'facebook' => t('facebook'),
 				'youtube' => t('youtube'),
 				'pinterest' => t('pinterest'),
 				'twitter' => t('twitter'),
 				'googleplus' => t('googleplus'),
-				'fancy' => t('fancy'));
+				'fancy' => t('fancy'),
+				'home'		=> t('home'),
+				'back'		=> t('back'),
+				'instagram'	=> t('instagram'),
+				'linkedin'	=> t('linkedin'),
+		);
         $this->parser->parse('basetemplate', $template_data);
 	}
 	public function support()
@@ -403,10 +416,32 @@ class User extends CI_Controller {
 		$this->lang->load('user', $this->config->item('language'));
 		
 		$template_data = array('body_content' => $this->parser->parse("user/support", array(), true),
-				'areyousure' => t('areyousure'),
-				'yes' => t('yes'),
-				'no' => t('no'));
+// 				'areyousure' => t('areyousure'),
+// 				'yes' => t('yes'),
+// 				'no' => t('no'),
+				'home'					=> t('home'),
+				'back'					=> t('back'),
+				'how_load_cartridge'	=> t('how_load_cartridge'),
+				'how_zeeproshare'		=> t('how_zeeproshare'),
+				'how_init_setup'		=> t('how_init_setup'),
+		);
         $this->parser->parse('basetemplate', $template_data);
+	}
+	
+	public function support_menu() {
+		$this->lang->load('user', $this->config->item('language'));
+		
+		$template_data = array(
+				'body_content'	=> $this->parser->parse("user/support_menu", array(), true),
+				'home'			=> t('home'),
+				'back'			=> t('back'),
+				'link_tutorial'	=> t('link_tutorial'),
+				'link_faq'		=> t('link_faq'),
+				'link_support'	=> t('link_support'),
+		);
+		$this->parser->parse('basetemplate', $template_data);
+		
+		return;
 	}
 	
 	public function account() {
@@ -421,6 +456,11 @@ class User extends CI_Controller {
 		$delete_account = $this->input->post('delete');
 		$change_password = $this->input->post('change');
 		$change_info = $this->input->post('info');
+		
+		if ($this->session->userdata('logged_in') == false) {
+			$this->output->set_header("Location: /login");
+			return;
+		}
 		
 		$this->load->helper('ssouser');
 		$this->lang->load('user', $this->config->item('language'));
@@ -574,6 +614,12 @@ class User extends CI_Controller {
 				'value_birth'			=> $user_birth,
 				'value_why'				=> $assign_func(SSOUSER_TITLE_WHY),
 				'value_what'			=> $assign_func(SSOUSER_TITLE_WHAT),
+				'max_birth'				=> date('Y-m-d', time() - 409968000), // a little less than 13 years, 13 * 365 * 24 * 3600
+				'msg_max_birthday'		=> t('msg_max_birthday'),
+				'msg_download'			=> t('msg_download'),
+				'msg_delete_user'		=> t('msg_delete_user'),
+				'button_delete_no'		=> t('button_delete_no'),
+				'button_delete_ok'		=> t('button_delete_ok'),
 		);
 		
 		$this->parser->parse('basetemplate', array(
@@ -583,116 +629,116 @@ class User extends CI_Controller {
 		return;
 	}
 	
-	public function info() {
-		$template_data = NULL; //array()
-		$user_info = array();
-		$assign_func = NULL; //function()
-		$user_birth = NULL;
-		$error = NULL;
-		$ret_val = 0;
+// 	public function info() {
+// 		$template_data = NULL; //array()
+// 		$user_info = array();
+// 		$assign_func = NULL; //function()
+// 		$user_birth = NULL;
+// 		$error = NULL;
+// 		$ret_val = 0;
 		
-		$this->load->helper('ssouser');
-		$this->lang->load('user', $this->config->item('language'));
+// 		$this->load->helper('ssouser');
+// 		$this->lang->load('user', $this->config->item('language'));
 		
-		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			$this->load->library('form_validation');
+// 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// 			$this->load->library('form_validation');
 			
-// 			$this->form_validation->set_rules('user_country', 'lang:title_country', 'required');
-// 			$this->form_validation->set_rules('user_city', 'lang:title_city', 'required');
-// 			$this->form_validation->set_rules('user_birth', 'lang:title_birth', 'required');
-			$this->form_validation->set_rules('user_why', 'lang:title_why', 'max_length[200]');
-			$this->form_validation->set_rules('user_what', 'lang:title_what', 'max_length[200]');
+// // 			$this->form_validation->set_rules('user_country', 'lang:title_country', 'required');
+// // 			$this->form_validation->set_rules('user_city', 'lang:title_city', 'required');
+// // 			$this->form_validation->set_rules('user_birth', 'lang:title_birth', 'required');
+// 			$this->form_validation->set_rules('user_why', 'lang:title_why', 'max_length[200]');
+// 			$this->form_validation->set_rules('user_what', 'lang:title_what', 'max_length[200]');
 			
-			if ($this->form_validation->run() == FALSE) {
-				$error = validation_errors();
-			}
-			else {
-				$array_info = array();
+// 			if ($this->form_validation->run() == FALSE) {
+// 				$error = validation_errors();
+// 			}
+// 			else {
+// 				$array_info = array();
 				
-				foreach (array(
-						SSOUSER_TITLE_COUNTRY	=> 'user_country',
-// 						SSOUSER_TITLE_CITY		=> 'user_city',
-						SSOUSER_TITLE_BIRTHDAY	=> 'user_birth',
-						SSOUSER_TITLE_WHY		=> 'user_why',
-						SSOUSER_TITLE_WHAT		=> 'user_what',
-				) as $key => $value) {
-					$array_info[$key] = ($this->input->post($value) !== FALSE) ? $this->input->post($value) : "";
-				}
-				$array_info[SSOUSER_TITLE_CITY] = "";
-				foreach (array('user_city_input', 'user_city') as $value) {
-					if ($this->input->post($value) !== FALSE && strlen($this->input->post($value)) > 0) {
-						$array_info[SSOUSER_TITLE_CITY] = $this->input->post($value);
-						break;
-					}
-				}
+// 				foreach (array(
+// 						SSOUSER_TITLE_COUNTRY	=> 'user_country',
+// // 						SSOUSER_TITLE_CITY		=> 'user_city',
+// 						SSOUSER_TITLE_BIRTHDAY	=> 'user_birth',
+// 						SSOUSER_TITLE_WHY		=> 'user_why',
+// 						SSOUSER_TITLE_WHAT		=> 'user_what',
+// 				) as $key => $value) {
+// 					$array_info[$key] = ($this->input->post($value) !== FALSE) ? $this->input->post($value) : "";
+// 				}
+// 				$array_info[SSOUSER_TITLE_CITY] = "";
+// 				foreach (array('user_city_input', 'user_city') as $value) {
+// 					if ($this->input->post($value) !== FALSE && strlen($this->input->post($value)) > 0) {
+// 						$array_info[SSOUSER_TITLE_CITY] = $this->input->post($value);
+// 						break;
+// 					}
+// 				}
 				
-				$ret_val = SSOUser_setUserInfo($array_info);
+// 				$ret_val = SSOUser_setUserInfo($array_info);
 				
-				switch ($ret_val) {
-					case ERROR_OK:
-						$this->output->set_header('Location: /user/account');
+// 				switch ($ret_val) {
+// 					case ERROR_OK:
+// 						$this->output->set_header('Location: /user/account');
 						
-						return;
-						break; // never reach here
+// 						return;
+// 						break; // never reach here
 						
-					case ERROR_MISS_PRM:
-					case ERROR_WRONG_PRM:
-						$error = t('error_parameter');
-						break;
+// 					case ERROR_MISS_PRM:
+// 					case ERROR_WRONG_PRM:
+// 						$error = t('error_parameter');
+// 						break;
 						
-					case ERROR_AUTHOR_USER:
-						$error = t('error_authorize');
-						break;
+// 					case ERROR_AUTHOR_USER:
+// 						$error = t('error_authorize');
+// 						break;
 						
-					default:
-						$error = t('error_unknown');
-						break;
-				}
-			}
-		}
+// 					default:
+// 						$error = t('error_unknown');
+// 						break;
+// 				}
+// 			}
+// 		}
 		
-		$ret_val = SSOUser_getUserInfo($user_info);
-		if ($ret_val == ERROR_AUTHOR_USER) {
-			$error = t('error_authorize');
-		}
+// 		$ret_val = SSOUser_getUserInfo($user_info);
+// 		if ($ret_val == ERROR_AUTHOR_USER) {
+// 			$error = t('error_authorize');
+// 		}
 		
-		$assign_func = function ($key_array) use (&$user_info) {
-			return (isset($user_info[$key_array]) ? htmlspecialchars($user_info[$key_array]) : NULL);
-		};
-		$user_birth = $assign_func(SSOUSER_TITLE_BIRTHDAY);
-		if ($user_birth) {
-			$obj_date = DateTime::createFromFormat('n/j/Y', $user_birth);
-			$user_birth = $obj_date->format('Y-m-d');
-		}
+// 		$assign_func = function ($key_array) use (&$user_info) {
+// 			return (isset($user_info[$key_array]) ? htmlspecialchars($user_info[$key_array]) : NULL);
+// 		};
+// 		$user_birth = $assign_func(SSOUSER_TITLE_BIRTHDAY);
+// 		if ($user_birth) {
+// 			$obj_date = DateTime::createFromFormat('n/j/Y', $user_birth);
+// 			$user_birth = $obj_date->format('Y-m-d');
+// 		}
 		
-		$template_data = array(
-				'home'				=> t('home'),
-				'back'				=> t('back'),
-				'title_location'	=> t('title_location'),
-				'title_birth'		=> t('title_birth'),
-				'label_why'			=> t('label_why'),
-				'label_what'		=> t('label_what'),
-				'msg_head_hint'		=> t('msg_head_hint'),
-				'button_confirm'	=> t('button_confirm'),
-				'hint_country'		=> t('hint_country'),
-				'hint_city'			=> t('hint_city'),
-				'hint_not_found'	=> t('hint_not_found'),
-				'hint_why'			=> t('hint_why'),
-				'hint_what'			=> t('hint_what'),
-				'msg_error'			=> $error,
-				'value_country'		=> $assign_func(SSOUSER_TITLE_COUNTRY),
-				'value_city'		=> $assign_func(SSOUSER_TITLE_CITY),
-				'value_birth'		=> $user_birth,
-				'value_why'			=> $assign_func(SSOUSER_TITLE_WHY),
-				'value_what'		=> $assign_func(SSOUSER_TITLE_WHAT),
-		);
+// 		$template_data = array(
+// 				'home'				=> t('home'),
+// 				'back'				=> t('back'),
+// 				'title_location'	=> t('title_location'),
+// 				'title_birth'		=> t('title_birth'),
+// 				'label_why'			=> t('label_why'),
+// 				'label_what'		=> t('label_what'),
+// 				'msg_head_hint'		=> t('msg_head_hint'),
+// 				'button_confirm'	=> t('button_confirm'),
+// 				'hint_country'		=> t('hint_country'),
+// 				'hint_city'			=> t('hint_city'),
+// 				'hint_not_found'	=> t('hint_not_found'),
+// 				'hint_why'			=> t('hint_why'),
+// 				'hint_what'			=> t('hint_what'),
+// 				'msg_error'			=> $error,
+// 				'value_country'		=> $assign_func(SSOUSER_TITLE_COUNTRY),
+// 				'value_city'		=> $assign_func(SSOUSER_TITLE_CITY),
+// 				'value_birth'		=> $user_birth,
+// 				'value_why'			=> $assign_func(SSOUSER_TITLE_WHY),
+// 				'value_what'		=> $assign_func(SSOUSER_TITLE_WHAT),
+// 		);
 		
-		$this->parser->parse('basetemplate', array(
-				'body_content'	=> $this->parser->parse('user/info', $template_data, TRUE),
-		));
+// 		$this->parser->parse('basetemplate', array(
+// 				'body_content'	=> $this->parser->parse('user/info', $template_data, TRUE),
+// 		));
 		
-		return;
-	}
+// 		return;
+// 	}
 	
 	public function set_optin_ajax() {
 		$cr = 0;

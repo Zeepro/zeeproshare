@@ -40,7 +40,7 @@ $lang['select'] = "Select a printer";
 
 // V2
 
-$lang['areyousure'] = "Are you sure you want to LOG OUT?";
+$lang['areyousure'] = "Logged as %s<br/>Are you sure you want to LOG OUT?";
 $lang['yes'] = "Yes";
 $lang['no'] = "No";
 $lang['news'] = "News";
@@ -57,9 +57,18 @@ $lang['link_config'] = 'Printer settings';
 $lang['link_account'] = 'My account';
 $lang['msg_upgrade'] = 'New update available, CLICK HERE!';
 $lang['link_news_more'] = '+more';
+$lang['msg_no_printer'] = 'No printer found';
+$lang['link_printers'] = 'My printers';
+$lang['upgrade_title'] = 'Upgrades';
+
+// Support
+
 $lang['link_tutorial'] = 'Tutorials';
 $lang['link_faq'] = 'FAQ';
 $lang['link_support'] = 'Support';
+$lang['how_load_cartridge'] = 'How to load your Zim cartridges';
+$lang['how_zeeproshare'] = 'ZeeproShare';
+$lang['how_init_setup'] = 'Zim initial setup';
 
 // Share
 
@@ -82,19 +91,21 @@ $lang['pinterest'] = "Pinterest";
 $lang['twitter'] = "Twitter";
 $lang['googleplus'] = "Google+";
 $lang['fancy'] = "Fancy";
+$lang['instagram'] = 'Instagram';
+$lang['linkedin'] = 'Linkedin';
 
 // account
 
 $lang['title_change_pwd'] = $lang['change_pass'];
 $lang['link_user_info']	= 'My profile';
-$lang['title_account_optin'] = 'Newsletter & alerts';
+$lang['title_account_optin'] = 'Newsletter'; //'Newsletter & alerts';
 $lang['title_account_delete'] = 'Delete account';
-$lang['hint_account_optin'] = 'Select items for which you will be receiving emails from ZeeproShare';
+$lang['hint_account_optin'] = 'Here is the news you\'ll get from Zeepro!'; //'Select items for which you will be receiving emails from ZeeproShare';
 $lang['title_optin_news'] = 'News & promos';
 $lang['title_optin_update'] = 'Sotfware update';
 $lang['function_off'] = 'Off';
 $lang['function_on'] = 'On';
-$lang['hint_account_delete'] = 'Input your password here';
+$lang['hint_account_delete'] = 'Password'; //'Input your password here';
 $lang['button_account_delete'] = 'Confirm to delete';
 $lang['msg_password_error'] = 'Wrong password';
 $lang['title_old_password'] = $lang['old'];
@@ -102,6 +113,10 @@ $lang['title_new_password'] = $lang['new'];
 $lang['title_confirm_pwd'] = $lang['confirm'];
 $lang['option_show_pwd'] = $lang['show_password'];
 $lang['button_pwd_change'] = $lang['submit_change'];
+$lang['msg_download'] = 'Downloading...';
+$lang['msg_delete_user'] = 'Warning: all the models stored in your account will be permanently deleted!<br/>Do you confirm your account deletion?';
+$lang['button_delete_no'] = 'No';
+$lang['button_delete_ok'] = 'Yes';
 
 // user info
 
@@ -121,6 +136,7 @@ $lang['hint_what'] = 'Max. 200 characters';
 $lang['error_parameter'] = 'Parameter error';
 $lang['error_authorize'] = 'Authentification failed';
 $lang['error_unknown'] = 'Unknown error';
+$lang['msg_max_birthday'] = 'You must be 13+ years old to regsiter';
 
 // header button
 

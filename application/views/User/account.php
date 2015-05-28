@@ -8,18 +8,19 @@
 					<p>{msg_head_hint}</p>
 					<label for="user_country">{title_location}</label>
 					<select name="user_country" id="user_country" data-oldvalue="{value_country}">
-						<option value="">{hint_country}</option>
+						<option value="">{msg_download}</option>
 					</select>
 					<select name="user_city" id="user_city" data-oldvalue="{value_city}">
-						<option value="">{hint_city}</option>
+						<option value="">{msg_download}</option>
 					</select>
 					<div id="user_city_customInput" style="display: none;">
 						<input type="text" name="user_city_input" id="user_city_custom" data-clear-btn="true" value="{value_city}" />
 					</div>
 					<div class="ui-field-contain">
 						<label for="user_birth">{title_birth}</label>
-						<input type="date" name="user_birth" id="user_birth" data-clear-btn="true" value="{value_birth}" />
+						<input type="date" name="user_birth" id="user_birth" data-clear-btn="true" max="{max_birth}" value="{value_birth}" />
 					</div>
+					<p class="zim-error" style="font-size: smaller; margin-left: 22%;">{msg_max_birthday}</p>
 					<label for="user_why">{label_why}</label>
 					<textarea cols="40" rows="8" name="user_why" id="user_why" placeholder="{hint_why}" maxlength="200">{value_why}</textarea>
 					<label for="user_what">{label_what}</label>
@@ -30,19 +31,23 @@
 			<div data-role="collapsible" id="account_menu_optin">
 				<h3>{title_account_optin}</h3>
 				<p>{hint_account_optin}</p>
-				<div class="ui-field-contain">
-					<label for="account_optin_update">{title_optin_update}</label>
-					<select name="account_optin_update" id="account_optin_update" data-role="slider" data-track-theme="b" data-theme="b">
-						<option value="off" >{function_off}</option>
-						<option value="on" {optin_update_on}>{function_on}</option>
-					</select>
-				</div>
-				<div class="ui-field-contain">
-					<label for="account_optin_news">{title_optin_news}</label>
-					<select name="account_optin_news" id="account_optin_news" data-role="slider" data-track-theme="b" data-theme="b">
-						<option value="off" >{function_off}</option>
-						<option value="on" {optin_news_on}>{function_on}</option>
-					</select>
+<!-- 				<div class="ui-field-contain"> -->
+<!-- 					<label for="account_optin_update">{title_optin_update}</label> -->
+<!-- 					<select name="account_optin_update" id="account_optin_update" data-role="slider" data-track-theme="b" data-theme="b"> -->
+<!-- 						<option value="off" >{function_off}</option> -->
+<!-- 						<option value="on" {optin_update_on}>{function_on}</option> -->
+<!-- 					</select> -->
+<!-- 				</div> -->
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><div class="ui-bar ui-bar-f" style="height:3em;">
+						<label for="account_optin_news" style="margin-top: 1em;">{title_optin_news}</label>
+					</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-f" style="height:3em;">
+						<select name="account_optin_news" id="account_optin_news" data-role="slider" data-track-theme="b" data-theme="b">
+							<option value="off" >{function_off}</option>
+							<option value="on" {optin_news_on}>{function_on}</option>
+						</select>
+					</div></div>
 				</div>
 			</div>
 			<div data-role="collapsible" id="account_menu_change_pwd">
@@ -58,15 +63,28 @@
 			</div>
 			<div data-role="collapsible" id="account_menu_delete">
 				<h3>{title_account_delete}</h3>
-				<form method="POST" accept-charset="utf-8" id="account_form_delete">
+				<form method="POST" accept-charset="utf-8" id="account_form_delete" data-confirmed="false">
 					<input type="password" name="old_pwd" placeholder="{hint_account_delete}" required />
 					<input type="checkbox" name="show_pass" id="show_pass" data-mini="true" />
 					<label for="show_pass" style="background-color: transparent; border-width: 0;">{option_show_pwd}</label>
+					<input type="hidden" name="delete" value="1" />
 					<input type="submit" name="delete" value="{button_account_delete}" data-theme="b" />
 				</form>
 			</div>
 		</div>
 		<div class="zim-error">{error}</div>
+		<div id="confirm_delete_popup" data-role="popup" data-dismissible="false" class="ui-content" style="max-width: 250px; text-align: center;">
+			{msg_delete_user}
+			<br /><br />
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back" data-transition="flow" onclick="javascript: startDeleteUser();">{button_delete_ok}</a>
+				</div>
+				<div class="ui-block-b">
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="back">{button_delete_no}</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -174,7 +192,8 @@ function load_locationList() {
 		success: function(data) {
 			var var_country_list = [];
 			var var_country_value = var_select_country.data("oldvalue");
-			var var_temp_dom = null;
+			var var_temp_dom = (new Option("{hint_country}", "")).outerHTML;
+			var var_usa_index = -1;
 			
 			var_location_list = data;
 			
@@ -188,11 +207,20 @@ function load_locationList() {
 				});
 			}
 			var_country_list.sort();
+			
+			// put usa in first
+			var_usa_index = var_country_list.indexOf("United States");
+			if (var_usa_index != -1) {
+				var_country_list.splice(var_usa_index, 1);
+			}
+			var_country_list.unshift("United States");
+			
 			$.each(var_country_list, function(var_i, var_countryName) {
 				if (var_countryName.length > 0) {
 					var_temp_dom += (new Option(var_countryName, var_countryName)).outerHTML;
 				}
 			});
+			var_select_country.empty();
 			var_select_country.append(var_temp_dom);
 			var_select_country.val(var_country_value);
 			
@@ -207,6 +235,20 @@ function load_locationList() {
 			$(".ui-loader").css("display", "none");
 		},
 	});
+	
+	return;
+}
+
+function startDeleteUser() {
+	$("form#account_form_delete").data("confirmed", true);
+	$("div#confirm_delete_popup").popup("close");
+	
+// 	$("#overlay").addClass("gray-overlay");
+// 	$(".ui-loader").css("display", "block");
+	
+	setTimeout(function() {
+		$("form#account_form_delete").submit();
+	}, 500);
 	
 	return;
 }
@@ -251,6 +293,15 @@ $("input[name=show_pass]").click(function() {
 		$("form#" + var_formId +" input[type=text]").attr("type", "password");
 	}
 });
+
+$("form#account_form_delete").bind("submit", function(event) {
+	if (false == $("form#account_form_delete").data("confirmed")) {
+		event.preventDefault();
+		$("div#confirm_delete_popup").popup("open");
+	}
+	
+	return;
+})
 
 // add header?
 $("header.page-header").html('<a href="javascript:history.back();" data-icon="back" data-theme="b">{back}</a> <a href="/user/v2" data-icon="home" data-theme="b">{home}</a>');

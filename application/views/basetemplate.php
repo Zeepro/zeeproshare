@@ -20,6 +20,9 @@
             });
         </script>
         <style type="text/css">
+			body, body div, body input, body button, body a, body p, body span {
+				font-family: Calibri, Arial, sans-serif !important;
+			}
             div.logo {
             	margin-top:-9px;
             	width:100%;
@@ -67,6 +70,7 @@
 			h2
 			{
 				text-align: center;
+				text-shadow: none !important;
 			}
 			.ui-transparent
 			{
