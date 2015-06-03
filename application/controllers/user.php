@@ -15,41 +15,42 @@ class User extends CI_Controller {
 		redirect('/user/v2');
 		
 		return;
+		/* 
+		if ($this->session->userdata('logged_in') == false)
+		{
+			$this->output->set_header("Location: /login");
+			return;
+		}
+		$this->lang->load('user', $this->config->item('language'));
 		
-// 		if ($this->session->userdata('logged_in') == false)
-// 		{
-// 			$this->output->set_header("Location: /login");
-// 			return;
-// 		}
-// 		$this->lang->load('user', $this->config->item('language'));
+		$tab = array("email" => $this->session->userdata('email'),
+					"password" => $this->session->userdata('password'));
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/listprinter.ashx");
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+		curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
+		curl_setopt($curl, CURLOPT_POST, 2);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+		$output = curl_exec($curl);
+		curl_close($curl);
 		
-// 		$tab = array("email" => $this->session->userdata('email'),
-// 					"password" => $this->session->userdata('password'));
-// 		$curl = curl_init();
-// 		curl_setopt($curl, CURLOPT_URL, "https://sso.zeepro.com/listprinter.ashx");
-// 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, true);
-// 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
-// 		curl_setopt($curl, CURLOPT_CAINFO, getcwd() . "/StartComCertificationAuthority.crt");
-// 		curl_setopt($curl, CURLOPT_POST, 2);
-// 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($tab));
-// 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
-// 		$output = curl_exec($curl);
-// 		curl_close($curl);
-		
-// 		$printers = json_decode($output);
+		$printers = json_decode($output);
 
-// 		if ($printers != NULL)
-// 			$title = t('connected');
-// 		else
-// 			$title = t('no_printer');
+		if ($printers != NULL)
+			$title = t('connected');
+		else
+			$title = t('no_printer');
 				
-//         $body = $this->load->view('User/index', array( "printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
+		$body = $this->load->view('User/index', array( "printers" => $printers, "user_token" => $this->session->userdata('user_token')), true);
 		
-// 		$template_data = array('body_content'	=> $body,
-// 								'signout'		=> t('signout'),
-// 								'connected'		=> $title,
-// 								'change_pass'	=> t('change_pass'));
-// 		$this->parser->parse('basetemplate', $template_data);
+		$template_data = array('body_content'	=> $body,
+								'signout'		=> t('signout'),
+								'connected'		=> $title,
+								'change_pass'	=> t('change_pass'));
+		$this->parser->parse('basetemplate', $template_data);
+		 */
 	}
 	
 	public function v2() {
@@ -362,7 +363,15 @@ class User extends CI_Controller {
 			
 			$recipients = $swift->send($message, $failures);
 			
-			redirect("/user/v2");
+			$this->parser->parse('basetemplate', array(
+							'body_content'	=> $this->parser->parse("user/share_submit",
+									array('msg_share_submit' => t('msg_share_submit')), TRUE),
+							'home'			=> t('home'),
+							'back'			=> t('back'),
+					)
+			);
+			
+			return;
 		}
 		$template_data = array('body_content' => $this->parser->parse("user/share", array(), true),
 // 				'areyousure' => t('areyousure'),
@@ -376,7 +385,7 @@ class User extends CI_Controller {
 				'home'	=> t('home'),
 				'back'	=> t('back'),
 		);
-        $this->parser->parse('basetemplate', $template_data);
+		$this->parser->parse('basetemplate', $template_data);
 	}
 
 	public function follow()

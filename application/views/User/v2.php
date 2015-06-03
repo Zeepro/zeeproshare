@@ -39,7 +39,7 @@
 		<div class="ui-corner-all ui-shadow ui-transparent" style="padding: 5px; overflow: hidden;">
 			<h2>{news}</h2>
 			<div id="user_printerUpgrade" style="display: none; text-align: center;">
-				<a href="#" onclick="javascript: do_upgrade();" style="color: red; font-weight: bold; font-size: larger; text-shadow: 0 1px #FFF;">{msg_upgrade}</a>
+				<a href="#" onclick="javascript: do_upgrade();" style="color: red; font-weight: bold; font-size: larger; text-shadow: none;">{msg_upgrade}</a>
 <!-- 				<div id="printer_upgrade_popup" data-role="popup" class="ui-content" style="width: 640px; max-width: 90%; text-align: center;"> -->
 <!-- 					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right"></a> -->
 <!-- 					<ul data-role="listview" class="shadowBox" data-inset="true"> -->
@@ -54,7 +54,7 @@
 <!-- 				</div> -->
 			</div>
 			<p id="news_wait_msg" class="black_message">{msg_load_wait}</p>
-			<ul data-role="none" id="news_list" style="text-shadow: 0 1px #FFF;"></ul>
+			<ul data-role="none" id="news_list" style="text-shadow: none; list-style: none;"></ul>
 		</div>
 		<div class="ui-corner-all ui-shadow ui-transparent" style="padding: 5px; overflow: hidden; margin-top: 10px;">
 			<h2>{inspiration}</h2>
@@ -68,7 +68,7 @@
 			</div>
 			<!-- Jssor Slider End -->
 		</div>
-		<div class="ui-corner-all ui-shadow ui-transparent" style="padding: 5px; overflow: hidden; margin-top: 10px;">
+		<div class="ui-corner-all ui-shadow ui-transparent" style="padding: 5px; padding-bottom: 2em; overflow: hidden; margin-top: 10px;">
 			<h2>{myzeeproshare}</h2>
 			<div class="widget_user_noPrinter" style="display: none;">
 				<p class="black_message">{msg_no_printer}</p>
@@ -343,6 +343,14 @@ function initializeSlider() {
 	$(window).bind("orientationchange", ScaleSlider);
 }
 
+function getDateMonthName(var_date) {
+	if (typeof(var_date) == "object") {
+		return var_date.toUTCString().split(" ")[2];
+	}
+	
+	return null;
+}
+
 // differ mono or multi printer
 if (var_user_printer_nb == 0) {
 	$("div.widget_user_noPrinter").show();
@@ -374,7 +382,7 @@ $(document).ready(function() {
 				var news_text = ele_news.find("title").text();
 				var news_time = ele_news.find("pubDate").text();
 				var news_date = new Date(news_time);
-				var news_display_date = news_date.toDateString();
+				var news_display_date = getDateMonthName(news_date) + " " + news_date.getDay();
 				$("ul#news_list").append('<li><a href="' + news_url + '" target="_blank" title="' + news_alt + '">' + news_display_date + ' - ' + news_text + '</a></li>');
 			});
 			
@@ -390,10 +398,11 @@ $(document).ready(function() {
 			success: function(data) {
 				$(data).find("item").each(function() {
 					var ele_image = $(this);
-					var image_url = ele_image.find("link").text();
+// 					var image_url = ele_image.find("link").text();
 					var image_src = ele_image.find("description").text();
 					var image_alt = ele_image.find("title").text();
-					$("div#slider_image").append('<div><a href="' + image_url + '"><img u="image" alt="' + image_alt + '" src="' + image_src + '" /></div>');
+// 					<a href="' + image_url + '"></a>
+					$("div#slider_image").append('<div><img u="image" alt="' + image_alt + '" src="' + image_src + '" /></div>');
 				});
 				
 				initializeSlider();

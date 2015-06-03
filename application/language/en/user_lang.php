@@ -44,7 +44,7 @@ $lang['areyousure'] = "Logged as %s<br/>Are you sure you want to LOG OUT?";
 $lang['yes'] = "Yes";
 $lang['no'] = "No";
 $lang['news'] = "News";
-$lang['inspiration'] = "Get Inspiration!";
+$lang['inspiration'] = "Latest Zeepro Models";
 $lang['myzeeproshare'] = "My ZeeproShare";
 $lang['channels'] = "ZeeproShare  Channels";
 $lang['share'] = "Share ideas!";
@@ -81,6 +81,7 @@ $lang['shareideas_email_subject'] = "User suggestion (Share ideas)";
 $lang['shareideas_email_address'] = "shareideas@zeepro.com";
 $lang['shareideas_email_alias'] = "User suggestion";
 $lang['shareideas_email_html'] = "Hello,<br><br>User {email} sent the following suggestion:<br><br>---<br><br>{suggestion}<br><br>---";
+$lang['msg_share_submit'] = "Thanks for sharing your idea!";
 
 // Follow us
 
@@ -136,7 +137,7 @@ $lang['hint_what'] = 'Max. 200 characters';
 $lang['error_parameter'] = 'Parameter error';
 $lang['error_authorize'] = 'Authentification failed';
 $lang['error_unknown'] = 'Unknown error';
-$lang['msg_max_birthday'] = 'You must be 13+ years old to regsiter';
+$lang['msg_max_birthday'] = 'You must be 13+ years old to register';
 
 // header button
 

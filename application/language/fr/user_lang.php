@@ -44,7 +44,7 @@ $lang['areyousure'] = "Se connecté comme %s<br/>Souhaitez-vous vraiment vous d�
 $lang['yes'] = "Oui";
 $lang['no'] = "Non";
 $lang['news'] = "Nouveautés";
-$lang['inspiration'] = "Trouvez l'inspiration !";
+$lang['inspiration'] = "Derniers models de Zeepro";
 $lang['myzeeproshare'] = "My ZeeproShare";
 $lang['channels'] = "Chaines ZeeproShare";
 $lang['share'] = "Partager vos idées !";
@@ -81,6 +81,7 @@ $lang['shareideas_email_subject'] = "Suggestion utilisateur (Share ideas)";
 $lang['shareideas_email_address'] = "shareideas@zeepro.com";
 $lang['shareideas_email_alias'] = "Suggestion utilisateur";
 $lang['shareideas_email_html'] = "Bonjour,<br><br>L'utilisteur {email} a envoyé la suggestion suivante :<br><br>---<br><br>{suggestion}<br><br>---";
+$lang['msg_share_submit'] = "Merci de partager votre idée !";
 
 // Follow us
 

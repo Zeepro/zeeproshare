@@ -20,11 +20,10 @@
 <!-- </div> -->
 <div class="content-wrapper">
 	<div class="ui-grid-b ui-corner-all ui-shadow ui-transparent" style="padding: 5px;">
-		<h2>{tellus}</h2>
+		<h2 style="font-size: larger;">{tellus}</h2>
 			<form action="/user/share" method="post" enctype="multipart/form-data" accept-charset="utf-8" data-ajax="false">
-				<p>{description}</p>
 				<input type="text" id="description"
-					name="description" value="" placeholder="{description_placeholder}">
+					name="description" value="" placeholder="{description}"> <!-- {description_placeholder} -->
 				<p>{attach}</p>
 				<input type="file" data-clear-btn="true" name="file" id="file_upload" />
 				<br />
