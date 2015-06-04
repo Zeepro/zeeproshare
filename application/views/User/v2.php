@@ -56,7 +56,7 @@
 			<p id="news_wait_msg" class="black_message">{msg_load_wait}</p>
 			<ul data-role="none" id="news_list" style="text-shadow: none; list-style: none;"></ul>
 		</div>
-		<div class="ui-corner-all ui-shadow ui-transparent" style="padding: 5px; overflow: hidden; margin-top: 10px;">
+		<div class="ui-corner-all ui-shadow ui-transparent" style="padding: 5px; overflow: hidden; margin-top: 10px; padding-bottom: 2em;">
 			<h2>{inspiration}</h2>
 			<p id="inspiration_wait_msg" class="black_message">{msg_load_wait}</p>
 			<!-- Jssor Slider Begin -->
