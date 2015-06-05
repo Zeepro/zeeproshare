@@ -383,7 +383,12 @@ $(document).ready(function() {
 				var news_time = ele_news.find("pubDate").text();
 				var news_date = new Date(news_time);
 				var news_display_date = getDateMonthName(news_date) + " " + news_date.getDay();
-				$("ul#news_list").append('<li><a href="' + news_url + '" target="_blank" title="' + news_alt + '">' + news_display_date + ' - ' + news_text + '</a></li>');
+				if (news_display_date == "Jun 4") {
+					$("ul#news_list").append('<li><a href="' + news_url + '" target="_blank" title="' + news_alt + '">' + news_text + '</a></li>');
+				}
+				else {
+					$("ul#news_list").append('<li><a href="' + news_url + '" target="_blank" title="' + news_alt + '">' + news_display_date + ' - ' + news_text + '</a></li>');
+				}
 			});
 			
 			$("ul#news_list").append('<li><a href="http://zeepro.com/blogs/news" target="_blank"><span style="font-size: smaller;">{link_news_more}</span></a></li>');
